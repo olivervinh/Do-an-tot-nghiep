@@ -5,7 +5,6 @@
 ### Donate me : 
 * Agribank 5505205142674
 * Momo 0868420530
-* Paypal tranvinh21
 ### Contact me : 
 * Trần Quý Vinh
 * Phone number : 0868420530

@@ -2,6 +2,11 @@
 ### Website bán hàng quần áo
 ### Youtube demo : 
 * https://www.youtube.com/watch?v=yb9iGnOcxqQ&t=195s
+### Website link
+* https://angular-cozastore-admin.web.app/
+* https://angular-cozastore-client.web.app/
+### Document
+* https://drive.google.com/file/d/1iqnOkFp1D37ehba1MUoySS1IjJEnbMeo/view?usp=sharing
 ### Donate me : 
 * Agribank 5505205142674
 * Momo 0868420530

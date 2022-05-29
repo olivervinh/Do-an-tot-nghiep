@@ -3,7 +3,11 @@
 ### Youtube demo : 
 * https://www.youtube.com/watch?v=yb9iGnOcxqQ&t=195s
 ### Website link
+##### Admin side
 * https://angular-cozastore-admin.web.app/
+* Username : admin@gmail.com
+* Password : Eyasuo147852
+##### Customer side
 * https://angular-cozastore-client.web.app/
 ### Document
 * https://drive.google.com/file/d/1M9NkKgXiJky3PGXNURIuMwJOfItorSnr/view?usp=sharing

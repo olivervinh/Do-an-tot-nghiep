@@ -6,7 +6,7 @@
 * https://angular-cozastore-admin.web.app/
 * https://angular-cozastore-client.web.app/
 ### Document
-* https://drive.google.com/file/d/1iqnOkFp1D37ehba1MUoySS1IjJEnbMeo/view?usp=sharing
+* https://drive.google.com/file/d/1M9NkKgXiJky3PGXNURIuMwJOfItorSnr/view?usp=sharing
 ### Donate me : 
 * Agribank 5505205142674
 * Momo 0868420530

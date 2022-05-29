@@ -72,28 +72,20 @@ namespace API.Controllers
             }
             return new TotalCart(totalQty);
         }
-        public class TotalCart
-        {
-            public TotalCart(int totalQty)
-            {
-                this.totalQty = totalQty;
-            }
-            public int totalQty { get; set; }
-        }
         [HttpPost("update")]
         public async Task<ActionResult> UpdateCarts(Cart json)
         {
-            var resuft = await _context.Carts.Where(s => s.CartID == json.CartID).FirstOrDefaultAsync();
+            var temp = await _context.Carts.Where(s => s.CartID == json.CartID).FirstOrDefaultAsync();
             if (json.SoLuong < 1)
             {
-                _context.Carts.Remove(resuft);
+                _context.Carts.Remove(temp);
             }
             else
             {
-                resuft.SoLuong = json.SoLuong;
+                temp.SoLuong = json.SoLuong;
             }
             _context.SaveChanges();
-            var resuft1 = _context.Carts.Where(s => s.UserID == json.UserID)
+            var resuft = _context.Carts.Where(s => s.UserID == json.UserID)
                 .Select(d => new CartViewModel
                 {
                     CartID = d.CartID,
@@ -110,11 +102,11 @@ namespace API.Controllers
                             KhuyenMai = i.KhuyenMai
                         }).FirstOrDefault(),
                 }).ToList();
-            return Json(resuft1);
+            return Json(resuft);
         }
         // GET: api/Carts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.Cart>> GetCart(int id)
+        public async Task<ActionResult<Cart>> GetCart(int id)
         {
             var cart = await _context.Carts.FindAsync(id);
             if (cart == null)
@@ -126,7 +118,7 @@ namespace API.Controllers
         // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(int id, Models.Cart cart)
+        public async Task<IActionResult> PutCart(int id, Cart cart)
         {
             if (id != cart.CartID)
             {
@@ -158,22 +150,17 @@ namespace API.Controllers
             await _context.SaveChangesAsync();
             return Json("1");
         }
-        public class DeleteCart
-        {
-            public int Id_sanpham { get; set; }
-            public string User_ID { get; set; }
-        }
         // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Models.Cart>> PostCart(Models.Cart cart)
+        public async Task<ActionResult<Cart>> PostCart(Cart cart)
         {
             var shoppingCartItem =
                     _context.Carts.SingleOrDefault(
                         s => s.SanPhamId == cart.SanPhamId && s.UserID == cart.UserID && s.Mau == cart.Mau && s.Size == cart.Size);
             if (shoppingCartItem == null)
             {
-                Models.Cart newCart = new Models.Cart();
+                Cart newCart = new Cart();
                 newCart.UserID = cart.UserID;
                 newCart.SanPhamId = cart.SanPhamId;
                 newCart.Id_SanPhamBienThe = cart.Id_SanPhamBienThe;
@@ -190,13 +177,7 @@ namespace API.Controllers
             }
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetCart", new { id = cart.CartID }, cart);
-        }
-        public class UpdateCart
-        {
-            public int Id_sanpham { get; set; }
-            public int id_sanphambienthe { get; set; }
-            public int soLuong { get; set; }
-        }
+        }  
         private bool CartExists(int id)
         {
             return _context.Carts.Any(e => e.CartID == id);

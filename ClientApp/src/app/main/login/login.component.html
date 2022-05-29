@@ -1,0 +1,21 @@
+<div class="login-form w3_form">
+           <div class="login w3_login">
+                <h2 class="login-header w3_header">Đăng nhập</h2>
+				    <div class="w3l_grid">
+                        <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)" class="login-container" action="#" method="post">
+                             <input type="email" placeholder="Email" Name="Email" formControlName="userName" required="" >
+                             <input type="password" placeholder="Password" formControlName="passWord" Name="password" required="">
+                             <input type="submit" value="Đăng nhập">
+                        </form>
+
+<div class="bottom-text w3_bottom_text mt-8">
+      <p>Chưa có tài khoản?<a [routerLink]="'/register'">Đăng ký</a></p>
+      <p>Đăng nhập bằng Google</p>
+      <button (click)="signInWithGoogle()" class="btn btn-social-icon btn-google">
+          <span class="fa fa-google"></span>
+     </button>
+</div>
+ </div>
+ </div>
+
+</div>

@@ -1,0 +1,37 @@
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <div class="container" style="width: 30vw;">
+        <br>
+        <div class="form-group">
+            <label for="SDT">SDT</label>
+            <input class="form-control" formControlName="SDT">
+        </div>
+        <div class="form-group">
+            <label for="DiaChi">DiaChi</label>
+            <input class="form-control" formControlName="DiaChi" >
+        </div>
+        <div class="form-group">
+            <label for="FirstName">FirstName</label>
+            <input class="form-control" formControlName="FirstName"  >
+        </div>
+        <div class="form-group">
+            <label for="LastName">LastName</label>
+            <input class="form-control" formControlName="LastName"  >
+        </div>
+        <div class="form-group">
+            <label for="Name">UserName</label>
+            <input class="form-control" formControlName="UserName"  >
+        </div>
+        <div class="form-group">
+            <label for="Name">Quyen</label>
+            <input class="form-control" formControlName="Quyen"  >
+        </div>
+        <div class="form-group">
+            <label for="Name">Password</label>
+            <input class="form-control" formControlName="Password" >
+        </div>
+    
+        <div class="form-group" style="justify-content:center;display: flex;">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>

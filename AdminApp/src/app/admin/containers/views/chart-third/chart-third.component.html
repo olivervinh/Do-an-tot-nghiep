@@ -1,0 +1,63 @@
+<mat-tab-group>
+    <mat-tab label="Biểu đồ tổng tiền giao dịch nhập hàng với nhà cung cấp">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <div style="display: block">
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+
+                </div>
+                <div class="col-6 col-md-4">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tên nhà cung cấp</th>
+                                <th scope="col">Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.ncctongtien">
+                                <td>{{item.ten}}</td>
+                                <td>{{item.tongTien|number}} VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-tab>
+    <mat-tab label="Số lượng nhập hàng với nhà cung cấp">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <div style="display: block">
+                        <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend1" [chartType]="barChartType1" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+
+                </div>
+                <div class="col-6 col-md-4">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tên nhà cung cấp</th>
+                                <th scope="col">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.nccsoluong">
+                                <td>{{item.ten}}</td>
+                                <td>{{item.soLuong}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+<h4>Số lượng tất cả sản phẩm biến thể tồn trong kho: {{ this.soLuongTon}} sản phẩm</h4>

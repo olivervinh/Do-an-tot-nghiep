@@ -1,0 +1,159 @@
+<button mat-button color="warn" style="float: left;display: block;" (click)="exportGeneratePdf()">
+    <!-- exports() -->
+    <p style="display: inline-block;margin-top: 0.9vh;">Export pdf</p>
+</button>
+<h1>Chi tiết hóa đơn</h1>
+<table class="table" style="width:100%">
+    <tr>
+        <th>Id </th>
+        <td *ngIf="this.hd.id">{{this.hd.id}}</td>
+    </tr>
+    <tr>
+        <th>Tên đầy đủ </th>
+        <td *ngIf="this.hd.fullName">{{this.hd.fullName}}</td>
+    </tr>
+    <tr>
+        <th>Số điện thoại: </th>
+        <td *ngIf="this.hd.sdt">{{this.hd.sdt}}</td>
+    </tr>
+    <tr>
+        <th>Email: </th>
+        <td *ngIf="this.hd.email">{{this.hd.email}}</td>
+    </tr>
+    <tr>
+        <th>Địa chỉ </th>
+        <td *ngIf="this.hd.diaChi">{{this.hd.diaChi}}</td>
+    </tr>
+
+    <tr>
+        <th>Ngày tạo: </th>
+        <td *ngIf="this.hd.hoaDon.ngayTao">{{this.hd.hoaDon.ngayTao}}</td>
+    </tr>
+    <tr>
+        <th>Ghi chú: </th>
+        <td *ngIf="this.hd.hoaDon.ghiChu">{{this.hd.hoaDon.ghiChu}}</td>
+    </tr>
+    <tr>
+        <th>Trạng thái: </th>
+        <td *ngIf="this.hd.hoaDon.trangThai">{{this.hd.hoaDon.trangThai}}</td>
+    </tr>
+
+
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id chi tiết hóa đơn
+            </th>
+            <th>
+                Tên Sản phẩm
+            </th>
+            <th>
+                Hình ảnh đại diện
+            </th>
+            <th>
+                Size
+            </th>
+            <th>
+                Màu sắc
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá bán
+            </th>
+
+            <th>
+                Thành tiền (VNĐ)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.hd.chiTietHoaDons">
+            <td *ngIf="item.id">
+                {{item.id}}
+            </td>
+            <td *ngIf="item.ten">
+                {{item.ten}}
+            </td>
+            <td *ngIf="item.hinh">
+                <img src="https://localhost:44302/Images/list-image-product/{{item.hinh}}" class="rounded mb-3" width="80">
+            </td>
+            <td *ngIf="item.size">
+                {{item.size}}
+            </td>
+            <td *ngIf="item.mauSac">
+                {{item.mauSac}}
+            </td>
+            <td *ngIf="item.soLuong">
+                {{item.soLuong}}
+            </td>
+            <td *ngIf="item.giaBan">
+                {{item.giaBan}}
+            </td>
+            <td *ngIf="item.thanhTien">
+                {{item.thanhTien}}
+            </td>
+        </tr>
+        <h4 style="font-weight: bold; text-underline-position: auto;" *ngIf="this.hd.hoaDon.tongTien">Tổng tiền: {{this.hd.hoaDon.tongTien}} VNĐ</h4>
+    </tbody>
+</table>
+
+<!-- <button mat-button color="accent" style="float: left;" (click)="onModalDialog()">
+    <mat-icon>add</mat-icon>
+    <p style="display: inline-block;margin-top: 0.9vh;">Thêm</p>
+</button>
+<div fxLayout fxLayoutAlign="center center" style="display: flex;justify-content: center;">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Tìm kiếm">
+    </mat-form-field>
+  </div>
+  <div style="display:flex;justify-content: space-evenly;">
+    <h3>Hóa đơn Id: {{getIdThisHoaDon()}}</h3>
+    <h3>Tổng tền hóa đơn: {{getTongTienThisHoaDon()}} VNĐ</h3>
+    <button mat-button >Xuất EXEL</button>
+</div>
+
+<table mat-table [dataSource]="this.service.dataSource2" matSort  class="mat-elevation-z8" style="width: 100%;">
+    <ng-container matColumnDef="IdCTHD">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.idCTHD}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tenSanPham">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên sản phẩm  </th>
+        <td mat-cell *matCellDef="let element"> {{element.tenSanPham}} </td>
+    </ng-container>
+   
+    <ng-container matColumnDef="gia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Giá </th>
+        <td mat-cell *matCellDef="let element"> {{element.gia}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="soLuong">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Số lượng </th>
+        <td mat-cell *matCellDef="let element"> {{element.soLuong}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="tenMau">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên màu  </th>
+        <td mat-cell *matCellDef="let element"> {{element.tenMau}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tenSize">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên size  </th>
+        <td mat-cell *matCellDef="let element"> {{element.tenSize}} </td>
+    </ng-container>
+    <ng-container matColumnDef="thanhTien">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Thành tiền  </th>
+        <td mat-cell *matCellDef="let element"> {{element.thanhTien}}  VNĐ</td>
+    </ng-container>
+    <ng-container matColumnDef="id_HoaDon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Hóa đơn  </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_HoaDon}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator> -->

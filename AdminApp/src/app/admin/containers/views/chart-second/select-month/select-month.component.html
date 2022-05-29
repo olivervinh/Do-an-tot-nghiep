@@ -1,0 +1,22 @@
+<h3>Chọn tháng để xem ngày</h3>
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <mat-form-field appearance="fill">
+      <mat-label>Chọn tháng</mat-label>
+      <mat-select formControlName="Thang">
+        <mat-option value="1">Tháng 1</mat-option>
+        <mat-option value="2">Tháng 2</mat-option>
+        <mat-option value="3">Tháng 3</mat-option>
+        <mat-option value="4">Tháng 4</mat-option>
+        <mat-option value="5">Tháng 5</mat-option>
+        <mat-option value="6">Tháng 6</mat-option>
+        <mat-option value="7">Tháng 7</mat-option>
+        <mat-option value="8">Tháng 8</mat-option>
+        <mat-option value="9">Tháng 9</mat-option>
+        <mat-option value="10">Tháng 10</mat-option>
+        <mat-option value="11">Tháng 11</mat-option>
+        <mat-option value="12">Tháng 12</mat-option>
+      </mat-select>
+      <mat-hint align="end">Chọn tháng để xem ngày</mat-hint>
+    </mat-form-field>
+    <button mat-button color="accent" type="submit" [mat-dialog-close]="true" >Xem</button>
+  </form>

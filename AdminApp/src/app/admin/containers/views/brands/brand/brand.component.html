@@ -1,0 +1,29 @@
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <div class="container" style="width: 30vw;">
+        <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1"
+            style="float: right;">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <br>
+        <!-- <div class="form-group">
+            <label for="form-control">Id</label>
+            <input class="form-control" [value]="service.brand.id" readonly>
+        </div> -->
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input class="form-control" formControlName="Name" [(ngModel)]="service.brand.ten" required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                    tên nhãn hiệu không được bỏ trống
+                </div>
+                <div *ngIf="name.errors.minlength">
+                    Tên không được dưới 2 kí tự
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="justify-content:center;display: flex;">
+            <button type="submit" class="btn btn-primary" [mat-dialog-close]="true"
+              >Submit</button>
+        </div>
+    </div>
+</form>

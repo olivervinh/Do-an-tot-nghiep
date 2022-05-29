@@ -1,0 +1,79 @@
+<button mat-button color="warn" style="float: left;display: block;" (click)="exportGeneratePdf()">
+    <p style="display: inline-block;margin-top: 0.9vh;">Export pdf</p>
+</button>
+<br>
+<h1>Phiếu nhập hàng</h1>
+<table class="table" style="width:100%">
+    <tr>
+        <th>Id nhà cung cấp: </th>
+        <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.id">{{this.phieunhapchitietphieunhap.nhaCungCap.id}}</td>
+    </tr>
+    <tr>
+        <th>Tên nhà cung cấp: </th>
+        <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.ten">{{this.phieunhapchitietphieunhap.nhaCungCap.ten}}</td>
+    </tr>
+    <tr>
+        <th>Số điện thoại: </th>
+        <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.sdt">{{this.phieunhapchitietphieunhap.nhaCungCap.sdt}}</td>
+    </tr>
+    <tr>
+        <th>Thông tin: </th>
+        <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.thongTin">{{this.phieunhapchitietphieunhap.nhaCungCap.thongTin}}</td>
+    </tr>
+    <tr>
+        <th>Địa chỉ: </th>
+        <td *ngIf="this.phieunhapchitietphieunhap.nhaCungCap.diaChi">{{this.phieunhapchitietphieunhap.nhaCungCap.diaChi}}</td>
+    </tr>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id Sản phẩm biến thể
+            </th>
+            <th>
+                Tên Sản phẩm biến thể
+            </th>
+            <th>
+                Giá nhập
+            </th>
+            <th>
+                Số lượng nhập (đơn vị : cái)
+            </th>
+            <th>
+                Thành tiền (VNĐ)
+            </th>
+            <th>
+                Id phiếu nhập hàng
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.phieunhapchitietphieunhap.chiTietPhieuNhaps">
+            <td *ngIf="item.id">
+                {{item.id}}
+            </td>
+            <td *ngIf="item.tenSanPhamBienTheMauSize">
+                {{item.tenSanPhamBienTheMauSize}}
+            </td>
+            <td *ngIf="item.giaNhap">
+                {{item.giaNhap}}
+            </td>
+            <td *ngIf="item.soluongNhap">
+                {{item.soluongNhap}}
+            </td>
+            <td *ngIf="item.thanhTienNhap">
+                {{item.thanhTienNhap|number}} VNĐ
+            </td>
+            <td *ngIf="item.id_PhieuNhapHang">
+                {{item.id_PhieuNhapHang}}
+            </td>
+        </tr>
+        <h4 style="font-weight: bold; text-underline-position: auto;">Tổng tiền: {{this.phieunhapchitietphieunhap.tongTien}} VNĐ</h4>
+    </tbody>
+</table>
+<h3 style="font-weight: bold; display: inline;">Ghi chú: </h3>
+<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.ghiChu">{{this.phieunhapchitietphieunhap.ghiChu}}</h4>
+<br>
+<h3 style="font-weight: bold; display: inline;">Người lập phiếu: </h3>
+<h4 style="display: inline;" *ngIf="this.phieunhapchitietphieunhap.nguoiLapPhieu">{{this.phieunhapchitietphieunhap.nguoiLapPhieu}}</h4>

@@ -1,0 +1,138 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Top 10 sản phẩm biến thể bán chạy">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <fusioncharts type="column3d" width="100%" height="570" dataFormat="json" [dataSource]="dataSourceSoLanXuatHien">
+                    </fusioncharts>
+
+                </div>
+                <div class="col-6 col-md-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản phẩm biến thể</th>
+                                <th scope="col">Số lượng bán được</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.soLanXuatHien">
+                                <td>{{item.tenSP}}</td>
+                                <td>{{item.soLanXuatHienTrongDonHang}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+    </mat-tab>
+    <mat-tab label="Thống kê sản phẩm đạt top doanh số cao nhất" id="pdfTable" #pdfTable>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <fusioncharts type="column3d" width="100%" height="570" dataFormat="json" [dataSource]="this.dataSourceDoanhThu">
+                    </fusioncharts>
+                </div>
+                <div class="col-6 col-md-4">
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản phẩm biến thể</th>
+                                <th scope="col">Doanh số (VNĐ)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.doanhthucaonhat">
+                                <td>{{item.tenSP}}</td>
+                                <td>{{item.doanhSoCaoNhat|number}} VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Doanh thu tháng trong năm 2021">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <fusioncharts type="column3d" width="100%" height="570" dataFormat="json" [dataSource]="dataSourceYear">
+                    </fusioncharts>
+
+                </div>
+                <div class="col-6 col-md-4">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tháng</th>
+                                <th scope="col">Doanh số</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of this.dataThongKe">
+                                <td>{{item.month}}</td>
+                                <td>{{item.revenues|number}} VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </mat-tab>
+
+    <mat-tab label="Thống kê ngày theo tháng">
+
+        <div class="container">
+            <button mat-button color="warn" (click)="openDialog()" class="mat-elevation-z8" style="outline:0;">Xem ngày theo tháng</button>
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <fusioncharts type="column3d" width="100%" height="570" dataFormat="json" [dataSource]="service.dataSourceNgay">
+                    </fusioncharts>
+                </div>
+                <div class="col-6 col-md-4">
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ngày</th>
+                                <th scope="col">Doanh số</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of service.dataThongKeNgay">
+                                <td>{{item.ngay}}</td>
+                                <td>{{item.revenues|number}} VNĐ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+
+
+</mat-tab-group>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <fusioncharts type='pie3d' width='550' height='450' [dataSource]='dataSourceBrand'>
+            </fusioncharts>
+        </div>
+        <div class="col">
+            <br>
+            <h4>Hiện tại năm 2021 đã bán được số VNĐ là: {{nam2021.tongTien|number}} VNĐ</h4>
+        </div>
+    </div>
+</div>

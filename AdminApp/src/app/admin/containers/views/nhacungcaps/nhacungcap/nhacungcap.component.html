@@ -1,0 +1,63 @@
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <div class="container" style="width: 30vw;">
+        <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1"
+            style="float: right;">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <br>
+        <div class="form-group">
+            <label for="label label-default">Tên nhà cung cấp</label>
+            <input  class="form-control"formControlName="Ten" [(ngModel)]="service.nhacungcap.ten" >         
+            <div *ngIf="Ten.invalid && (Ten.dirty || Ten.touched)" class="alert alert-danger">
+                <div *ngIf="Ten.errors.required">
+                   Tên size không được bỏ trống
+                </div>
+                <div *ngIf="Ten.errors.minlength">
+                    Tên không được dưới 2 kí tự
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="label label-default">Số điện thoại</span>
+            <input  class="form-control"formControlName="SDT" [(ngModel)]="service.nhacungcap.sdt" required>
+            <div *ngIf="SDT.invalid && (SDT.dirty || SDT.touched)" class="alert alert-danger">
+
+                <div *ngIf="SDT.errors.required">
+                   Số điện thoại không được bỏ trống
+                </div>
+                <div *ngIf="SDT.errors.minlength">
+                    Số điện thoại không được dưới 7 kí tự
+                </div>
+                <div *ngIf="SDT.errors.maxlength">
+                    Số điện thoại không được trên 20 kí tự
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="label label-default">Thông tin</span>
+            <textarea class="form-control"formControlName="ThongTin" [(ngModel)]="service.nhacungcap.thongTin" required></textarea>
+            <div *ngIf="ThongTin.invalid && (ThongTin.dirty || ThongTin.touched)" class="alert alert-danger">
+
+                <div *ngIf="ThongTin.errors.required">
+                   Thông tin không được bỏ trống
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="label label-default">Địa chỉ</span>
+            <textarea class="form-control" formControlName="DiaChi" [(ngModel)]="service.nhacungcap.diaChi" ></textarea>
+            <div *ngIf="DiaChi.invalid && (DiaChi.dirty || DiaChi.touched)" class="alert alert-danger">
+
+                <div *ngIf="DiaChi.errors.required">
+                   Thông tin không được bỏ trống
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="justify-content:center;display: flex;">
+            <button type="submit" class="btn btn-primary" [mat-dialog-close]="true"
+                [disabled]="this.newFormGroup.invalid">Submit</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,5 @@
+<div style="width: 80%;">
+  <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1" style="float: right;"><mat-icon>clear</mat-icon></button>
+  <br>
+    <img *ngFor="let url of this.imageproductList" src="https://localhost:44302/Images/san-pham-bien-the/{{url.imagePath}}" class="rounded mb-3" width="180">
+  </div>

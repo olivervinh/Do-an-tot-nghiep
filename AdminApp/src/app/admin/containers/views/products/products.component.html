@@ -1,0 +1,94 @@
+<button mat-button color="warn" style="float: left;" (click)="exportGeneratePdf()">
+    <!-- exports() -->
+    <p style="display: inline-block;margin-top: 0.9vh;">Export pdf</p>
+</button>
+<button mat-button color="accent" style="float: left;" (click)="onSelectedAdd()">
+    <mat-icon>add</mat-icon>
+    <p style="display: inline-block;margin-top: 0.9vh;">Thêm</p>
+</button>
+<div fxLayout fxLayoutAlign="center center" style="display: flex;justify-content: center;">
+    <mat-form-field fxFlex="40%">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Tìm kiếm">
+    </mat-form-field>
+</div>
+<table mat-table [dataSource]="service.dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ten">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên </th>
+        <td mat-cell *matCellDef="let element"> {{element.ten}} </td>
+    </ng-container>
+    <ng-container matColumnDef="hinh">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Hình </th>
+        <td mat-cell *matCellDef="let element">
+            <img src="https://localhost:44302/Images/list-image-product/{{element.image}}" class="rounded mb-3" width="80">
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="trangThaiSanPham">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Trạng thái SP </th>
+        <td mat-cell *matCellDef="let element"> {{element.trangThaiSanPham}} </td>
+    </ng-container>
+    <ng-container matColumnDef="gia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Giá bán</th>
+        <td mat-cell *matCellDef="let element"> {{element.giaBan|number}} VNĐ </td>
+    </ng-container>
+    <ng-container matColumnDef="giaNhap">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Giá nhập </th>
+        <td mat-cell *matCellDef="let element"> {{element.giaNhap|number}} VNĐ </td>
+    </ng-container>
+    <ng-container matColumnDef="trangThaiHoatDong">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Hoạt động </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon *ngIf="element.trangThaiHoatDong==1" style="color: green;" class="active-icon green-600 s-16">check</mat-icon>
+            <mat-icon *ngIf="element.trangThaiHoatDong==0" style="color: red;" class="active-icon red-500 s-16">close</mat-icon>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="tenNhanHieu">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Nhãn hiệu </th>
+        <td mat-cell *matCellDef="let element"> {{element.tenNhanHieu}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tenLoai">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Loại </th>
+        <td mat-cell *matCellDef="let element"> {{element.tenLoai}} </td>
+    </ng-container>
+    <ng-container matColumnDef="like">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Số lượng Like </th>
+        <td mat-cell *matCellDef="let element"> {{element.soLuongLike}} </td>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Số lượng Comment </th>
+        <td mat-cell *matCellDef="let element"> {{element.soLuongComment}} </td>
+    </ng-container>
+    <ng-container matColumnDef="activate">
+        <th mat-header-cell *matHeaderCellDef> active </th>
+        <td mat-cell *matCellDef="let element"> {{element.activate}} </td>
+    </ng-container>
+
+
+    <!-- toggle olumn -->
+    <ng-container matColumnDef="toggle">
+        <th mat-header-cell *matHeaderCellDef class="make-gold"> Ẩn/hiện </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [checked]="element.trangThaiHoatDong" (change)="updateActiveStatus(element)"></mat-slide-toggle>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="make-gold"> Sửa, xóa</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="populateForm(element)" color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <a mat-icon-button (click)="clickDelete(element.id)" color="warn">
+                <mat-icon>delete</mat-icon>
+            </a>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator>

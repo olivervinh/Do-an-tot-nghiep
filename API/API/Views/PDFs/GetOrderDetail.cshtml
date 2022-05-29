@@ -1,0 +1,130 @@
+﻿@model MotHoaDon
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Coza Store - Cửa hàng bán quần áo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div style="background-color:cadetblue;text-align:center">
+            <h2 style="color:azure; padding:5%">
+                CHI TIẾT HÓA ĐƠN
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Bên gửi</h3>
+                <table class="table" style="text-align:left">
+                    <tr>
+                        <th>Tên cửa hàng:</th>
+                        <td>Coza Store</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>cozastore@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <th>Thông tin shop:</th>
+                        <td>Kinh doanh các mặt hàng thời trang chính như là các sản phẩm quần áo</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col">
+                <h3>Bên nhận</h3>
+                <table class="table" style="text-align:left">
+                    <tr>
+                        <th>Tên :</th>
+                        <td>@Model.FullName</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ:</th>
+                        <td>@Model.DiaChi</td>
+                    </tr>
+                    <tr>
+                        <th>Điện thoại:</th>
+                        <td>@Model.SDT</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>@Model.DiaChi</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <table class="table" style="text-align:left">
+        <tr>
+            <th>Mã hóa đơn :</th>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <th>Ngày tạo:</th>
+            <td>@Model.hoaDon.NgayTao</td>
+        </tr>
+        <tr>
+            <th>Ghi chú:</th>
+            <td>@Model.hoaDon.GhiChu</td>
+        </tr>
+        <tr>
+            <th>Trạng thái:</th>
+            <td>@Model.hoaDon.TrangThai</td>
+        </tr>
+    </table>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Ảnh đại diện</th>
+                <th scope="col">Size</th>
+                <th scope="col">Màu sắc</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cthd in Model.chiTietHoaDons)
+            {
+                <tr>
+                    <th scope="row">@cthd.Id</th>
+                    <td>@cthd.Ten</td>
+                    <td><img src="https://localhost:44302/Images/list-image-product/@cthd.Hinh" style="width:100px" /></td>
+                    <td>@cthd.Size</td>
+                    <td>@cthd.MauSac</td>
+                    <td>@cthd.GiaBan</td>
+                    <td>@cthd.SoLuong</td>
+                    <td>@cthd.ThanhTien</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col">
+            <h4>Người bán hàng</h4>
+            <img src="https://dvdn247.net/wp-content/uploads/2020/07/22-1.jpg" alt="Alternate Text" style="width:150px" />
+            <h4>Trần Quý Vinh</h4>
+        </div>
+        <div class="col">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="left">
+                            <strong class="text-dark">Tổng tiền: </strong>
+                        </td>
+                        <td class="right">
+                            <strong class="text-dark">@Model.hoaDon.TongTien</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h5>Ngày xuất file: @DateTime.Now</h5>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

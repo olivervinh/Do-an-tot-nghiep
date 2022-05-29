@@ -1,0 +1,28 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-picture-o"></i> CoreUI Icons <span class="badge badge-info">New</span>
+      <div class="card-header-actions">
+        <a
+          href="https://icons.coreui.io/"
+          rel="noopener"
+          target="_blank"
+          class="card-header-action"
+        >
+          <small class="text-muted">download</small>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="mb-5 col col-6 col-sm-4 col-md-3 col-xl-2" *ngFor="let icon of icons">
+          <i class="{{toKebabCase(icon[0])}} c-icon c-icon-3xl" *ngIf="platform.TRIDENT; else notIE"></i>
+          <ng-template #notIE>
+            <c-icon [name]="toKebabCase(icon[0])" size="3xl" [title]="icon[0]" class="c-icon-fix"></c-icon>
+          </ng-template>
+          <div>{{ toKebabCase(icon[0]) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

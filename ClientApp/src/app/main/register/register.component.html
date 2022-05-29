@@ -1,0 +1,145 @@
+<div class="bg-grey-lighter min-h-screen flex flex-col">
+  <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+          <h1 class="mb-8 text-3xl text-center">Đăng ký tài khoản</h1>
+
+          <form name="resetPasswordForm" [formGroup]="userFormGroup" novalidate fxLayout="column">
+
+
+            <div fxFlex="100%">
+                <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left:10px;padding-right:10px;width:100%">
+                    <mat-label>Họ</mat-label>
+                    <input matInput [type]="'text'" formControlName="FirstName">
+
+                    <mat-error *ngIf="userFormGroup.get('FirstName').hasError('required')">
+                        Bắt buộc
+                    </mat-error>
+
+                </mat-form-field>
+            </div>
+            <div fxFlex="100%">
+              <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left:10px;padding-right:10px;width:100%">
+                  <mat-label>Tên</mat-label>
+                  <input matInput [type]="'text'" formControlName="LastName">
+
+                  <mat-error *ngIf="userFormGroup.get('LastName').hasError('required')">
+                      Bắt buộc
+                  </mat-error>
+
+              </mat-form-field>
+          </div>
+          <div fxFlex="100%">
+            <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left:10px;padding-right:10px;width:100%">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="Email">
+
+                <mat-error *ngIf="userFormGroup.get('Email').hasError('required')">
+                    Bắt buộc
+                </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div fxFlex="100%">
+            <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left:10px;padding-right:10px;width:100%">
+                <mat-label>Số điện thoại</mat-label>
+                <span matPrefix>+84 &nbsp;</span>
+                <input matInput type="tel" formControlName="SDT">
+
+                <mat-error *ngIf="userFormGroup.get('SDT').hasError('required')">
+                    Bắt buộc
+                </mat-error>
+
+            </mat-form-field>
+          </div>
+          <div fxFlex="100%">
+            <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left:10px;padding-right:10px;width:100%">
+                <mat-label>Địa chỉ</mat-label>
+                <input matInput [type]="'text'" formControlName="DiaChi">
+
+                <mat-error *ngIf="userFormGroup.get('DiaChi').hasError('required')">
+                    Bắt buộc
+                </mat-error>
+
+            </mat-form-field>
+          </div>
+
+
+            <div fxFlex="100%">
+                <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left: 10px; padding-right: 10px; width: 100%">
+                    <mat-label>Mật khẩu</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="userFormGroup.get('Password').hasError('required')">
+                        Bắt buộc
+                    </mat-error>
+
+                </mat-form-field>
+            </div>
+            <div fxFlex="100%">
+                <mat-form-field [floatLabel]="'always'" appearance="outline" fxFlex="100%" style="padding-left: 10px; padding-right: 10px; width: 100%">
+                    <mat-label>Nhập lại mật khẩu</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="RePassword">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="userFormGroup.get('RePassword').hasError('required')">
+                        Bắt buộc
+                    </mat-error>
+                    <mat-error *ngIf="!userFormGroup.get('RePassword').hasError('required') &&
+                    userFormGroup.get('RePassword').hasError('passwordsNotMatching')">
+                        Mật khẩu nhập lại không khớp với mật khẩu mới
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+                <button (click)="registerAccount()" type="submit" [disabled]="userFormGroup.invalid" class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1" style="color: white;background-color: black;">Tạo tài khoản</button>
+
+
+
+        </form>
+
+
+
+
+
+
+          <!-- <input
+              type="text"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="fullname"
+              placeholder="Họ" formControlName = "username" [(ngModel)]="register.FirstName" />
+              <input
+              type="text"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="fullname"
+              placeholder="Tên" [(ngModel)]="register.LastName" />
+
+          <input
+              type="text"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="email"
+              placeholder="Email" [(ngModel)]="register.Email" />
+
+          <input
+              type="password"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="password"
+              placeholder="Mật khẩu" [(ngModel)]="register.Password" />
+          <input
+              type="password"
+              class="block border border-grey-light w-full p-3 rounded mb-4"
+              name="confirm_password"
+              placeholder="Xác nhận mật khẩu" [(ngModel)]="register.RePassword" />
+
+          <button (click)="registerAccount()" type="submit" class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1">Tạo tài khoản</button>
+ -->
+
+      </div>
+
+      <div class="text-grey-dark mt-6">
+          Đã có tài khoản vui lòng
+          <a class="no-underline border-b border-blue text-blue" [routerLink]="'/login'">
+              đăng nhập
+          </a>.
+      </div>
+  </div>
+</div>

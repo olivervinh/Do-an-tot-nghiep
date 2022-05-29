@@ -1,0 +1,122 @@
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Lịch sử mua hàng
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="main-container container">
+
+    <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-12">
+            <h2 class="title">Thông tin đơn hàng</h2>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="2" class="text-left">Chi tiết hoá đơn</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 50%;" class="text-left"> <b>Mã hoá đơn:</b> #{{bill.id}}
+                            <br>
+                            <b>Ngày mua:</b> {{bill.ngayTao|date: 'dd/MM/yyyy HH:mm'}}</td>
+                        <td style="width: 50%;" class="text-left"> <b>Phương thức thanh toán:</b> Thanh toán khi nhận hàng
+                            <br>
+                            <b>Vận chuyển:</b> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td style="width: 50%; vertical-align: top;" class="text-left">Thông tin người nhận</td>
+                        <td style="width: 50%; vertical-align: top;" class="text-left">Địa chỉ giao hàng</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">
+                            <br><span>{{bill.user.firstName}} {{bill.user.lastName}}</span>,
+                            <br>{{bill.user.diaChi}},
+                            <br>{{bill.user.sdt}}
+                            <td class="text-left">{{bill.diaChi}}
+                                <br>{{bill.xa}},
+                                <br>{{bill.huyen}},
+                                <br>{{bill.tinh}},
+                                <br>{{bill.ghiChu}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td class="text-left">Tên sản phẩm</td>
+                            <td class="text-right">Số lượng</td>
+                            <td class="text-right">Giá</td>
+                            <td class="text-right">Tổng tiền</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of bill_details">
+                            <td class="text-left">{{item.sanPham.ten}} </td>
+                            <td class="text-right">{{item.soluong}}</td>
+                            <td class="text-right">{{item.giaBan|number}}</td>
+                            <td class="text-right">{{item.soluong*item.gia|number}}</td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right"><b>Tổng giá trị đơn hàng</b>
+                            </td>
+                            <td class="text-right">{{tongtien|number}} VNĐ</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right"><b>Phí giao hàng</b>
+                            </td>
+                            <td class="text-right"><span>{{25000|number}} VNĐ</span></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right"><b>Giảm giá</b>
+                            </td>
+                            <td class="text-right">{{tongtien-bill.tongTien|number}} VNĐ</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right"><b>Tổng tiền phải trả</b>
+                            </td>
+                            <td class="text-right">{{bill.tongTien+25000|number}} VNĐ</td>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="buttons clearfix" style="padding-bottom: 20px;">
+                <div class="pull-right" style="padding-left: 20px;"><a class="btn btn-primary" [routerLink]="'/history'">Trở về</a>
+                </div>
+                <div *ngIf="bill.trangThai!=1" class="pull-right"><a class="btn btn-primary" (click)="Huy()">Huỷ đơn</a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

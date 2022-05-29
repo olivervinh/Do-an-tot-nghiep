@@ -1,0 +1,220 @@
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Home
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+            Shoping Cart
+        </span>
+    </div>
+</div>
+
+
+<!-- Shoping Cart -->
+<form class="bg0 p-t-75 p-b-85">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+                    <div class="wrap-table-shopping-cart" style="height: 541px;">
+                        <table class="table-shopping-cart">
+                            <thead>
+                                <tr class="table_head">
+                                    <th class="column-1">Sản phẩm</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Giá</th>
+                                    <th class="column-4" style="text-align: center;">Số lượng</th>
+                                    <th class="column-5">Tổng tiền</th>
+                                    <th class="column-5">Xoá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr class="table_row" *ngFor="let item of list_item">
+                                    <td class="column-1">
+                                        <div class="how-itemcart1">
+                                            <img src="https://localhost:44302/Images/list-image-product/{{item.productDetail.image}}" alt="IMG">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">{{item.productDetail.ten}} ( {{item.mau}} - {{item.size}} )</td>
+                                    <td class="column-3">{{item.productDetail.giaBan|number}} VNĐ</td>
+                                    <td class="column-4">
+                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                            <button (click)="updateTruSanPham(item.cartID,item.soLuong)" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i  class="fs-16 zmdi zmdi-minus"></i>
+                                            </button>
+
+                                            <input class="mtext-104 cl3 txt-center num-product" (change)="ChangeSoLuong(item.cartID,item.soLuong)" type="number" name="num-product1" [value]="item.soLuong">
+
+                                            <button (click)="updateCongSanPham(item.cartID,item.soLuong)" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                              <i  class="fs-16 zmdi zmdi-plus"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">{{item.soLuong*item.productDetail.giaBan|number}} VNĐ</td>
+                                    <td style="padding-left: 23px;"><button (click)="deleteSanPham(item)"><mat-icon>delete</mat-icon></button></td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+
+                    <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+
+                        <div class="flex-w flex-m m-r-20 m-tb-5">
+                            <input [(ngModel)]="MaGiamGia" class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
+
+                            <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                <button (click)="maGiamGia()" type="submit">Áp dụng giảm giá</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                    <h4 class="mtext-109 cl2 p-b-30">
+                        Tổng tiền
+                    </h4>
+
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Tổng tiền sản phẩm:
+                            </span>
+                        </div>
+
+                        <div class="size-209">
+                            <span class="mtext-110 cl2">
+                                {{tongtien|number}} VNĐ
+                            </span>
+                        </div>
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Chi phí giao hàng:
+                            </span>
+                        </div>
+
+                        <div class="size-209">
+                            <span class="mtext-110 cl2">
+                                {{ 25000|number}} VNĐ
+                            </span>
+                        </div>
+                        <div class="size-208" *ngIf="check!=null">
+                            <span class="stext-110 cl2">
+                              Giảm giá:
+                          </span>
+                        </div>
+
+                        <div class="size-209" *ngIf="check!=null">
+                            <span class="mtext-110 cl2">
+                            - {{check.soTienGiam|number}} VNĐ
+                          </span>
+                        </div>
+                    </div>
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="size-208 w-full-ssm" style="width:100% !important">
+                                <span class="stext-110 cl2">
+                                Thông tin giao hàng:
+                            </span>
+                                <mat-checkbox [checked]="checkdiachi" (click)="changeValue(checkdiachi)" class="example-margin">Sử dụng địa chỉ mặc định</mat-checkbox>
+                            </div>
+
+                            <div class="size0000 p-r-18 p-r-0-sm w-full-ssm" style="width:100% !important">
+
+                                <div class="p-t-15">
+
+
+
+
+                                    <!-- <div *ngIf="!checkdiachi">
+                                        <span>Tỉnh/thành Phố</span>
+                                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+
+                                            <select class="js-select2" (ngModelChange)="changTinhThanh($event)" [(ngModel)]="Tinh" name="tim3">
+                                      <option  *ngFor="let item of list_tinh_thanh" value="{{item.name}}">{{item.name}}</option>
+                                  </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <span>Quận/Huyện</span>
+                                        <div class="bor8 bg0 m-b-12">
+
+                                            <select class="js-select2" (ngModelChange)="changHuyenQuan($event)" [(ngModel)]="Huyen" name="time2">
+                                  <option  *ngFor="let huyen of list_quan_huyen" value="{{huyen.name}}">{{huyen.name}}</option>
+                              </select>
+                                        </div>
+                                        <span>Xã/Phường</span>
+                                        <div class="bor8 bg0 m-b-22">
+
+                                            <select class="js-select2" [(ngModel)]="Xa" name="time5">
+                                  <option  *ngFor="let xa of list_xa_phuong" value="{{xa.name}}">{{xa.name}}</option>
+                              </select>
+                                        </div>
+                                    </div> -->
+
+
+
+                                    <div *ngIf="!checkdiachi">
+                                        <span>Tỉnh/thành Phố</span>
+                                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+
+                                            <select class="js-select2" (ngModelChange)="changTinhThanh($event)" [(ngModel)]="Tinh" name="tim3">
+                                      <option  *ngFor="let item of list_tinh_thanh" value="{{item.name}}">{{item.name}}</option>
+                                  </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <span>Quận/Huyện</span>
+                                        <div class="bor8 bg0 m-b-12">
+
+                                            <select class="js-select2" (ngModelChange)="changHuyenQuan($event)" [(ngModel)]="Huyen" name="time2">
+                                  <option  *ngFor="let huyen of list_quan_huyen" value="{{huyen.name}}">{{huyen.name}}</option>
+                              </select>
+                                        </div>
+                                        <span>Xã/Phường</span>
+                                        <div class="bor8 bg0 m-b-22">
+
+                                            <select class="js-select2" [(ngModel)]="Xa" name="time5">
+                                  <option  *ngFor="let xa of list_xa_phuong" value="{{xa.name}}">{{xa.name}}</option>
+                              </select>
+                                        </div>
+                                    </div>
+
+                                    <span>Địa chỉ</span>
+                                    <div class="bor8 bg0 m-b-22">
+                                        <textarea style="height: 80px !important;" class="stext-111 cl8 plh3 size-111 p-lr-15" [(ngModel)]="DiaChi" type="text" name="postcode" placeholder="Ví dụ : 25T2 , Hoàng Đạo Thuỷ , Cầu Giấy , Hà Nội">
+                                    </textarea>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-w flex-t p-t-27 p-b-33">
+                            <div class="size-208">
+                                <span class="mtext-101 cl2">
+                                Tổng thanh toán
+                            </span>
+                            </div>
+
+                            <div class="size-209 p-t-1">
+                                <span class="mtext-110 cl2">
+                                {{tongThanhToan|number}} VNĐ
+                            </span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                        Tiến hành thanh toán
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

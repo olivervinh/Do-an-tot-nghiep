@@ -1,0 +1,279 @@
+<mat-horizontal-stepper [linear]=true #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Lựa chọn nhà cung cấp</ng-template>
+
+            <mat-label style="font-weight: bold;">Nhà cung cấp</mat-label>
+            <select class="form-control" [(ngModel)]="this.service.phieunhapchange.nhacungcap" (change)="getSanPhamNhaCungCap($event)" style="width:70%">
+                <option *ngFor="let item of this.nhacungcaps" [value]="item.id">
+                    {{item.ten}}
+                </option>
+            </select>
+
+            <div class="container">
+                <table class="table" style="width:70%">
+                    <tr>
+                        <th>Id nhà cung cấp </th>
+                        <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tên nhà cung cấp </th>
+                        <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.ten}}</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại</th>
+                        <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.sdt}}</td>
+                    </tr>
+                    <tr>
+                        <th>Thông tin</th>
+                        <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.thongTin}}</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ</th>
+                        <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.diaChi}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Tạo phiếu nhập khi chi tiết</ng-template>
+            <div class="container">
+                <div class="row">
+                    <table class="table" style="width:100%">
+                        <tr>
+                            <th>Id nhà cung cấp: </th>
+                            <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.id}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tên nhà cung cấp: </th>
+                            <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.ten}}</td>
+                        </tr>
+                        <tr>
+                            <th>Số điện thoại: </th>
+                            <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.sdt}}</td>
+                        </tr>
+                        <tr>
+                            <th>Thông tin: </th>
+                            <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.thongTin}}</td>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ: </th>
+                            <td *ngIf="this.motnhacungcap">{{this.motnhacungcap.diaChi}}</td>
+                        </tr>
+                    </table>
+                    <h4 style="font-weight: bold;margin-left: 12px;">Chọn sản phẩm biến thể và số lượng: </h4>
+                    <form [formGroup]="newFormGroupChiTiet" (ngSubmit)="onSubmitChiTiet(newFormGroupChiTiet.value)">
+                        <div class="container" style="width: 30vw;">
+                            <div class="form-group">
+                                <span class="label label-default">Tên sản phẩm</span>
+                                <select class="form-control" [(ngModel)]="this.service.phieunhapchange.sanpham" (change)="getSanPhamBienTheSanPham($event)">
+                                    <option *ngFor="let item of this.sanphams" [value]="item.id">{{item.ten}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <span class="label label-default">Tên sản phẩm biến thể</span>
+                                <select class="form-control" [disabled]="selectedFruit !== 'Apple'" formControlName="TenSanPhamBienThe">
+                                    <option *ngFor="let item of this.sanphambienthes"
+                                        [value]="item.tenSanPhamBienTheMauSize">
+                                        {{item.tenSanPhamBienTheMauSize}}
+                                    </option>
+                                   
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <span class="label label-default">Giá nhập sản phẩm biến thể</span>
+                                <input type="text" class="form-control" formControlName="GiaNhapSanPhamBienThe" readonly>
+                            </div>
+                            <div class="form-group">
+                                <span class="label label-default">Số lượng cần nhập</span>
+                                <select class="form-control" formControlName="SoLuongNhap">
+                                    <option [value]=50>
+                                        50 cái</option>
+                                    <option [value]=100>
+                                        100 cái</option>
+                                    <option [value]=150>
+                                        150 cái</option>
+                                    <option [value]=200>
+                                        200 cái</option>
+                                    <option [value]=250>
+                                        250 cái</option>
+                                </select>
+                                <div *ngIf="SoLuongNhap.invalid && (SoLuongNhap.dirty || SoLuongNhap.touched)" class="alert alert-danger">
+
+                                    <div *ngIf="SoLuongNhap.errors.required">
+                                        Số lượng nhập không được bỏ trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="justify-content:center;display: flex;">
+                                <button type="submit" class="btn btn-outline-danger btn-sm" [disabled]="this.newFormGroupChiTiet.invalid">Thêm chi tiết</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <h4 style="font-weight: bold;">Chi tiết phiếu nhập: </h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tên Sản phẩm biến thể
+                                </th>
+                                <th>
+                                    Giá nhập
+                                </th>
+                                <th>
+                                    Số lượng nhập (đơn vị : cái)
+                                </th>
+                                <th>
+                                    Thành tiền (VNĐ)
+                                </th>
+                                <th>
+                                    Xóa
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of chitiets">
+                                <td>
+                                    {{item.TenSanPhamBienThe}}
+                                </td>
+                                <td>
+                                    {{item.GiaNhapSanPhamBienThe|number}} VNĐ
+                                </td>
+                                <td>
+                                    {{item.SoLuongNhap}}
+                                </td>
+                                <td>
+                                    {{item.GiaNhapSanPhamBienThe*item.SoLuongNhap}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger"><i class="fa fa-trash" (click)="deleteDetail(item)"
+                                            aria-hidden="true"></i></button>
+                                </td>
+
+                            </tr>
+                            <h4 style="font-weight: bold; text-underline-position: auto;">Tổng tiền: {{tongTien()|number}} VNĐ</h4>
+                        </tbody>
+                    </table>
+                    <form [formGroup]="newFormGroupPhieuNhap" (ngSubmit)="onSubmit(newFormGroupPhieuNhap.value)">
+                        <div class="container" style="width: 30vw;">
+                            <div class="form-group">
+                                <span class="label label-default" style="font-weight: bold;">Tạo ghi chú</span>
+                                <textarea class="form-control" formControlName="GhiChu" style="margin-top: 0px; margin-bottom: 0px; height: 160px;width: 1050px;"></textarea>
+                            </div>
+
+                            <div class="form-group" style="justify-content:center;display: flex;">
+                                <button type="submit" class="btn btn-primary btn-lg" [disabled]="this.newFormGroupPhieuNhap.invalid">Tạo phiếu nhập kho</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <!-- <mat-step>
+        <ng-template matStepLabel>Hoàn thành</ng-template>
+        <h1>Hoàn thành, vui lòng kiểm tra kho</h1>
+        <h2>Phiếu nhập của bạn: </h2>
+        <div style="margin-top: 400px;">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step> -->
+</mat-horizontal-stepper>
+<!-- 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="newFormGroupChiTiet" (ngSubmit)="onSubmitChiTiet(newFormGroupChiTiet.value)">
+                <div class="container" style="width: 30vw;">
+                    <div class="form-group">
+                        <span class="label label-default">Nhà cung cấp</span>
+                        <select class="form-control">
+                            <option *ngFor="let item of this.nhacungcaps" [value]="item.id">{{item.ten}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span class="label label-default">Tên sản phẩm</span>
+                        <select class="form-control">
+                            <option *ngFor="let item of this.sanphams" [value]="item.id">{{item.ten}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span class="label label-default">Tên sản phẩm biến thể</span>
+                        <select class="form-control" formControlName="Id_SanPhamBienThe" >
+                            <option *ngFor="let item of this.sanphambienthes" [value]="item.id">{{item.tenSanPhamBienTheMauSize}}</option>
+                        </select>
+                        <div *ngIf="Id_SanPhamBienThe.invalid && (Id_SanPhamBienThe.dirty || Id_SanPhamBienThe.touched)"
+                            class="alert alert-danger">
+
+                            <div *ngIf="Id_SanPhamBienThe.errors.required">
+                                Tên sản phẩm biến thể không được bỏ trống
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="label label-default">Số lượng cần nhập</span>
+                        <input class="form-control" formControlName="SoLuongNhap"
+                            [(ngModel)]="service.chitietphieunhap.soLuongNhap" required>
+                        <div *ngIf="SoLuongNhap.invalid && (SoLuongNhap.dirty || SoLuongNhap.touched)"
+                            class="alert alert-danger">
+
+                            <div *ngIf="SoLuongNhap.errors.required">
+                                Số lượng nhập không được bỏ trống
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group" style="justify-content:center;display: flex;">
+                        <button type="submit" class="btn btn-primary"
+                            [disabled]="this.newFormGroupChiTiet.invalid">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="row">
+        <span>Chi tiết phiếu nhập</span>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Sản phẩm biến thể
+                    </th>
+                    <th>
+                        Số lượng nhập
+                    </th>                 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of chitiets">
+                    <td>
+                        {{item.Id_SanPhamBienThe}}
+                    </td>
+                    <td>
+                        {{item.SoLuongNhap}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->

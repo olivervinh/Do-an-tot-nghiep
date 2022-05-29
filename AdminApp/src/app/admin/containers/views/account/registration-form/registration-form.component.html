@@ -1,0 +1,45 @@
+<div class="main">
+    <div class="container">
+        <header>Register Form</header>
+        <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
+            <div class="input-field">
+                <input type="text" class="form-control" placeholder="Email" formControlName="email" required>
+            </div>
+            <div class="input-field">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="firstName" formControlName="firstName" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="Last Name" formControlName="lastName" required>
+            </div>
+            <div class="input-field">
+                <input class="form-control" placeholder="Địa chỉ" formControlName="location" required>
+            </div>
+
+            <div class="button">
+                <div class="inner">
+                </div>
+                <button type="submit">Create Account</button>
+            </div>
+
+        </form>
+        <div *ngIf="errors" class="alert alert-danger" role="alert">
+            <strong>Oops!</strong> {{errors}}
+        </div>
+        <div class="auth">
+            Or login with</div>
+        <div class="links">
+            <div class="facebook">
+                <i class="fab fa-facebook-square"><span>Facebook</span></i>
+            </div>
+            <div class="google">
+                <i class="fab fa-google-plus-square"><span>Google</span></i>
+            </div>
+        </div>
+        <div class="signup" style="cursor: pointer">
+            Not a member? <a (click)="onRegister()">Register now</a>
+        </div>
+    </div>
+</div>

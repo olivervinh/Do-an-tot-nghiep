@@ -1,0 +1,48 @@
+<form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+    <div class="container" style="width: 30vw;">
+        <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1"
+            style="float: right;">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <br>
+        <div class="form-group">
+            <label for="TenSize">Tên Size</label>
+            <select class="form-control" formControlName="TenSize" [(ngModel)]="service.size.tenSize" required>
+                <option value="S">Size S</option>
+                <option value="M">Size M</option>
+                <option value="L">Size L</option>
+                <option value="XL">Size XL</option>
+                <option value="38">Size 38</option>
+                <option value="39">Size 39</option>
+                <option value="40">Size 40</option>
+                <option value="41">Size 41</option>
+                <option value="42">Size 42</option>
+            </select>
+            <div *ngIf="TenSize.invalid && (TenSize.dirty || TenSize.touched)" class="alert alert-danger">
+                <div *ngIf="TenSize.errors.required">
+                   Tên size không được bỏ trống
+                </div>
+                <div *ngIf="TenSize.errors.minlength">
+                    Tên không được dưới 2 kí tự
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="label label-default">Id_Loai</span>
+            <select class="form-control" [(ngModel)]="service.size.id_Loai" formControlName="Id_Loai">
+                <option *ngFor="let category of this.categories" [value]="category.id">{{category.ten}}</option>
+            </select>
+            <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
+
+                <div *ngIf="Id_Loai.errors.required">
+                    Loại không được bỏ trống
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="justify-content:center;display: flex;">
+            <button type="submit" class="btn btn-primary" [mat-dialog-close]="true"
+                [disabled]="this.newFormGroup.invalid">Submit</button>
+        </div>
+    </div>
+</form>

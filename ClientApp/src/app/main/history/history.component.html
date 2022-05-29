@@ -1,0 +1,58 @@
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Lịch sử mua hàng
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="main-container container">
+    <div class="row">
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td class="text-center">Mã đơn hàng</td>
+                            <td class="text-center">Ngày mua</td>
+                            <td class="text-center">Tổng tiền</td>
+                            <td class="text-center">Trạng thái</td>
+                            <td>Xem chi tiết</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of list_hoadon">
+                            <td class="text-center">#{{item.id}}</td>
+                            <td class="text-center">{{item.ngayTao|date: 'dd/MM/yyyy HH:mm'}}</td>
+                            <td class="text-center">{{item.tongTien|number}}</td>
+                            <td class="text-center">
+                                <span *ngIf="item.trangThai==0">
+                                    Chưa xác nhận
+                                </span>
+                                <span *ngIf="item.trangThai==1">
+                                    Đã xác nhận
+                                </span>
+                                <span *ngIf="item.trangThai==2">
+                                    Hoàn thành
+                                </span>
+                                <span *ngIf="item.trangThai==3">
+                                    Đã huỷ
+                                </span>
+                            </td>
+                            <td><a [routerLink]="'/bill/'+item.id"><mat-icon>visibility</mat-icon></a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HoaDonUser>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Coza Store - Cửa hàng bán quần áo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div style="background-color:cadetblue;text-align:center">
+            <h2 style="color:azure; padding:5%">
+                TẤT CẢ HÓA DƠN
+            </h2>
+        </div>
+        <table class="table" style="text-align:left">
+            <tr>
+                <th>Tên cửa hàng:</th>
+                <td>Coza Store</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>cozastore@gmail.com</td>
+            </tr>
+            <tr>
+                <th>Thông tin shop:</th>
+                <td>Kinh doanh các mặt hàng thời trang chính như là các sản phẩm quần áo</td>
+            </tr>
+        </table>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tên đầy đủ</th>
+                <th scope="col">Ghi chú</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Loại thanh toán</th>
+                <th scope="col">Đã lấy tiền</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Đã lấy tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hd in Model)
+            {
+                <tr>
+                    <th scope="row">@hd.Id</th>
+                    <td>@hd.FullName</td>
+                    <td>@hd.GhiChu</td>
+                    <td>@hd.NgayTao</td>
+                    <td>@hd.TrangThai</td>
+                    <td>@hd.LoaiThanhToan</td>
+                    <td>@hd.DaLayTien</td>
+                    <td>@hd.TongTien</td>
+                    <td>@hd.DaLayTien</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h5>Ngày xuất file: @DateTime.Now</h5>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

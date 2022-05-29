@@ -1,0 +1,522 @@
+<!-- <style>
+    mat-form-field {
+        margin-top: 2rem;
+    }
+</style>
+<form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
+
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Tên</mat-label>
+        <input matInput placeholder="Tên" formControlName="Ten" type="text" [(ngModel)]="service.product.ten" required>
+    </mat-form-field>
+
+    <div *ngIf="Ten.invalid && (Ten.dirty || Ten.touched)" class="alert alert-danger">
+        <div *ngIf="Ten.errors.required">
+            Tên không được bỏ trống
+        </div>
+        <div *ngIf="Ten.errors.minlength">
+            Tên không được dưới 2 kí tự
+        </div>
+        <div *ngIf="Ten.errors.maxlength">
+            Tên không được trên 100 kí tự
+        </div>
+        <div *ngIf="Ten.errors.pattern">
+            Tên không được có kí tự đặc biệt
+        </div>
+    </div>
+
+
+
+
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Giá bán</mat-label>
+        <input matInput placeholder="Giá Bán" formControlName="GiaBan" type="number" [(ngModel)]="service.product.giaBan" required>
+
+    </mat-form-field>
+
+    <div *ngIf="GiaBan.invalid && (GiaBan.dirty || GiaBan.touched)" class="alert alert-danger">
+        <div *ngIf="GiaBan.errors.required">
+            Giá bán sản phẩm không được bỏ trống
+        </div>
+        <div *ngIf="GiaBan.errors.minlength">
+            Giá bán không được dưới 3 kí tự
+        </div>
+        <div *ngIf="GiaBan.errors.maxlength">
+            Giá bán không được trên 10 kí tự
+        </div>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Giá nhập</mat-label>
+        <input matInput placeholder="Giá Nhập" formControlName="GiaNhap" type="number" [(ngModel)]="service.product.giaNhap" required>
+    </mat-form-field>
+    <div *ngIf="GiaNhap.invalid && (GiaNhap.dirty || GiaNhap.touched)" class="alert alert-danger">
+        <div *ngIf="GiaNhap.errors.required">
+            Giá nhập sản phẩm không được bỏ trống
+        </div>
+        <div *ngIf="GiaNhap.errors.minlength">
+            Giá nhập không được dưới 3 kí tự
+        </div>
+        <div *ngIf="GiaNhap.errors.maxlength">
+            Giá nhập không được trên 10 kí tự
+        </div>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Khuyến mãi</mat-label>
+        <input matInput placeholder="Khuyến mãi" formControlName="KhuyenMai" type="number" [(ngModel)]="service.product.khuyenMai" required>
+    </mat-form-field>
+    <div *ngIf="KhuyenMai.invalid && (KhuyenMai.dirty || KhuyenMai.touched)" class="alert alert-danger">
+        <div *ngIf="KhuyenMai.errors.required">
+            Khuyến mãi sản phẩm không được bỏ trống
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="label label-default">Giới tính</span>
+        <select class="form-control" [(ngModel)]="service.product.gioiTinh" formControlName="GioiTinh" required>
+            <option value=1>Nam</option>
+            <option value=2>Nữ</option>
+        </select>
+        <div *ngIf="GioiTinh.invalid && (GioiTinh.dirty || GioiTinh.touched)" class="alert alert-danger">
+            <div *ngIf="GioiTinh.errors.required">
+                Giới tính sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <mat-label>Mô tả</mat-label>
+    <ckeditor formControlName="MoTa" [editor]="Editor" [(ngModel)]="service.product.moTa" required></ckeditor>
+
+
+    <div *ngIf="MoTa.invalid && (MoTa.dirty || MoTa.touched)" class="alert alert-danger">
+        <div div *ngIf="MoTa.errors.required">
+            Mô tả không được bỏ trống
+        </div>
+        <div *ngIf="MoTa.errors.minlength">
+            Mô tả không được dưới 10 kí tự
+        </div>
+        <div *ngIf="MoTa.errors.maxlength">
+            Mô tả không được trên 100 kí tự
+        </div>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Tag</mat-label>
+        <input matInput placeholder="Tag" formControlName="Tag" type="text" [(ngModel)]="service.product.tag" required>
+
+    </mat-form-field>
+    <div *ngIf="Tag.invalid && (Tag.dirty || Tag.touched)" class="alert alert-danger">
+        <div *ngIf="Tag.errors.required">
+            Tag không được bỏ trống
+        </div>
+        <div *ngIf="Tag.errors.minlength">
+            Tag không được dưới 3 kí tự
+        </div>
+        <div *ngIf="Tag.errors.maxlength">
+            Tag không được trên 15 kí tự
+        </div>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;margin-top: 2rem;">
+        <mat-label>Hướng dẫn</mat-label>
+        <textarea matInput placeholder="Hướng dẫn" formControlName="HuongDan" type="text" rows="3" [(ngModel)]="service.product.huongDan" required>
+      </textarea>
+
+    </mat-form-field>
+    <div *ngIf="HuongDan.invalid && (HuongDan.dirty || HuongDan.touched)" class="alert alert-danger">
+        <div *ngIf="HuongDan.errors.required">
+            Hướng dẫn không được bỏ trống
+        </div>
+        <div *ngIf="HuongDan.errors.minlength">
+            Hướng dẫn không được dưới 3 kí tự
+        </div>
+        <div *ngIf="HuongDan.errors.maxlength">
+            Hướng dẫn không được trên 15 kí tự
+        </div>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Thành phần</mat-label>
+        <input matInput placeholder="Thành phần" formControlName="ThanhPhan" type="text" [(ngModel)]="service.product.thanhPhan" required>
+
+    </mat-form-field>
+    <div *ngIf="ThanhPhan.invalid && (ThanhPhan.dirty || ThanhPhan.touched)" class="alert alert-danger">
+        <div *ngIf="ThanhPhan.errors.required">
+            Thành phần không được bỏ trống
+        </div>
+        <div *ngIf="ThanhPhan.errors.minlength">
+            Thành phần không được dưới 3 kí tự
+        </div>
+        <div *ngIf="ThanhPhan.errors.maxlength">
+            Thành phần không được trên 50 kí tự
+        </div>
+        <div *ngIf="ThanhPhan.errors.pattern">
+            Thành phần không được có kí tự đặc biệt
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group">
+        <span class="label label-default">Loại</span>
+        <select class="form-control" [(ngModel)]="service.product.tenLoai" formControlName="Id_Loai" required>
+            <option  *ngFor="let category of this.categories"
+                [value]="category.id">{{category.ten}}</option>
+        </select>
+        <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
+
+            <div *ngIf="Id_Loai.errors.required">
+                Loại sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="label label-default">Nhà cung cấp</span>
+        <select class="form-control" [(ngModel)]="service.product.id_NhaCungCap" formControlName="Id_NhaCungCap" required>
+      <option *ngFor="let ncc of this.nhacungcaps" [value]="ncc.id">{{ncc.ten}}</option>
+    </select>
+        <div *ngIf="Id_NhaCungCap.invalid && (Id_NhaCungCap.dirty || Id_NhaCungCap.touched)" class="alert alert-danger">
+            <div *ngIf="Id_NhaCungCap.errors.required">
+                Nhà cung cấp không được bỏ trống
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="label label-default">Nhãn hiệu</span>
+        <select class="form-control" [(ngModel)]="service.product.tenNhanHieu" formControlName="Id_NhanHieu" required>
+          <option  *ngFor="let brand of this.brands"
+              [value]="brand.id">{{brand.ten}}</option>
+      </select>
+        <div *ngIf="Id_NhanHieu.invalid && (Id_NhanHieu.dirty || Id_NhanHieu.touched)" class="alert alert-danger">
+
+            <div *ngIf="Id_NhanHieu.errors.required">
+                Nhãn hiệu sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+    <mat-label>Trạng thái sản phẩm</mat-label>
+    <select class="form-control" [(ngModel)]="service.product.trangThaiSanPham" formControlName="TrangThaiSanPham" required>
+        <option 
+            value="thuong">Sản phẩm thường
+        </option>
+        <option 
+            value="hot">Sản phẩm hot 
+        </option>
+        <option 
+            value="new">Sản phẩm new
+        </option>
+        <option 
+            value="sale">Sản phẩm khuyến mãi
+        </option>
+    </select>
+    <br>
+    <div *ngIf="TrangThaiSanPham.invalid && (TrangThaiSanPham.dirty || TrangThaiSanPham.touched)" class="alert alert-danger">
+
+        <div *ngIf="TrangThaiSanPham.errors.required">
+            Trạng thái sản phẩm không được bỏ trống
+        </div>
+    </div>
+    <mat-label>Trạng thái hoạt động</mat-label>
+    <select class="form-control" [(ngModel)]="service.product.trangThaiHoatDong" formControlName="TrangThaiHoatDong" required>
+      <option 
+          value="True">Bật
+      </option>
+      <option 
+          value="False">Tắt 
+      </option>
+    </select>
+    <br>
+    <div *ngIf="TrangThaiHoatDong.invalid && (TrangThaiHoatDong.dirty || TrangThaiHoatDong.touched)" class="alert alert-danger">
+
+        <div *ngIf="TrangThaiHoatDong.errors.required">
+            Trạng thái hoạt động không được bỏ trống
+        </div>
+    </div>
+    <br>
+ 
+    <div class="form-group">
+        <input class="form-control" type="file" multiple (change)="gopHam($event)" required>
+        <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+    </div>
+
+
+    <br>
+    <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
+</form> -->
+
+
+
+
+
+<style>
+    mat-form-field {
+        margin-top: 2rem;
+    }
+</style>
+<form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
+    <div class="form-group">
+        <label>Tên</label>
+        <select class="form-control" formControlName="Ten" [(ngModel)]="service.product.ten">
+      <option *ngFor="let ten of TenSanPhamArray" [value]="ten.value"   required>
+        {{ten.viewValue}}
+      </option>
+    </select>
+        <div *ngIf="Ten.invalid && (Ten.dirty || Ten.touched)" class="alert alert-danger">
+            <div *ngIf="Ten.errors.required">
+                Tên không được bỏ trống
+            </div>
+            <div *ngIf="Ten.errors.minlength">
+                Tên không được dưới 2 kí tự
+            </div>
+            <div *ngIf="Ten.errors.maxlength">
+                Tên không được trên 100 kí tự
+            </div>
+            <div *ngIf="Ten.errors.pattern">
+                Tên không được có kí tự đặc biệt
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <label>Giá bán</label>
+        <select formControlName="GiaBan" class="form-control" [(ngModel)]="service.product.giaBan" required>
+      <option *ngFor="let ten of GiaBanArray" [value]="ten.value">
+        {{ten.viewValue|number}} VNĐ
+      </option>
+    </select>
+        <div *ngIf="GiaBan.invalid && (GiaBan.dirty || GiaBan.touched)" class="alert alert-danger">
+            <div *ngIf="GiaBan.errors.required">
+                Giá bán sản phẩm không được bỏ trống
+            </div>
+            <div *ngIf="GiaBan.errors.minlength">
+                Giá bán không được dưới 3 kí tự
+            </div>
+            <div *ngIf="GiaBan.errors.maxlength">
+                Giá bán không được trên 10 kí tự
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Giá nhập</label>
+        <select class="form-control" formControlName="GiaNhap" [(ngModel)]="service.product.giaNhap" required>
+      <option *ngFor="let ten of GiaNhapArray" [value]="ten.value">
+        {{ten.viewValue|number}} VNĐ
+      </option>
+    </select>
+        <div *ngIf="GiaNhap.invalid && (GiaNhap.dirty || GiaNhap.touched)" class="alert alert-danger">
+            <div *ngIf="GiaNhap.errors.required">
+                Giá nhập sản phẩm không được bỏ trống
+            </div>
+            <div *ngIf="GiaNhap.errors.minlength">
+                Giá nhập không được dưới 3 kí tự
+            </div>
+            <div *ngIf="GiaNhap.errors.maxlength">
+                Giá nhập không được trên 10 kí tự
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Khuyến mãi</label>
+        <input class="form-control" formControlName="KhuyenMai" [(ngModel)]="service.product.khuyenMai" required>
+
+        <div *ngIf="KhuyenMai.invalid && (KhuyenMai.dirty || KhuyenMai.touched)" class="alert alert-danger">
+            <div *ngIf="KhuyenMai.errors.required">
+                Khuyến mãi sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+
+        <span class="label label-default">Giới tính</span>
+        <select class="form-control" formControlName="GioiTinh" [(ngModel)]="service.product.gioiTinh" required>
+      <option value=1>Nam</option>
+      <option value=2>Nữ</option>
+    </select>
+        <div *ngIf="GioiTinh.invalid && (GioiTinh.dirty || GioiTinh.touched)" class="alert alert-danger">
+            <div *ngIf="GioiTinh.errors.required">
+                Giới tính sản phẩm không được bỏ trống
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Mô tả</label>
+        <select class="form-control" formControlName="MoTa" [(ngModel)]="service.product.moTa">
+      <option *ngFor="let ten of MoTaArray" [value]="ten.value">
+        {{ten.viewValue}}
+      </option>
+    </select>
+        <div *ngIf="MoTa.invalid && (MoTa.dirty || MoTa.touched)" class="alert alert-danger">
+            <div div *ngIf="MoTa.errors.required">
+                Mô tả không được bỏ trống
+            </div>
+            <div *ngIf="MoTa.errors.minlength">
+                Mô tả không được dưới 10 kí tự
+            </div>
+            <div *ngIf="MoTa.errors.maxlength">
+                Mô tả không được trên 100 kí tự
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Tag</label>
+        <select class="form-control" formControlName="Tag" [(ngModel)]="service.product.tag" required>
+      <option value="Fashion">Fashion
+      </option>
+      <option value="Features">Features
+      </option>
+    </select>
+        <div *ngIf="Tag.invalid && (Tag.dirty || Tag.touched)" class="alert alert-danger">
+            <div *ngIf="Tag.errors.required">
+                Tag không được bỏ trống
+            </div>
+            <div *ngIf="Tag.errors.minlength">
+                Tag không được dưới 3 kí tự
+            </div>
+            <div *ngIf="Tag.errors.maxlength">
+                Tag không được trên 15 kí tự
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <label>Hướng dẫn</label>
+        <select class="form-control" formControlName="HuongDan" [(ngModel)]="service.product.huongDan">
+      <option *ngFor="let ten of MoTaArray" [value]="ten.value">
+        {{ten.viewValue}}
+      </option>
+    </select>
+        <div *ngIf="HuongDan.invalid && (HuongDan.dirty || HuongDan.touched)" class="alert alert-danger">
+            <div *ngIf="HuongDan.errors.required">
+                Hướng dẫn không được bỏ trống
+            </div>
+            <div *ngIf="HuongDan.errors.minlength">
+                Hướng dẫn không được dưới 3 kí tự
+            </div>
+            <div *ngIf="HuongDan.errors.maxlength">
+                Hướng dẫn không được trên 15 kí tự
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label>Thành phần</label>
+        <select class="form-control" formControlName="ThanhPhan" [(ngModel)]="service.product.thanhPhan">
+      <option *ngFor="let ten of ThanhPhanArray" [value]="ten.value">
+        {{ten.viewValue}}
+      </option>
+    </select>
+        <div *ngIf="ThanhPhan.invalid && (ThanhPhan.dirty || ThanhPhan.touched)" class="alert alert-danger">
+            <div *ngIf="ThanhPhan.errors.required">
+                Thành phần không được bỏ trống
+            </div>
+            <div *ngIf="ThanhPhan.errors.minlength">
+                Thành phần không được dưới 3 kí tự
+            </div>
+            <div *ngIf="ThanhPhan.errors.maxlength">
+                Thành phần không được trên 50 kí tự
+            </div>
+            <div *ngIf="ThanhPhan.errors.pattern">
+                Thành phần không được có kí tự đặc biệt
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <span class="label label-default">Loại</span>
+        <select class="form-control" [(ngModel)]="service.product.tenLoai" formControlName="Id_Loai" required>
+      <option *ngFor="let category of this.categories" [value]="category.id">{{category.ten}}</option>
+    </select>
+        <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
+            <div *ngIf="Id_Loai.errors.required">
+                Loại sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <span class="label label-default">Nhà cung cấp</span>
+        <select class="form-control" [(ngModel)]="service.product.id_NhaCungCap" formControlName="Id_NhaCungCap" required>
+      <option *ngFor="let ncc of this.nhacungcaps" [value]="ncc.id">{{ncc.ten}}</option>
+    </select>
+        <div *ngIf="Id_NhaCungCap.invalid && (Id_NhaCungCap.dirty || Id_NhaCungCap.touched)" class="alert alert-danger">
+            <div *ngIf="Id_NhaCungCap.errors.required">
+                Nhà cung cấp không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <span class="label label-default">Nhãn hiệu</span>
+        <select class="form-control" [(ngModel)]="service.product.tenNhanHieu" formControlName="Id_NhanHieu" required>
+      <option *ngFor="let brand of this.brands" [value]="brand.id">{{brand.ten}}</option>
+    </select>
+        <div *ngIf="Id_NhanHieu.invalid && (Id_NhanHieu.dirty || Id_NhanHieu.touched)" class="alert alert-danger">
+            <div *ngIf="Id_NhanHieu.errors.required">
+                Nhãn hiệu sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Trạng thái sản phẩm</label>
+        <select class="form-control" [(ngModel)]="service.product.trangThaiSanPham" formControlName="TrangThaiSanPham" required>
+      <option value="thuong">Sản phẩm thường
+      </option>
+      <option value="hot">Sản phẩm hot
+      </option>
+      <option value="new">Sản phẩm new
+      </option>
+      <option value="sale">Sản phẩm khuyến mãi
+      </option>
+    </select>
+        <div *ngIf="TrangThaiSanPham.invalid && (TrangThaiSanPham.dirty || TrangThaiSanPham.touched)" class="alert alert-danger">
+            <div *ngIf="TrangThaiSanPham.errors.required">
+                Trạng thái sản phẩm không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Trạng thái hoạt động</label>
+        <select class="form-control" [(ngModel)]="service.product.trangThaiHoatDong" formControlName="TrangThaiHoatDong" required>
+      <option value="True">Bật
+      </option>
+      <option value="False">Tắt
+      </option>
+    </select>
+        <br>
+        <div *ngIf="TrangThaiHoatDong.invalid && (TrangThaiHoatDong.dirty || TrangThaiHoatDong.touched)" class="alert alert-danger">
+            <div *ngIf="TrangThaiHoatDong.errors.required">
+                Trạng thái hoạt động không được bỏ trống
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" type="file" multiple (change)="gopHam($event)" required>
+        <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+    </div>
+
+    <br>
+    <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
+</form>

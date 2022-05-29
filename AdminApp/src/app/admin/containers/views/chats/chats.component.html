@@ -1,0 +1,39 @@
+<div class="jumbotron bg-light">
+    <h2 class="text-center text-primary">
+        <i class="fab fa-facebook-messenger"></i>&nbsp; Public Talk
+    </h2>
+    <div class="row">
+        <div class="col-md-12" *ngFor="let item of this.service.chatarray">
+            <div class="row" *ngIf="item.idUser==checkuse()">
+                <div class="offset col-md-6 offset-md-6">
+                    <div class="container darker bg-primary">
+                        <p class="sender text-right text-white">{{item.name}}</p>
+                        <p class="text-right text-white">{{item.contentChat}}</p>
+                        <span class="time-right text-light">{{item.timeChat}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.idUser!=checkuse()">
+                <div class="bg-light container">
+                    <p class="text-left">{{item.name}}</p>
+                    <p class="textAlign">{{item.contentChat}}</p>
+                    <span class="time-left">{{item.timeChat}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <form [formGroup]="newFormGroup" (ngSubmit)="onSubmit(newFormGroup.value)">
+                <div class="container" style="width: 30vw;">
+                    <br>
+                    <div class="form-group">
+                        <label for="label label-default">Nội dung chat</label>
+                        <input class="form-control" formControlName="Content">
+                    </div>
+                    <div class="form-group" style="justify-content:center;display: flex;">
+                        <button type="submit" class="btn btn-primary" [disabled]="this.newFormGroup.invalid">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

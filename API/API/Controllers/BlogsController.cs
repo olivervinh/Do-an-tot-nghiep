@@ -37,51 +37,7 @@ namespace API.Controllers
                 nameUser = _context.AppUsers.Where(s => s.Id == b.FkAppUser_NguoiThem).Select(s => s.FirstName + " " + s.LastName).FirstOrDefault(),
             });
             return await blogs.ToListAsync();
-    } 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutBlog(int id, [FromForm] UploadBlog upload)
-        //{
-        //    var listImage = new List<ImageBlog>();
-        //    Blog blog = new Blog();
-        //    blog = await _context.Blogs.FindAsync(id);
-        //    blog.TieuDe = upload.TieuDe;
-        //    blog.NoiDung = upload.NoiDung;
-        //    blog.FkAppUser_NguoiThem = upload.FkUserId;
-        //    Blog sp;
-        //    sp = _context.Blogs.Find(id);
-        //    Notification notification = new Notification()
-        //    {
-        //        TenSanPham = upload.TieuDe,
-        //        TranType = "Edit"
-        //    };
-        //    _context.Notifications.Add(notification);
-        //    ImageBlog image = new ImageBlog();
-        //    var file = upload.files.ToArray();
-        //    var imageBlogs = _context.ImageBlogs.ToArray().Where(s => s.FkBlogId == id);
-        //    if (upload.files != null)
-        //    {
-        //        ImageBlog[] images = _context.ImageBlogs.Where(s => s.FkBlogId == id).ToArray();
-        //        foreach (var i in images)
-        //        {
-        //            FileHelper.DeleteFileOnPathAsync(i.ImageName);
-        //        }
-        //        _context.ImageBlogs.RemoveRange(images);
-        //        foreach (var item in upload.files)
-        //        {
-        //            if (item.Length > 0)
-        //            {
-        //                var imageBlog = new ImageBlog();
-        //                _context.ImageBlogs.Add(imageBlog);
-        //                imageBlog.FkBlogId = blog.Id;
-        //                imageBlog.ImageName = await FileHelper.UploadImageAndReturnPathAsync(imageBlog.Id, "blog", item);
-        //                _context.ImageBlogs.Update(imageBlog);
-        //                await _context.SaveChangesAsync();
-        //            }
-        //        }
-        //    }
-        //    await _hubContext.Clients.All.BroadcastMessage();
-        //    return Ok();
-        //}
+        }
         [HttpPost("getBlog")]
         public async Task<ActionResult> GetBlog()
         {
@@ -103,11 +59,8 @@ namespace API.Controllers
             blog.TieuDe = upload.TieuDe;
             blog.NoiDung = upload.NoiDung;
             blog.FkAppUser_NguoiThem = upload.FkUserId;
-
             Blog sp;
             sp = _context.Blogs.Find(id);
-
-
             Notification notification = new Notification()
             {
                 TenSanPham = upload.TieuDe,
@@ -127,26 +80,21 @@ namespace API.Controllers
                 }
                 catch (Exception)
                 {
-
                 }
-
             }
             if (upload.files != null)
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-
                     if (file[i].Length > 0)
                     {
                         var path = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-blog",
                        upload.TieuDe + i + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await file[i].CopyToAsync(stream);
                         }
-
                         listImage.Add(new ImageBlog()
                         {
                             ImageName = upload.TieuDe + i + "." + file[i].FileName.Split(".")
@@ -155,8 +103,6 @@ namespace API.Controllers
                         });
                     }
                 }
-
-
             }
             else // xu li khi khong cap nhat hinh
             {
@@ -180,7 +126,6 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Blog>> PostBlog([FromForm] UploadBlog upload)
         {
-
             Blog blog = new Blog();
             blog.TieuDe = upload.TieuDe;
             blog.NoiDung = upload.NoiDung;
@@ -192,10 +137,7 @@ namespace API.Controllers
             };
             _context.Notifications.Add(notification);
             var file = upload.files.ToArray();
-
             _context.Blogs.Add(blog);
-
-
             await _context.SaveChangesAsync();
             Blog Test;
             Test = await _context.Blogs.FindAsync(blog.Id);
@@ -203,72 +145,29 @@ namespace API.Controllers
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-
                     if (file[i].Length > 0)
                     {
-
                         ImageBlog imageBlog1 = new ImageBlog();
                         _context.ImageBlogs.Add(imageBlog1);
                         await _context.SaveChangesAsync();
                         var path = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-blog",
                        upload.TieuDe + imageBlog1.Id + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await file[i].CopyToAsync(stream);
                         }
-
-
                         imageBlog1.ImageName = upload.TieuDe + imageBlog1.Id + "." + file[i].FileName.Split(".")
                             [file[i].FileName.Split(".").Length - 1];
                         imageBlog1.FkBlogId = Test.Id;
-
                         _context.ImageBlogs.Update(imageBlog1);
                         await _context.SaveChangesAsync();
-
                     }
                 }
             }
-
             await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
-        // POST: api/Blogs
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Blog>> PostBlog([FromForm] UploadBlog upload)
-        //{
-        //    Blog blog = new Blog();
-        //    blog.TieuDe = upload.TieuDe;
-        //    blog.NoiDung = upload.NoiDung;
-        //    blog.FkAppUser_NguoiThem = upload.FkUserId;
-        //    Notification notification = new Notification()
-        //    {
-        //        TenSanPham = upload.TieuDe,
-        //        TranType = "Add"
-        //    };
-        //    _context.Notifications.Add(notification);
-        //    _context.Blogs.Add(blog);
-        //    await _context.SaveChangesAsync();
-        //    if (upload.files != null)
-        //    {
-        //        foreach (var file in upload.files)
-        //        {
-        //            if (file.Length > 0)
-        //            {
-        //                var imageBlog = new ImageBlog();
-        //                _context.ImageBlogs.Add(imageBlog);
-        //                imageBlog.FkBlogId = blog.Id;
-        //                imageBlog.ImageName = await FileHelper.UploadImageAndReturnPathAsync(imageBlog.Id, "blog", file);
-        //                _context.ImageBlogs.Update(imageBlog);
-        //                await _context.SaveChangesAsync();
-        //            }
-        //        }
-        //    }
-        //    await _hubContext.Clients.All.BroadcastMessage();
-        //    return Ok();
-        //}
         // DELETE: api/Blogs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlog(int id)

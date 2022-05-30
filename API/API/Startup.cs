@@ -91,7 +91,7 @@ namespace API
             services.AddAutoMapper();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -136,6 +136,8 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+            //seed db
+            await SeedData.Seed(app);
         }
     }
 }

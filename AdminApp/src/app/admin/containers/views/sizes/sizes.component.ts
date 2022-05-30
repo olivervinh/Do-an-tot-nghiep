@@ -10,17 +10,13 @@ import { ToastServiceService } from '../../shared/toast-service.service';
 import {  Size, SizeService } from './size.service';
 import * as signalR from '@microsoft/signalr';
 import { SizeComponent } from './size/size.component';
-
 @Component({
   selector: 'app-sizes',
   templateUrl: './sizes.component.html',
   styleUrls: ['./sizes.component.scss']
 })
 export class SizesComponent implements OnInit, AfterViewInit {
-
-  
   @ViewChild(MatSort) sort: MatSort;
- 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
   constructor(public service:SizeService,
@@ -28,7 +24,6 @@ export class SizesComponent implements OnInit, AfterViewInit {
               public http: HttpClient,
               public dialog: MatDialog,
               public serviceToast : ToastServiceService,) { }
-
 displayedColumns: string[] = ['id', 'tenSize','tenLoai',
   'actions'];
   ngOnInit(): void {
@@ -37,7 +32,6 @@ displayedColumns: string[] = ['id', 'tenSize','tenLoai',
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {

@@ -33,13 +33,11 @@
                 <option *ngFor="let category of this.categories" [value]="category.id">{{category.ten}}</option>
             </select>
             <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
-
                 <div *ngIf="Id_Loai.errors.required">
                     Loại không được bỏ trống
                 </div>
             </div>
         </div>
-
         <div class="form-group" style="justify-content:center;display: flex;">
             <button type="submit" class="btn btn-primary" [mat-dialog-close]="true"
                 [disabled]="this.newFormGroup.invalid">Submit</button>

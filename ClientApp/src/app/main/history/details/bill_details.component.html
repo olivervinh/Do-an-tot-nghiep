@@ -5,7 +5,6 @@
             Trang chủ
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
-
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
             Lịch sử mua hàng
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
@@ -13,12 +12,10 @@
     </div>
 </div>
 <div class="main-container container">
-
     <div class="row">
         <!--Middle Part Start-->
         <div id="content" class="col-sm-12">
             <h2 class="title">Thông tin đơn hàng</h2>
-
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -74,7 +71,6 @@
                             <td class="text-right">{{item.giaBan|number}}</td>
                             <td class="text-right">{{item.soluong*item.gia|number}}</td>
                         </tr>
-
                     </tbody>
                     <tfoot>
                         <tr>
@@ -82,28 +78,24 @@
                             <td class="text-right"><b>Tổng giá trị đơn hàng</b>
                             </td>
                             <td class="text-right">{{tongtien|number}} VNĐ</td>
-
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td class="text-right"><b>Phí giao hàng</b>
                             </td>
                             <td class="text-right"><span>{{25000|number}} VNĐ</span></td>
-
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td class="text-right"><b>Giảm giá</b>
                             </td>
                             <td class="text-right">{{tongtien-bill.tongTien|number}} VNĐ</td>
-
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td class="text-right"><b>Tổng tiền phải trả</b>
                             </td>
                             <td class="text-right">{{bill.tongTien+25000|number}} VNĐ</td>
-
                         </tr>
                     </tfoot>
                 </table>
@@ -114,9 +106,6 @@
                 <div *ngIf="bill.trangThai!=1" class="pull-right"><a class="btn btn-primary" (click)="Huy()">Huỷ đơn</a>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>

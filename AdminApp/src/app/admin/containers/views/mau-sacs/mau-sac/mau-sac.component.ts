@@ -6,14 +6,12 @@ import { MauSacService } from '../mau-sac.service';
 import { CategoryService } from '../../categories/category.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { environment } from '../../../../../../environments/environment';
-
 @Component({
   selector: 'app-mau-sac',
   templateUrl: './mau-sac.component.html',
   styleUrls: ['./mau-sac.component.scss']
 })
 export class MauSacComponent implements OnInit {
-
   categories: any[] = [];
   constructor(public service: MauSacService,
     public serviceCategory: CategoryService,
@@ -25,11 +23,9 @@ export class MauSacComponent implements OnInit {
         Object.assign(this.categories, data)
       }
     )
-
   }
   get MaMau() { return this.newFormGroup.get('MaMau'); }
   get Id_Loai() { return this.newFormGroup.get('Id_Loai'); }
-
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
       MaMau: new FormControl(null,
@@ -43,10 +39,8 @@ export class MauSacComponent implements OnInit {
         ])
     });
   }
-
   selectedFile: File = null;
   public newFormGroup: FormGroup;
-
   onSubmit = (data) => {
     if (this.service.mausac.id == 0) {
       const formData = new FormData();
@@ -69,8 +63,6 @@ export class MauSacComponent implements OnInit {
       this.http.put(environment.URL_API + 'mausacs/' + `${this.service.mausac.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
-
-
           this.service.getAllMauSacs();
           this.service.mausac.id = 0;
         }, err => {

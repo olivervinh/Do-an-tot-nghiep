@@ -4,14 +4,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Product, ProductService } from '../product.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Router } from '@angular/router';
-
 import { CategoryService } from '../../categories/category.service';
 import { BrandService } from '../../brands/brand.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { environment } from '../../../../../../environments/environment';
 import { __values } from 'tslib';
 import { NhaCungCapService } from '../../nhacungcaps/nhacungcap.service';
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -71,7 +69,6 @@ export class ProductComponent implements OnInit {
   get TrangThaiSanPham() { return this.newForm.get('TrangThaiSanPham'); }
   get TrangThaiHoatDong() { return this.newForm.get('TrangThaiHoatDong'); }
   get GioiTinh(){return this.newForm.get('GioiTinh')}
-
   ngOnInit(): void {
     console.log(this.service.product)
     this.serviceCategory.get().subscribe(
@@ -79,7 +76,6 @@ export class ProductComponent implements OnInit {
         Object.assign(this.categories, data)
       }
     )
-
     this.serviceBrand.get().subscribe(
       data => {
         Object.assign(this.brands, data)
@@ -89,11 +85,9 @@ export class ProductComponent implements OnInit {
       data => {
         Object.assign(this.nhacungcaps, data)
         console.log("nha cung cap",this.nhacungcaps);
-        
       }
     )
     this.newForm = new FormGroup({
-
       Ten: new FormControl(null, [
         Validators.required,
         Validators.minLength(2),
@@ -103,71 +97,55 @@ export class ProductComponent implements OnInit {
         Validators.required,
         Validators.min(3),
         Validators.max(100000000000),
-
       ]),
       GiaNhap: new FormControl(null, [
         Validators.required,
         Validators.min(3),
         Validators.max(100000000000),
-
       ]),
       KhuyenMai: new FormControl( this.service.product.khuyenMai,[
         Validators.required,
         Validators.min(0),
         Validators.max(50000000000),
-
       ]),
       MoTa: new FormControl(null, [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10000000000000),
-
-
       ]),
       HuongDan: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(1000000000000),
-
-
       ]),
       ThanhPhan: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(5000000000),
-
       ]),
       Tag: new FormControl(null, [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(15),
-
       ]),
       Id_Loai: new FormControl( null, [
         Validators.required,
-
       ]),
       Id_NhaCungCap: new FormControl( null, [
         Validators.required,
-
       ]),
       Id_NhanHieu: new FormControl(null, [
         Validators.required,
-
       ]),
-
       TrangThaiSanPham: new FormControl(null, [
         Validators.required,
       ]),
       TrangThaiHoatDong: new FormControl(null, [
         Validators.required,
-
       ]),
       GioiTinh: new FormControl(null, [
         Validators.required,
-
       ]),
-
     });
   }
   clearForm() {
@@ -239,7 +217,6 @@ export class ProductComponent implements OnInit {
         }, err => {
           this.serviceToast.showToastSuaThatBai()
         });
-
     }
   }
   resetForm() {
@@ -285,7 +262,6 @@ export class ProductComponent implements OnInit {
     {value: 'Dây Nịt Nam Mặt GG', viewValue: 'Dây Nịt Nam Mặt GG'},
     {value: 'Thắt Lưng Da Bò SÁP', viewValue: 'Thắt Lưng Da Bò SÁP'},
   ];
-
   //Data gia nhap
   GiaNhapArray:any = [
     {value: '100000', viewValue: '100000'},
@@ -347,7 +323,6 @@ viewValue:  `Mang đến hình ảnh là một người lịch lãm, nhưng khô
    viewValue:  `Kim loại `
   },
   ];
-
   //Data Huong dan
   HuongDanArray:any = [
     {value: `Ủi 180 độ, có thể phối với mọi loại đồ`,
@@ -358,5 +333,3 @@ viewValue:  `Mang đến hình ảnh là một người lịch lãm, nhưng khô
    },
   ];
 }
-
-

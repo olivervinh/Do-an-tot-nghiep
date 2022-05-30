@@ -27,7 +27,6 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
   soLuong:number;
   constructor(private cartService: CartService,public userService: UserService,public http:HttpClient,public route: ActivatedRoute,private sanitized: DomSanitizer) {
     this.route.params.subscribe(params => {
-
       this.id_product = params['id']; // get id to params
   });
   this.soLuong=0;
@@ -38,28 +37,20 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
               this.testMarkup = this.sanitized.bypassSecurityTrustHtml(this.product.moTa);
               this.http.post("https://localhost:44302/api/mausacs/mau/",{
                 id_san_pham:this.id_product,
-
     }).subscribe(
       res=>{
         this.mau=res;
-
       });
       this.size={};
-
       this.http.post("https://localhost:44302/api/sanphams/listreview/",{
         IdSanPham:this.product.id
-
     }).subscribe(
       res=>{
         this.list_review=res;
       });
           });
-
-
   }
-
   ngOnInit(){
-
   }
   onChangeMau(mau){
     this.http.post("https://localhost:44302/api/sizes/sizetheomau/",{
@@ -82,11 +73,9 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
         this.Content="";
       });
   }
-
   soLuongTru(){
     if(this.soLuong>=0)
     {
-
     }
     else
     {
@@ -107,36 +96,29 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
     $('.js-addwish-b2').on('click', function(e){
 			e.preventDefault();
 		});
-
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 			$(this).on('click', function(){
 				Swal.fire(nameProduct, "is added to wishlist !", "success");
-
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
 			});
 		});
       $('.js-addwish-detail').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-  
         $(this).on('click', function(){
           Swal.fire(nameProduct, "đã được thêm vào giỏ hàng !", "success");
-  
           $(this).addClass('js-addedwish-detail');
           $(this).off('click');
         });
       });
-  
       /*---------------------------------------------*/
-  
       $('.js-addcart-detail').each(function(){
         var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
           Swal.fire(nameProduct, "đã được thêm vào giỏ hàng !", "success");
         });
       });
-	
     $('.wrap-slick3').each(function(){
       $(this).find('.slick3').slick({
           slidesToShow: 1,
@@ -145,12 +127,10 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
           infinite: true,
           autoplay: false,
           autoplaySpeed: 6000,
-
           arrows: true,
           appendArrows: $(this).find('.wrap-slick3-arrows'),
           prevArrow:'<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
           nextArrow:'<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
-
           // dots: true,
           // appendDots: $(this).find('.wrap-slick3-dots'),
           // dotsClass:'slick3-dots',
@@ -203,22 +183,17 @@ export class ProductDetailsComponent implements OnInit ,AfterViewInit{
       ]
     });
   });
-
-
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   var nameTab = $(e.target).attr('href');
   $(nameTab).find('.slick2').slick('reinit');
 });
-
   }
   maxQty(){
-
     if(this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0]!=null){
       let maxQty = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0].soLuongTon
       return maxQty
     }
     return 0
-
   }
   checkQty(){
     if(this.maxQty()<=0){
@@ -229,12 +204,10 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     if(this.soLuong<this.maxQty()){
       this.soLuong++;
     }
-
   }
   addToCard(product) {
     if( !this.userService.checkLogin())
     {
-
     }
     else{
       var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0];
@@ -252,9 +225,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       ).subscribe(resp => {
         this.cartService.addToCart(product);
       });
-
     }
-
   }
   // addToCard(){
   //   var SanPhamBienThe = this.list_san_pham_bien_the.filter(d=>d.tenMau==this.selectMau&&d.tenSize==this.selectSize)[0];
@@ -270,7 +241,6 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
   //      UserID:clicks,
   //    }
   //   ).subscribe(resp => {
-
   //   });
   // }
 }

@@ -1,45 +1,32 @@
-
-
 (function ($) {
     // USE STRICT
     "use strict";
-
         /*==================================================================
         [ Slick1 ]*/
         $('.wrap-slick1').each(function(){
             var wrapSlick1 = $(this);
             var slick1 = $(this).find('.slick1');
-
-
             var itemSlick1 = $(slick1).find('.item-slick1');
             var layerSlick1 = $(slick1).find('.layer-slick1');
             var actionSlick1 = [];
-            
-
             $(slick1).on('init', function(){
                 var layerCurrentItem = $(itemSlick1[0]).find('.layer-slick1');
-
                 for(var i=0; i<actionSlick1.length; i++) {
                     clearTimeout(actionSlick1[i]);
                 }
-
                 $(layerSlick1).each(function(){
                     $(this).removeClass($(this).data('appear') + ' visible-true');
                 });
-
                 for(var i=0; i<layerCurrentItem.length; i++) {
                     actionSlick1[i] = setTimeout(function(index) {
                         $(layerCurrentItem[index]).addClass($(layerCurrentItem[index]).data('appear') + ' visible-true');
                     },$(layerCurrentItem[i]).data('delay'),i); 
                 }        
             });
-
-
             var showDot = false;
             if($(wrapSlick1).find('.wrap-slick1-dots').length > 0) {
                 showDot = true;
             }
-
             $(slick1).slick({
                 pauseOnFocus: false,
                 pauseOnHover: false,
@@ -64,29 +51,21 @@
                             '<span class="caption-dots-slick1">' + caption + '</span>';
                 },
             });
-
             $(slick1).on('afterChange', function(event, slick, currentSlide){ 
-
                 var layerCurrentItem = $(itemSlick1[currentSlide]).find('.layer-slick1');
-
                 for(var i=0; i<actionSlick1.length; i++) {
                     clearTimeout(actionSlick1[i]);
                 }
-
                 $(layerSlick1).each(function(){
                     $(this).removeClass($(this).data('appear') + ' visible-true');
                 });
-
                 for(var i=0; i<layerCurrentItem.length; i++) {
                     actionSlick1[i] = setTimeout(function(index) {
                         $(layerCurrentItem[index]).addClass($(layerCurrentItem[index]).data('appear') + ' visible-true');
                     },$(layerCurrentItem[i]).data('delay'),i); 
                 }
-                         
             });
-
         });
-
         /*==================================================================
         [ Slick2 ]*/
         $('.wrap-slick2').each(function(){
@@ -132,13 +111,10 @@
               ]    
             });
           });
-
-
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
           var nameTab = $(e.target).attr('href'); 
           $(nameTab).find('.slick2').slick('reinit');          
         });      
-        
         /*==================================================================
         [ Slick3 ]*/
         $('.wrap-slick3').each(function(){
@@ -149,12 +125,10 @@
                 infinite: true,
                 autoplay: false,
                 autoplaySpeed: 6000,
-
                 arrows: true,
                 appendArrows: $(this).find('.wrap-slick3-arrows'),
                 prevArrow:'<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
                 nextArrow:'<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
-
                 dots: true,
                 appendDots: $(this).find('.wrap-slick3-dots'),
                 dotsClass:'slick3-dots',
@@ -164,7 +138,4 @@
                 },  
             });
         });
-            
-                
-
 })(jQuery);

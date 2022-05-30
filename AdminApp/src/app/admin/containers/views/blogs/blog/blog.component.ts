@@ -11,14 +11,11 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-
-
   constructor(  public service : BlogService,
                 public http :HttpClient ,
                 public toastr: ToastrService,
                 public serviceToast: ToastServiceService,
               ) {
-             
                 }
                 ngOnInit(): void {
                   this.newFormGroup = new FormGroup({
@@ -64,7 +61,6 @@ export class BlogComponent implements OnInit {
   clearForm() {
     this.newFormGroup.reset();
   }
-
   onSubmit = (data) => {
     if (this.service.blog.id == 0) {
       let form = new FormData();
@@ -91,12 +87,10 @@ export class BlogComponent implements OnInit {
       }
       this.service.put(this.service.blog.id, form)
         .subscribe(res => {
-       
           this.clearForm();
         }, err => {
           this.serviceToast.showToastSuaThatBai()
         });
-
     }
   }
 }

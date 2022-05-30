@@ -1,12 +1,9 @@
 @charset "UTF-8";
-
 // Default Variables
-
 // Slick icon entity codes outputs the following
 // "\2190" outputs ascii character "←"
 // "\2192" outputs ascii character "→"
 // "\2022" outputs ascii character "•"
-
 $slick-font-path: "./fonts/" !default;
 $slick-font-family: "slick" !default;
 $slick-loader-path: "./" !default;
@@ -20,7 +17,6 @@ $slick-dot-size: 6px !default;
 $slick-opacity-default: 0.75 !default;
 $slick-opacity-on-hover: 1 !default;
 $slick-opacity-not-active: 0.25 !default;
-
 @function slick-image-url($url) {
     @if function-exists(image-url) {
         @return image-url($url);
@@ -29,7 +25,6 @@ $slick-opacity-not-active: 0.25 !default;
         @return url($slick-loader-path + $url);
     }
 }
-
 @function slick-font-url($url) {
     @if function-exists(font-url) {
         @return font-url($url);
@@ -38,15 +33,12 @@ $slick-opacity-not-active: 0.25 !default;
         @return url($slick-font-path + $url);
     }
 }
-
 /* Slider */
-
 .slick-list {
     .slick-loading & {
         background: #fff slick-image-url("ajax-loader.gif") center center no-repeat;
     }
 }
-
 /* Icons */
 @if $slick-font-family == "slick" {
     @font-face {
@@ -57,9 +49,7 @@ $slick-opacity-not-active: 0.25 !default;
         font-style: normal;
     }
 }
-
 /* Arrows */
-
 .slick-prev,
 .slick-next {
     position: absolute;
@@ -99,7 +89,6 @@ $slick-opacity-not-active: 0.25 !default;
         -moz-osx-font-smoothing: grayscale;
     }
 }
-
 .slick-prev {
     left: -25px;
     [dir="rtl"] & {
@@ -113,7 +102,6 @@ $slick-opacity-not-active: 0.25 !default;
         }
     }
 }
-
 .slick-next {
     right: -25px;
     [dir="rtl"] & {
@@ -127,13 +115,10 @@ $slick-opacity-not-active: 0.25 !default;
         }
     }
 }
-
 /* Dots */
-
 .slick-dotted.slick-slider {
     margin-bottom: 30px;
 }
-
 .slick-dots {
     position: absolute;
     bottom: -25px;

@@ -4,14 +4,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { ProfileService } from './profile.service';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
   constructor( public toast: ToastServiceService, public service : ProfileService, public http: HttpClient) { }
   id: string
   userApp: any
@@ -57,13 +55,9 @@ export class ProfileComponent implements OnInit {
             Validators.required,
             Validators.minLength(0),
           ])  
-
       });
-
       this.id =   localStorage.getItem("idUser")
-     
   }
- 
   onSubmit = (data) =>{
    const formData = new FormData();
    formData.append('SDT',data.SDT);
@@ -78,10 +72,7 @@ export class ProfileComponent implements OnInit {
           this.toast.showToastSuaThanhCong()
       },
       error=>{
-
       }
-
     )
   }
-
 }

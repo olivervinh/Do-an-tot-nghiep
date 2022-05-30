@@ -1,13 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { getStyle, rgbToHex } from '@coreui/coreui/dist/js/coreui-utilities';
-
 @Component({
   templateUrl: 'colors.component.html'
 })
 export class ColorsComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private _document: any) {}
-
   public themeColors(): void {
     Array.from(this._document.querySelectorAll('.theme-color')).forEach((el: HTMLElement) => {
       const background = getStyle('background-color', el);
@@ -27,7 +25,6 @@ export class ColorsComponent implements OnInit {
       el.parentNode.appendChild(table);
     });
   }
-
   ngOnInit(): void {
     this.themeColors();
   }

@@ -30,10 +30,8 @@
       <progressbar class="progress progress-striped progress-animated" [max]="max" [value]="dynamic">
         <span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span>
       </progressbar>
-
       <small><em>No animation</em></small>
       <progressbar class="progress progress-success" [value]="dynamic" [max]="100" type="success"><b>{{dynamic}}%</b></progressbar>
-
       <small><em>Object (changes type based on value)</em></small>
       <progressbar class="progress-bar progress-bar-striped progress-bar-animated" [value]="dynamic" [max]="max" [type]="type">
         {{type}} <i *ngIf="showWarning">!!! Watch out !!!</i>

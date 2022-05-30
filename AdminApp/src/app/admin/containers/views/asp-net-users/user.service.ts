@@ -1,4 +1,3 @@
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
@@ -6,7 +5,6 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { environment } from "../../../../../environments/environment";
 import { User } from "./asp-net-users.component";
-
 @Injectable({
     providedIn: 'root'
   })

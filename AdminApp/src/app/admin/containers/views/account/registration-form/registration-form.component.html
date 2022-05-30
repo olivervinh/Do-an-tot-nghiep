@@ -17,13 +17,11 @@
             <div class="input-field">
                 <input class="form-control" placeholder="Địa chỉ" formControlName="location" required>
             </div>
-
             <div class="button">
                 <div class="inner">
                 </div>
                 <button type="submit">Create Account</button>
             </div>
-
         </form>
         <div *ngIf="errors" class="alert alert-danger" role="alert">
             <strong>Oops!</strong> {{errors}}

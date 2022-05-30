@@ -4,12 +4,10 @@
     }
 </style>
 <form [formGroup]="newForm" (ngSubmit)="onSubmit(newForm.value)">
-
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
         <mat-label>Tên</mat-label>
         <input matInput placeholder="Tên" formControlName="Ten" type="text" [(ngModel)]="service.product.ten" required>
     </mat-form-field>
-
     <div *ngIf="Ten.invalid && (Ten.dirty || Ten.touched)" class="alert alert-danger">
         <div *ngIf="Ten.errors.required">
             Tên không được bỏ trống
@@ -27,9 +25,7 @@
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
         <mat-label>Giá bán</mat-label>
         <input matInput placeholder="Giá Bán" formControlName="GiaBan" type="number" [(ngModel)]="service.product.giaBan" required>
-
     </mat-form-field>
-
     <div *ngIf="GiaBan.invalid && (GiaBan.dirty || GiaBan.touched)" class="alert alert-danger">
         <div *ngIf="GiaBan.errors.required">
             Giá bán sản phẩm không được bỏ trống
@@ -114,7 +110,6 @@
         <mat-label>Hướng dẫn</mat-label>
         <textarea matInput placeholder="Hướng dẫn" formControlName="HuongDan" type="text" rows="3" [(ngModel)]="service.product.huongDan" required>
       </textarea>
-
     </mat-form-field>
     <div *ngIf="HuongDan.invalid && (HuongDan.dirty || HuongDan.touched)" class="alert alert-danger">
         <div *ngIf="HuongDan.errors.required">
@@ -130,7 +125,6 @@
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
         <mat-label>Thành phần</mat-label>
         <input matInput placeholder="Thành phần" formControlName="ThanhPhan" type="text" [(ngModel)]="service.product.thanhPhan" required>
-
     </mat-form-field>
     <div *ngIf="ThanhPhan.invalid && (ThanhPhan.dirty || ThanhPhan.touched)" class="alert alert-danger">
         <div *ngIf="ThanhPhan.errors.required">
@@ -146,7 +140,6 @@
             Thành phần không được có kí tự đặc biệt
         </div>
     </div>
-
     <br>
     <div class="form-group">
         <span class="label label-default">Loại</span>
@@ -159,8 +152,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <span class="label label-default">Nhà cung cấp</span>
         <select class="form-control" [(ngModel)]="service.product.id_NhaCungCap" formControlName="Id_NhaCungCap" required>
@@ -172,8 +163,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <span class="label label-default">Nhãn hiệu</span>
         <select class="form-control" [(ngModel)]="service.product.id_NhanHieu" formControlName="Id_NhanHieu" required>
@@ -185,7 +174,6 @@
             </div>
         </div>
     </div>
-
     <mat-label>Trạng thái sản phẩm</mat-label>
     <select class="form-control" [(ngModel)]="service.product.trangThaiSanPham" formControlName="TrangThaiSanPham" required>
         <option 
@@ -203,7 +191,6 @@
     </select>
     <br>
     <div *ngIf="TrangThaiSanPham.invalid && (TrangThaiSanPham.dirty || TrangThaiSanPham.touched)" class="alert alert-danger">
-
         <div *ngIf="TrangThaiSanPham.errors.required">
             Trạng thái sản phẩm không được bỏ trống
         </div>
@@ -219,23 +206,18 @@
     </select>
     <br>
     <div *ngIf="TrangThaiHoatDong.invalid && (TrangThaiHoatDong.dirty || TrangThaiHoatDong.touched)" class="alert alert-danger">
-
         <div *ngIf="TrangThaiHoatDong.errors.required">
             Trạng thái hoạt động không được bỏ trống
         </div>
     </div>
     <br>
- 
     <div class="form-group">
         <input class="form-control" type="file" multiple (change)="gopHam($event)" required>
         <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
     </div>
-
-
     <br>
     <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
 </form>
-
 <!-- <style>
     mat-form-field {
         margin-top: 2rem;
@@ -322,7 +304,6 @@
                 Giới tính sản phẩm không được bỏ trống
             </div>
         </div>
-
     </div>
     <div class="form-group">
         <label>Mô tả</label>
@@ -343,8 +324,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <label>Tag</label>
         <select class="form-control" formControlName="Tag" [(ngModel)]="service.product.tag" required>
@@ -365,9 +344,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="form-group">
         <label>Hướng dẫn</label>
         <select class="form-control" formControlName="HuongDan" [(ngModel)]="service.product.huongDan">
@@ -387,10 +363,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <div class="form-group">
         <label>Thành phần</label>
         <select class="form-control" formControlName="ThanhPhan" [(ngModel)]="service.product.thanhPhan">
@@ -413,9 +385,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="form-group">
         <span class="label label-default">Loại</span>
         <select class="form-control" [(ngModel)]="service.product.id_Loai" formControlName="Id_Loai" required>
@@ -427,8 +396,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <span class="label label-default">Nhà cung cấp</span>
         <select class="form-control" [(ngModel)]="service.product.id_NhaCungCap" formControlName="Id_NhaCungCap" required>
@@ -440,8 +407,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <span class="label label-default">Nhãn hiệu</span>
         <select class="form-control" [(ngModel)]="service.product.id_NhanHieu" formControlName="Id_NhanHieu" required>
@@ -453,8 +418,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <label>Trạng thái sản phẩm</label>
         <select class="form-control" [(ngModel)]="service.product.trangThaiSanPham" formControlName="TrangThaiSanPham" required>
@@ -473,7 +436,6 @@
             </div>
         </div>
     </div>
-
     <div class="form-group">
         <label>Trạng thái hoạt động</label>
         <select class="form-control" [(ngModel)]="service.product.trangThaiHoatDong" formControlName="TrangThaiHoatDong" required>
@@ -489,12 +451,10 @@
             </div>
         </div>
     </div>
-
     <div class="form-group">
         <input class="form-control" type="file" multiple (change)="gopHam($event)" required>
         <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
     </div>
-
     <br>
     <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
 </form> -->

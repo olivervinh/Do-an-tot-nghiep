@@ -25,7 +25,6 @@ const routes: Routes = [
     component: CheckoutComponent,
     data: {breadcrumb: 'Checkout'}
   },
-
   {
     path: 'like',
     component: LikeComponent,
@@ -41,13 +40,11 @@ const routes: Routes = [
     component: HomeComponent,
     data: {breadcrumb: 'Home'}
   },
-
   {
     path: 'register',
     component: RegisterComponent,
     data: {breadcrumb: 'Register'}
   },
-
   {
     path: 'login',
     component: LoginComponent,
@@ -82,7 +79,6 @@ const routes: Routes = [
     component: BillDetailsComponent
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

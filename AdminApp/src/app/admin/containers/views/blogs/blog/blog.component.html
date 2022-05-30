@@ -21,8 +21,6 @@
             <input class="form-control" type="file" multiple (change)="gopHam($event)" required>
             <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
         </div>
-
-
         <div class="form-group" style="justify-content:center;display: flex;">
             <button type="submit" class="btn btn-primary" [mat-dialog-close]="true">Submit</button>
         </div>

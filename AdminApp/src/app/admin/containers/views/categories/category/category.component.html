@@ -10,7 +10,6 @@
             <label for="Name">Tên loại</label>
             <input class="form-control" formControlName="Name" [(ngModel)]="service.category.ten" required>
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-
                 <div *ngIf="name.errors.required">
                   tên loại không được bỏ trống
                 </div>

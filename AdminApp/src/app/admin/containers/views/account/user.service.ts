@@ -6,25 +6,16 @@ import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { environment } from '../../../../../environments/environment';
-
 //import * as _ from 'lodash';
-
 // Add the RxJS Observable operators we need in this app.
-
-
 @Injectable()
-
 export class UserService extends BaseService {
-
   baseUrl: string = '';
-
   // Observable navItem source
   private _authNavStatusSource = new BehaviorSubject<boolean>(false);
   // Observable navItem stream
   authNavStatus$ = this._authNavStatusSource.asObservable();
-
   private loggedIn = false;
-
   constructor(public toast: ToastServiceService, private http: HttpClient, public router: Router) {
     super();
     this.loggedIn = !!localStorage.getItem('auth_token');
@@ -58,14 +49,12 @@ export class UserService extends BaseService {
             return true;
           })
   }
-
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
   }
-
   isLoggedIn() {
     return this.loggedIn;
   }

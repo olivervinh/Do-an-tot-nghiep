@@ -2,12 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-
   newchat:Chat = new Chat()
   constructor(public http: HttpClient) { }
   gethttp(): Observable<any>{
@@ -26,7 +24,6 @@ export class ChatService {
     return this.http.post(environment.URL_API+"userchats/addchat",chat)
   }
 }
-
 export class Chat{
   content:string
 }

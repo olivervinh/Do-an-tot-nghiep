@@ -6,14 +6,12 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { UserService } from '../user.service';
 import {  UserRegistration} from '../user.service'
 import { environment } from '../../../../../../environments/environment';
-
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
- 
   urls = new Array<string>();
   public newForm: FormGroup;
   gopHam(event){
@@ -31,16 +29,13 @@ export class RegistrationFormComponent implements OnInit {
         reader.readAsDataURL(file);
       }
   }
-
   selectedFile: FileList;
   onSelectFile(fileInput: any) {
     this.selectedFile = <FileList>fileInput.target.files;
   }
-
  errors: string;  
  isRequesting: boolean;
  submitted: boolean = false;
- 
  constructor(public userService: UserService,private router: Router,public http : HttpClient, public _snackBar:  MatSnackBar) { 
  }
  onRegister(){
@@ -55,7 +50,6 @@ export class RegistrationFormComponent implements OnInit {
       location : new FormControl(null),
     })
   }
-
   onSubmit=(data) => {
     let form = new FormData();
     form.append('Email', data.email);
@@ -64,14 +58,11 @@ export class RegistrationFormComponent implements OnInit {
     form.append('LastName', data.lastName);
     form.append('Location',data.location);
     form.append('Quyen','User');
-    
     this.http.post(environment.URL_API+'accounts',form).subscribe
     (result  => {
       this.router.navigate(['/login'],{queryParams: {brandNew: true,email:data.email}});                     
     },
       errors =>  this.errors = errors
-
     )
-    
 }
 }

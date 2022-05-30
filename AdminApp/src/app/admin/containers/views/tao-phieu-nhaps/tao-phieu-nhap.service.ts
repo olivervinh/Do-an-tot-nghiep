@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +18,6 @@ export class TaoPhieuNhapService {
   chitietphieunhap:ChiTietPhieuNhap=new ChiTietPhieuNhap()
   constructor(private http:HttpClient) { }
   phieunhappost:PostPhieuNhap=new PostPhieuNhap()
-
   idphieunhap:number
   getphieunhaphttp():Observable<any>{
     return this.http.get(environment.URL_API+"TaoPhieuNhaps")
@@ -50,7 +48,6 @@ export class TaoPhieuNhapService {
       res=>{
         this.dataSource.data = res as PhieuNhapNhaCungCap[] ;
         console.log(this.dataSource.data);
-        
       }
     )
   }
@@ -81,7 +78,6 @@ export class UploadChiTietPhieuNhapHang{
  GiaNhapSanPhamBienThe:number
  TenSanPhamBienThe:string
  SoluongNhap:number
-
 }
 export class PostPhieuNhap{
   nguoiLapPhieu:string

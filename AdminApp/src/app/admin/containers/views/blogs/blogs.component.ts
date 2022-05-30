@@ -15,7 +15,6 @@ import * as signalR from '@microsoft/signalr';
 })
 export class BlogsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
- 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     public service:BlogService,
@@ -28,36 +27,27 @@ export class BlogsComponent implements OnInit {
    public blog : Blog 
   ngOnInit(): void {
     this.service.getAllBlogs()
-    
     const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {
     return console.error(err.toString());
   });
-
-
   connection.on("BroadcastMessage", () => {
     this.service.getAllBlogs()
   });
   }
-  
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;
   }
-
   onModalDialog(){
- 
     this.service.blog = new Blog()
-  
     this.dialog.open(BlogComponent)
   }
-
  doFilter = (value: string) => {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
 }

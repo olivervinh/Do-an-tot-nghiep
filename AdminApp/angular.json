@@ -27,7 +27,6 @@
                             "src/scss/style.scss",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "./node_modules/@boldreports/javascript-reporting-controls/Content/material/bold.reports.all.min.css"
-
                         ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
@@ -87,8 +86,6 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
                         "scripts": [
-
-
                         ],
                         "styles": [
                             "node_modules/@coreui/icons/css/free.css",

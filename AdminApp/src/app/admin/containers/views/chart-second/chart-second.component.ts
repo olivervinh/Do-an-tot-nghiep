@@ -17,7 +17,6 @@ export class ChartSecondComponent implements OnInit {
   doanhthucaonhat: any;
   nam2021soluong: any;
   soLuongTon: any;
-
   constructor(public service:ChartSecondService,    public dialog: MatDialog,
     public zone: NgZone) {
     this.dataSourceBrand = {
@@ -44,7 +43,6 @@ export class ChartSecondComponent implements OnInit {
       }]
     };
   }
-
   public dataSourceYear: any = {
     chart: {
       caption: 'Doanh thu các tháng trong năm 2021',
@@ -57,25 +55,18 @@ export class ChartSecondComponent implements OnInit {
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" }
     ]
   }
     ;
-
-
-
-
   public dataSourceSoLanXuatHien: any = {
     chart: {
       caption: 'Top 10 sản phẩm bán chạy nhất theo số lượng',
@@ -99,8 +90,6 @@ export class ChartSecondComponent implements OnInit {
       { label: "", value: "" }
     ]
   }
-
-
   public dataSourceDoanhThu: any = {
     chart: {
       caption: 'sản phẩm biến thể đạt top 10 doanh số cao nhất',
@@ -113,32 +102,26 @@ export class ChartSecondComponent implements OnInit {
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
       { label: "", value: "" },
       { label: "", value: "" },
-
       { label: "", value: "" },
     ]
    }
-
   ngOnInit(): void {
     this.getTop10SanPhamLoiNhats()
     this.getSoLanXuatHienTrongDonHang()
     this.getThongKeThang();
     this.getNam2021doanhso();
     this.getSoLuongTrongNam();
-
     this.getTopNhanHieu();
     const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {
@@ -153,14 +136,12 @@ export class ChartSecondComponent implements OnInit {
     connection.on("BroadcastMessage", () => {
       this.getTop10SanPhamLoiNhats()
     })
-
     connection.on("BroadcastMessage", () => {
       this.getTopNhanHieu()
     })
     connection.on("BroadcastMessage", () => {
       this.getNam2021doanhso()
     })
-
     connection.on("BroadcastMessage", () => {
       this.getNam2021doanhso()
     })
@@ -178,7 +159,6 @@ export class ChartSecondComponent implements OnInit {
       }
     )
   }
-
   //quantrong
   getThongKeThang() {
     this.service.getThongKeThang().subscribe(
@@ -196,8 +176,6 @@ export class ChartSecondComponent implements OnInit {
     )
   }
   //quantrong
-
-
   //Quan trong
   lengthtopsolan: any
   getSoLanXuatHienTrongDonHang() {
@@ -209,7 +187,6 @@ export class ChartSecondComponent implements OnInit {
           this.dataSourceSoLanXuatHien.data[i].label = this.soLanXuatHien[i].tenSP
           this.dataSourceSoLanXuatHien.data[i].value = this.soLanXuatHien[i].soLanXuatHienTrongDonHang
         }
-
       },
       error => {
         this.errorMessage = <any>error
@@ -218,9 +195,6 @@ export class ChartSecondComponent implements OnInit {
     )
   }
   //quantrong
-
-
-
   ///Quan trong
   lengthtop: any
   getTop10SanPhamLoiNhats() {
@@ -235,9 +209,6 @@ export class ChartSecondComponent implements OnInit {
       }
     )
   }
-
-
-
   ///Quan trong
   getSoLuongTrongNam() {
     this.service.getNam2021SoLuong().subscribe(
@@ -249,9 +220,6 @@ export class ChartSecondComponent implements OnInit {
       }
     )
   }
-
-
-
   bienthedoanhthu: any
   getTopBienTheDoanhThu() {
     this.service.getTopBienTheDoanhThu().subscribe(
@@ -263,7 +231,6 @@ export class ChartSecondComponent implements OnInit {
       }
     )
   }
-
   nhanhieutop: any
   getTopNhanHieu() {
     this.service.getTopNhanHieuDoanhThu().subscribe(
@@ -279,11 +246,8 @@ export class ChartSecondComponent implements OnInit {
       }
     )
   }
-
-
   openDialog() {
     const dialogRef = this.dialog.open(SelectMonthComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

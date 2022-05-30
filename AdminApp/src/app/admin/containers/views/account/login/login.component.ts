@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   credentials: Credentials = { email: '', password: '' };
   constructor(public toast: ToastrService, public router: Router, private activatedRoute: ActivatedRoute, public http: HttpClient, public userService: UserService) {
-
   }
   private loggedIn = false;
   isLoggedIn() {
@@ -37,22 +36,17 @@ export class LoginComponent implements OnInit {
         this.credentials.email = param['email'];
       });
   }
- 
   onRegister() {
     this.router.navigate(['/register']);
   }
   onSubmit = (data) => {
-
     this.submitted = true;
     this.isRequesting = true;
     this.errors = '';
     console.log(data.userName,data.passWord)
     this.userService.login(data.userName, data.passWord)
-
   }
-
 }
-
 export interface Credentials {
   email: string;
   password: string;

@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./like.component.scss']
 })
 export class LikeComponent implements OnInit {
-
   list_sanphamyeuthich:any;
   constructor(public http:HttpClient,public route: ActivatedRoute,private cartService: CartService) {
     const clicks = localStorage.getItem('idUser');
@@ -20,15 +19,12 @@ export class LikeComponent implements OnInit {
         this.list_sanphamyeuthich=res;
       });
    }
-
   ngOnInit(): void {
   }
   deleteSanPham(product){
     this.http.post("https://localhost:44302/api/sanphams/deletelike/"+product.id,{
-
   }).subscribe(
     res=>{
-
       Swal.fire("Xoá sản phẩm thành công .", '', 'success');
       const clicks = localStorage.getItem('idUser');
       this.http.post("https://localhost:44302/api/sanphams/dslike/",{
@@ -38,8 +34,6 @@ export class LikeComponent implements OnInit {
             this.list_sanphamyeuthich=res;
           });
           this.cartService.DeleteProductInLove(product);
-
     })
-
   }
 }

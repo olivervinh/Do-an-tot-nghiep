@@ -2,14 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../../environments/environment';
 import { ProductService } from '../product.service';
-
 @Component({
   selector: 'app-imagesmodel',
   templateUrl: './imagesmodel.component.html',
   styleUrls: ['./imagesmodel.component.scss']
 })
 export class ImagesmodelComponent implements OnInit {
-
   constructor(public http : HttpClient,
             public service : ProductService) { }
   public imageproductList : ImageProduct[]

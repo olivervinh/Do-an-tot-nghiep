@@ -2,9 +2,6 @@
     <div class="container" style="width: 30vw;">
         <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1" style="float: right;"><mat-icon>clear</mat-icon></button>
         <br>
-
-
-
         <div class="form-group">
             <label for="MaMau">Tên màu</label>
             <select class="form-control" formControlName="MaMau" [(ngModel)]="this.service.mausac.maMau">
@@ -15,7 +12,6 @@
                 <option value="Đỏ">Đỏ</option>
             </select>
             <div *ngIf="MaMau.invalid && (MaMau.dirty || MaMau.touched)" class="alert alert-danger">
-
                 <div *ngIf="MaMau.errors.required">
                     Mã màu không được bỏ trống
                 </div>
@@ -31,7 +27,6 @@
                     [value]="category.id">{{category.ten}}</option>
             </select>
             <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
-
                 <div *ngIf="Id_Loai.errors.required">
                     Loại không được bỏ trống
                 </div>

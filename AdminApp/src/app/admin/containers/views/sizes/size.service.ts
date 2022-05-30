@@ -1,4 +1,3 @@
-
 import { HttpClient } from "@angular/common/http";
 import { Injectable, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
@@ -6,8 +5,6 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
-
-
 @Injectable({
     providedIn: 'root'
   })
@@ -17,7 +14,6 @@ export class SizeService{
   public dataSource = new MatTableDataSource<Size>();
     size:Size = new Size()
     constructor(public http:HttpClient) { }
-   
     delete(id:number){
       return this.http.delete(`${environment.URL_API}sizes/${id}`)
     }

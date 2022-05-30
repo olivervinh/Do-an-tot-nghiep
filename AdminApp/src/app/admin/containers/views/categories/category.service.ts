@@ -5,7 +5,6 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
-
 @Injectable({
     providedIn: 'root'
   })
@@ -14,9 +13,7 @@ export class CategoryService{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<Category>();
     category:Category = new Category()
-  
     constructor(public http:HttpClient) { }
-  
     delete(id:number){
       return this.http.delete(`${environment.URL_API+"loais"}/${id}`)
     }

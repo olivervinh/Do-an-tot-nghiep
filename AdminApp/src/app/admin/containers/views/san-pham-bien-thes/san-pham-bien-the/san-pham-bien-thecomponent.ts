@@ -9,15 +9,12 @@ import { MauSacService } from '../../mau-sacs/mau-sac.service';
 import { ProductService } from '../../products/product.service';
 import { Size, SizeService } from '../../sizes/size.service';
 import { SanPhamBienTheService } from '../san-pham-bien-the.service';
-
-
 @Component({
   selector: 'app-san-pham-bien-the',
   templateUrl: './san-pham-bien-the.component.html',
   styleUrls: ['./san-pham-bien-the.component.scss']
 })
 export class SanPhamBienTheComponent implements OnInit {
-
   public imgsrc: string = "./assets/Resources/Images/san-pham-bien-the/blog-02.jpg";
   public imgsrc1: string = "./assets/Resources/Images/item/pin.png";
   fileChange(event) {
@@ -26,7 +23,6 @@ export class SanPhamBienTheComponent implements OnInit {
     reader.onload = (event: any) => {
       this.imgsrc = event.target.result
     }
-
   }
   urls = new Array<string>();
   selectedFile: File = null;
@@ -60,7 +56,6 @@ export class SanPhamBienTheComponent implements OnInit {
     public serviceCategory: CategoryService,
     public serviceSanPham: ProductService,
     public http: HttpClient) {
-
   }
   get Id_Mau() { return this.newFormGroup.get('Id_Mau'); }
   get Id_SanPham() { return this.newFormGroup.get('Id_SanPham'); }
@@ -91,7 +86,6 @@ export class SanPhamBienTheComponent implements OnInit {
       data => {
         Object.assign(this.loaitensize, data)
         console.log(this.loaitensize);
-
       }
     )
     this.service.getAllSanPhams().subscribe(

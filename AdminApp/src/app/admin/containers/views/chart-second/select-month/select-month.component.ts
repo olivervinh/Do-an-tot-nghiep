@@ -2,28 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from '../../../../../../environments/environment';
-
 import { ChartSecondService } from '../chart-second.service';
-
 @Component({
   selector: 'app-select-month',
   templateUrl: './select-month.component.html',
   styleUrls: ['./select-month.component.scss']
 })
 export class SelectMonthComponent implements OnInit {
-
   constructor(public service:ChartSecondService,
               public http: HttpClient) { }
   public newFormGroup: FormGroup;
   ngOnInit(): void {
-  
     this.newFormGroup = new FormGroup({
       Thang: new FormControl(null,
         [
         ]),
     });
   }
-
   onSubmit = (data) => {
     const formData = new FormData();
     formData.append("month", data.Thang)
@@ -43,10 +38,7 @@ export class SelectMonthComponent implements OnInit {
             this.service.dataSourceNgay.data[i].label = ""
             this.service.dataSourceNgay.data[i].value = ""
           }
-
-
         }
-
       },
       error => {
       }

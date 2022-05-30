@@ -2,14 +2,12 @@
     <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Lựa chọn nhà cung cấp</ng-template>
-
             <mat-label style="font-weight: bold;">Nhà cung cấp</mat-label>
             <select class="form-control" [(ngModel)]="this.service.phieunhapchange.nhacungcap" (change)="getSanPhamNhaCungCap($event)" style="width:70%">
                 <option *ngFor="let item of this.nhacungcaps" [value]="item.id">
                     {{item.ten}}
                 </option>
             </select>
-
             <div class="container">
                 <table class="table" style="width:70%">
                     <tr>
@@ -83,7 +81,6 @@
                                         [value]="item.tenSanPhamBienTheMauSize">
                                         {{item.tenSanPhamBienTheMauSize}}
                                     </option>
-                                   
                                 </select>
                             </div>
                             <div class="form-group">
@@ -105,7 +102,6 @@
                                         250 cái</option>
                                 </select>
                                 <div *ngIf="SoLuongNhap.invalid && (SoLuongNhap.dirty || SoLuongNhap.touched)" class="alert alert-danger">
-
                                     <div *ngIf="SoLuongNhap.errors.required">
                                         Số lượng nhập không được bỏ trống
                                     </div>
@@ -157,7 +153,6 @@
                                     <button class="btn btn-danger"><i class="fa fa-trash" (click)="deleteDetail(item)"
                                             aria-hidden="true"></i></button>
                                 </td>
-
                             </tr>
                             <h4 style="font-weight: bold; text-underline-position: auto;">Tổng tiền: {{tongTien()|number}} VNĐ</h4>
                         </tbody>
@@ -168,7 +163,6 @@
                                 <span class="label label-default" style="font-weight: bold;">Tạo ghi chú</span>
                                 <textarea class="form-control" formControlName="GhiChu" style="margin-top: 0px; margin-bottom: 0px; height: 160px;width: 1050px;"></textarea>
                             </div>
-
                             <div class="form-group" style="justify-content:center;display: flex;">
                                 <button type="submit" class="btn btn-primary btn-lg" [disabled]="this.newFormGroupPhieuNhap.invalid">Tạo phiếu nhập kho</button>
                             </div>
@@ -217,7 +211,6 @@
                         </select>
                         <div *ngIf="Id_SanPhamBienThe.invalid && (Id_SanPhamBienThe.dirty || Id_SanPhamBienThe.touched)"
                             class="alert alert-danger">
-
                             <div *ngIf="Id_SanPhamBienThe.errors.required">
                                 Tên sản phẩm biến thể không được bỏ trống
                             </div>
@@ -229,13 +222,10 @@
                             [(ngModel)]="service.chitietphieunhap.soLuongNhap" required>
                         <div *ngIf="SoLuongNhap.invalid && (SoLuongNhap.dirty || SoLuongNhap.touched)"
                             class="alert alert-danger">
-
                             <div *ngIf="SoLuongNhap.errors.required">
                                 Số lượng nhập không được bỏ trống
                             </div>
-
                         </div>
-
                     </div>
                     <div class="form-group" style="justify-content:center;display: flex;">
                         <button type="submit" class="btn btn-primary"
@@ -245,7 +235,6 @@
             </form>
         </div>
         <div class="col">
-
         </div>
     </div>
     <div class="row">

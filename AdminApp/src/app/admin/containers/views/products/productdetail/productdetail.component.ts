@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Product, ProductService } from '../product.service';
-
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
@@ -14,10 +12,7 @@ export class ProductdetailComponent implements OnInit {
   constructor(public http : HttpClient,
               public router : Router,
               public service: ProductService,
-
             ) { }
-
   ngOnInit(): void {
-
   }
 }

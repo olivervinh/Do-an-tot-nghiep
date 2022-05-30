@@ -14,11 +14,9 @@
                 <option value=150000>150.000 VNĐ</option>
             </select>
             <div *ngIf="SoTienGiam.invalid && (SoTienGiam.dirty || SoTienGiam.touched)" class="alert alert-danger">
-
                 <div *ngIf="SoTienGiam.errors.required">
                     Số tiền giảm không được bỏ trống
                 </div>
-
             </div>
         </div>
         <div class="form-group" style="justify-content:center;display: flex;">

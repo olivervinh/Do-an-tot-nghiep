@@ -6,24 +6,20 @@ import { BrandService } from '../brand.service';
 import { ToastrService } from 'ngx-toastr';
 import { NotifierService } from 'angular-notifier';
 import { environment } from '../../../../../../environments/environment';
-
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
-
   public BrandsComponent : BrandsComponent
   constructor(  public service : BrandService,
                 public http :HttpClient ,
                 public toastr: ToastrService,
               ) {
-             
                 }
 get name() { return this.newFormGroup.get('Name'); }
 get ThongTin() { return this.newFormGroup.get('ThongTin'); }
-
 ngOnInit(): void {
 this.newFormGroup = new FormGroup({
 Name: new FormControl(null,
@@ -43,11 +39,7 @@ TileImage : new FormControl(null,
   )
 });
 }
-
 public newFormGroup: FormGroup;
-
-
-
 showToastThemThanhCong(){
   this.toastr.success("Thêm thành công")
 }
@@ -64,7 +56,6 @@ onSubmit=(data) =>{
 if(this.service.brand.id==0){
 const formData = new FormData();
 formData.append('Name', data.Name);
-
 console.log(data)
 this.http.post(environment.URL_API+'nhanhieus', formData)
 .subscribe(res => {

@@ -27,7 +27,6 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Ngày tạo </th>
         <td mat-cell *matCellDef="let element"> {{element.ngayTao| date: 'dd-MM-yyyy'}} </td>
     </ng-container>
-
     <ng-container matColumnDef="tongTien">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tổng tiền mà shop đã giao dịch </th>
         <td mat-cell *matCellDef="let element"> {{element.tongTien|number}} VNĐ </td>
@@ -41,7 +40,6 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef class="make-gold">Xem chi tiết, xóa</th>
         <td mat-cell *matCellDef="let element">
-
             <button mat-icon-button (click)="populateForm(element.id)" color="primary">
                 <mat-icon>visibility</mat-icon>
             </button>
@@ -52,8 +50,6 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
 </table>
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
 </mat-paginator>

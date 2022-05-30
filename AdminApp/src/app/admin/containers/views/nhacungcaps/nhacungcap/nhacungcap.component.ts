@@ -1,13 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-
 import { CategoryService } from '../../categories/category.service';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { environment } from '../../../../../../environments/environment';
 import { NhaCungCapService } from '../nhacungcap.service';
-
 @Component({
   selector: 'app-nhacungcap',
   templateUrl: './nhacungcap.component.html',
@@ -15,11 +12,9 @@ import { NhaCungCapService } from '../nhacungcap.service';
 })
 export class NhaCungCapComponent implements OnInit {
   categories: any[] = [];
-
   constructor(public service: NhaCungCapService,
     public http: HttpClient,
     public serviceToast: ToastServiceService,
-
   ){
   }
   public newFormGroup: FormGroup;
@@ -29,7 +24,6 @@ export class NhaCungCapComponent implements OnInit {
   get DiaChi() { return this.newFormGroup.get('DiaChi'); }
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
-  
       Ten: new FormControl(null,
         [
           Validators.required,
@@ -51,10 +45,6 @@ export class NhaCungCapComponent implements OnInit {
         ]),
     });
   }
-
-
-
-
   onSubmit = (data) => {
     if (this.service.nhacungcap.id == 0) {
       const formData = new FormData();

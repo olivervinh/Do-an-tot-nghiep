@@ -7,9 +7,7 @@ import * as signalR from '@microsoft/signalr';
   styleUrls: ['./hoa-don-edit.component.scss']
 })
 export class HoaDonEditComponent implements OnInit {
-
   constructor(public service: HoaDonService) { }
-
   ngOnInit(): void {
   }
   onSubmit(hd:any){
@@ -19,7 +17,6 @@ export class HoaDonEditComponent implements OnInit {
          this.service.getAllHoaDons() 
       },
       error=>{
-
       })
   }
 }

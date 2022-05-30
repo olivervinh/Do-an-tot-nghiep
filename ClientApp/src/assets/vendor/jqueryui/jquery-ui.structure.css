@@ -51,20 +51,15 @@
 	opacity: 0;
 	filter:Alpha(Opacity=0); /* support: IE8 */
 }
-
 .ui-front {
 	z-index: 100;
 }
-
-
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-disabled {
 	cursor: default !important;
 	pointer-events: none;
 }
-
-
 /* Icons
 ----------------------------------*/
 .ui-icon {
@@ -76,16 +71,13 @@
 	overflow: hidden;
 	background-repeat: no-repeat;
 }
-
 .ui-widget-icon-block {
 	left: 50%;
 	margin-left: -8px;
 	display: block;
 }
-
 /* Misc visuals
 ----------------------------------*/
-
 /* Overlays */
 .ui-widget-overlay {
 	position: fixed;
@@ -144,7 +136,6 @@
 .ui-menu .ui-state-active {
 	margin: -1px;
 }
-
 /* icon support */
 .ui-menu-icons {
 	position: relative;
@@ -152,7 +143,6 @@
 .ui-menu-icons .ui-menu-item-wrapper {
 	padding-left: 2em;
 }
-
 /* left-aligned */
 .ui-menu .ui-icon {
 	position: absolute;
@@ -161,7 +151,6 @@
 	left: .2em;
 	margin: auto 0;
 }
-
 /* right-aligned */
 .ui-menu .ui-menu-icon {
 	left: auto;
@@ -180,11 +169,9 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-
 	/* Support: IE <= 11 */
 	overflow: visible;
 }
-
 .ui-button,
 .ui-button:link,
 .ui-button:visited,
@@ -192,7 +179,6 @@
 .ui-button:active {
 	text-decoration: none;
 }
-
 /* to make room for the icon, a width needs to be set here */
 .ui-button-icon-only {
 	width: 2em;
@@ -200,12 +186,10 @@
 	text-indent: -9999px;
 	white-space: nowrap;
 }
-
 /* no icon support for input elements */
 input.ui-button.ui-button-icon-only {
 	text-indent: 0;
 }
-
 /* button icon element(s) */
 .ui-button-icon-only .ui-icon {
 	position: absolute;
@@ -214,16 +198,13 @@ input.ui-button.ui-button-icon-only {
 	margin-top: -8px;
 	margin-left: -8px;
 }
-
 .ui-button.ui-icon-notext .ui-icon {
 	padding: 0;
 	width: 2.1em;
 	height: 2.1em;
 	text-indent: -9999px;
 	white-space: nowrap;
-
 }
-
 input.ui-button.ui-icon-notext .ui-icon {
 	width: auto;
 	height: auto;
@@ -231,7 +212,6 @@ input.ui-button.ui-icon-notext .ui-icon {
 	white-space: normal;
 	padding: .4em 1em;
 }
-
 /* workarounds */
 /* Support: Firefox 5 - 40 */
 input.ui-button::-moz-focus-inner,
@@ -281,10 +261,8 @@ button.ui-button::-moz-focus-inner {
 .ui-controlgroup-vertical .ui-controlgroup-label.ui-widget-content {
 	border-bottom: none;
 }
-
 /* Spinner specific style fixes */
 .ui-controlgroup-vertical .ui-spinner-input {
-
 	/* Support: IE8 only, Android < 4.4 only */
 	width: 75%;
 	width: calc( 100% - 2.4em );
@@ -292,7 +270,6 @@ button.ui-button::-moz-focus-inner {
 .ui-controlgroup-vertical .ui-spinner .ui-spinner-up {
 	border-top-style: solid;
 }
-
 .ui-checkboxradio-label .ui-icon-background {
 	box-shadow: inset 1px 1px 1px #ccc;
 	border-radius: .12em;
@@ -412,7 +389,6 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
 	float: left;
 }
-
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi {
 	width: auto;
@@ -445,7 +421,6 @@ button.ui-button::-moz-focus-inner {
 	width: 100%;
 	font-size: 0;
 }
-
 /* RTL support */
 .ui-datepicker-rtl {
 	direction: rtl;
@@ -481,7 +456,6 @@ button.ui-button::-moz-focus-inner {
 	border-right-width: 0;
 	border-left-width: 1px;
 }
-
 /* Icons */
 .ui-datepicker .ui-icon {
 	display: block;
@@ -744,13 +718,11 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 	background-position: 0 0;
 }
-
 /* support: IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
 	filter: inherit;
 }
-
 .ui-slider-horizontal {
 	height: .8em;
 }
@@ -768,7 +740,6 @@ button.ui-button::-moz-focus-inner {
 .ui-slider-horizontal .ui-slider-range-max {
 	right: 0;
 }
-
 .ui-slider-vertical {
 	width: .8em;
 	height: 100px;

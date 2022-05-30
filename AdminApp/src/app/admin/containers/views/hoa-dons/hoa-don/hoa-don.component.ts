@@ -5,10 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
-
-
 import { CTHDViewModel, HoaDonService } from '../hoadon.service';
-
 @Component({
   selector: 'app-hoa-don',
   templateUrl: './hoa-don.component.html',
@@ -16,7 +13,6 @@ import { CTHDViewModel, HoaDonService } from '../hoadon.service';
 })
 export class HoaDonComponent implements OnInit {
   constructor( private service :HoaDonService){
-    
   }
   url:any
   hd:any
@@ -26,19 +22,16 @@ export class HoaDonComponent implements OnInit {
   }
   exportGeneratePdf() {
     window.open("https://localhost:44302/api/GeneratePdf/orderdetail/"+this.hd.id, "_blank");
-
   }
   getMotHoaDon(id:any){
     this.service.getMotHoaDonService(id).subscribe(
       res => {
         this.hd = res as any;
         console.log("chi tiet hoa don la: ",this.hd);
-        
       }
     )
   }
 //   @ViewChild(MatSort) sort: MatSort;
- 
 //   @ViewChild(MatPaginator) paginator: MatPaginator;
 //   productList: any[];
 //   constructor(public service: HoaDonService,
@@ -47,22 +40,16 @@ export class HoaDonComponent implements OnInit {
 //               public dialog: MatDialog,
 //              ) { }
 //   displayedColumns: string[] = ['IdCTHD', 'tenSanPham','tenSize','tenMau','gia','soLuong','thanhTien','id_HoaDon'];
-
-
 //   public cthdViewModel : CTHDViewModel
 //   public data : any=[]
 //   ngOnInit(): void {
 //     this.service.getHoaDon(this.service.hoadon.id);
-  
-    
 //   }
 //   ngAfterViewInit(): void {
 //     this.service.dataSource2.sort = this.sort;
 //     this.service.dataSource2.paginator = this.paginator;
 //     console.log(this.service.dataOneBill);
 //   }
-
-
 // getIdThisHoaDon(){
 //   return this.service.hoadon.id
 // }
@@ -72,7 +59,4 @@ export class HoaDonComponent implements OnInit {
 //  doFilter = (value: string) => {
 //   this.service.dataSource2.filter = value.trim().toLocaleLowerCase();
 // }
-
-  
- 
 }

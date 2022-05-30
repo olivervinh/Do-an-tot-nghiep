@@ -4,15 +4,12 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { environment } from "../../../../../environments/environment";
-
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { DatePipe } from '@angular/common';
 import { Observable } from "rxjs";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,10 +17,8 @@ export class HoaDonService {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<HoaDonUser>();
-
   hoadon: HoaDonUser = new HoaDonUser()
   cthdViewModel: CTHDViewModel = new CTHDViewModel()
-
   constructor(public http: HttpClient,private datePipe: DatePipe) { }
   get():Observable<any> {
     return this.http.get<any>(environment.URL_API + "hoadons")
@@ -37,19 +32,14 @@ export class HoaDonService {
   getMotHoaDonService(id:number):Observable<any>{
     return this.http.get<any>(environment.URL_API + "hoadons/admindetailorder/"+id)
   }
-
-
   getAllHoaDons() {
     this.get().subscribe(
       res => {
         this.dataSource.data = res as HoaDonUser[];
         console.log(this.dataSource.data);
-        
       }
     )
   }
-
-
 }
 export class HoaDonUser{
   id: number = 0
@@ -61,7 +51,6 @@ export class HoaDonUser{
   daLayTien:string
   trangThai:number
 }
-
 export class CTHDViewModel {
   idCTHD: number
   soLuong: number

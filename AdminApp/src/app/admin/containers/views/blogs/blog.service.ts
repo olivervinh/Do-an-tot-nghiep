@@ -5,12 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-
   @ViewChild(MatSort) sort: MatSort;  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<Blog>();
@@ -25,7 +23,6 @@ export class BlogService {
     post(blog: any): Observable<any> {
       return this.http.post<any>(environment.URL_API + 'blogs', blog)
     }
-  
     put( id: number,blog: any): Observable<any> {
       return this.http.put<any>(environment.URL_API + 'blogs/' + id, blog)
     }
@@ -37,7 +34,6 @@ export class BlogService {
         }
       )
     }
-
 }
 export class Blog{
   id:number = 0

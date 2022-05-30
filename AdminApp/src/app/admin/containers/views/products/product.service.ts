@@ -1,17 +1,14 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { MatTableDataSource } from '@angular/material/table';
-
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<Product>();
@@ -32,7 +29,6 @@ export class ProductService {
   post(product: any): Observable<any> {
     return this.http.post<any>(environment.URL_API + 'sanphams', product)
   }
-
   put( id: number,product: any): Observable<any> {
     return this.http.put<any>(environment.URL_API + 'sanphams/' + id, product)
   }

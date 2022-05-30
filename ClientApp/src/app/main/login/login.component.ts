@@ -22,9 +22,7 @@ export class LoginComponent implements OnInit {
   isRequesting: boolean;
   submitted: boolean = false;
   credentials: Credentials = { email: '', password: '' };
-
   constructor(public authService: SocialAuthService,public router : Router,private activatedRoute: ActivatedRoute , public http : HttpClient,public userService : UserService){
-
   }
   private loggedIn = false;
   isLoggedIn() {
@@ -68,10 +66,7 @@ onSubmit = (data) =>{
     this.errors='';
     this.userService.login(data.userName,data.passWord)
     }
-
 }
-
-
 export interface Credentials {
   email: string;
   password: string;

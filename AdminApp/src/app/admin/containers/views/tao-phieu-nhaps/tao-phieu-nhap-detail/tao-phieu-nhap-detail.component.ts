@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TaoPhieuNhapService } from '../tao-phieu-nhap.service';
-
 @Component({
   selector: 'app-tao-phieu-nhap-detail',
   templateUrl: './tao-phieu-nhap-detail.component.html',
@@ -8,7 +7,6 @@ import { TaoPhieuNhapService } from '../tao-phieu-nhap.service';
 })
 export class TaoPhieuNhapDetailComponent implements OnInit {
   @Input() childMessage: string;
-
   constructor(private service: TaoPhieuNhapService) { }
   phieunhapchitietphieunhap: any
   ngOnInit(): void {
@@ -16,15 +14,12 @@ export class TaoPhieuNhapDetailComponent implements OnInit {
       result => {
         this.phieunhapchitietphieunhap = result as any
         console.log(this.phieunhapchitietphieunhap);
-
       },
       error => {
-
       }
     )
   }
   exportGeneratePdf() {
     window.open("https://localhost:44302/api/GeneratePdf/phieunhapdetail/" + this.phieunhapchitietphieunhap.id, "_blank");
-
   }
 }

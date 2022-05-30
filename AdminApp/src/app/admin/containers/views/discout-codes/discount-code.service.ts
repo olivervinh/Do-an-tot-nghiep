@@ -6,20 +6,15 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { Category } from '../categories/category.service';
-
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountCodeService {
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   public dataSource = new MatTableDataSource<DiscountCode>();
     magiamgia : DiscountCode = new DiscountCode()
-
-  
     constructor(public http:HttpClient) { }
-  
     delete(id:number){
       return this.http.delete(`${environment.URL_API+"magiamgias"}/${id}`)
     }

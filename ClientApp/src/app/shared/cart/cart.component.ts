@@ -8,9 +8,7 @@ declare var $: any;
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
 	list_item:any;
-	
   constructor(public http:HttpClient) {
 	const clicks = localStorage.getItem('idUser');
 	this.http.post("https://localhost:44302/api/Carts/getCart/"+clicks,{}).subscribe(
@@ -18,9 +16,7 @@ export class CartComponent implements OnInit {
 		  this.list_item = res;
 		});
    }
-
   ngOnInit(): void {
-	
     $('.js-pscroll').each(function(){
 			$(this).css('position','relative');
 			$(this).css('overflow','hidden');
@@ -29,11 +25,9 @@ export class CartComponent implements OnInit {
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
-
 			$(window).on('resize', function(){
 				ps.update();
 			})
 		});
   }
-
 }

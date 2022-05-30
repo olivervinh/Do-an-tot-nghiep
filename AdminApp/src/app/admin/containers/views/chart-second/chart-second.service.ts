@@ -2,18 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class ChartSecondService {
-
   constructor(private http: HttpClient) { }
   getKhachHangMuaNhieuNhat():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeSoLuongs/getkhachhangmuanhieunhat") 
   }
-
   getNam2021DoanhSo():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeSoLuongs/nam2021")
   }
@@ -23,16 +19,13 @@ export class ChartSecondService {
   getSoLuongTon():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeSoLuongs/soluongton")
   }
-
   getTopSoLuongTon():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeBieuDos/topsoluongton")
   }
-
   ////////////////////////////////////
   getTopBienTheDoanhThu():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeBieuDos/topbienthedoanhthu")
   }
-
   getThongKeThang(): Observable<any> {
     return this.http.get<any>(environment.URL_API + "ThongKeBieuDos/topthongkethang")
   }
@@ -45,8 +38,6 @@ export class ChartSecondService {
   getTopNhanHieuDoanhThu():Observable<any>{
     return this.http.get<any>(environment.URL_API+"ThongKeBieuDos/topnhanhieubanchaynhattrongnam2021")
   }
-
-
   dataThongKeNgay: any
   public dataSourceNgay: any = {
     chart: {
@@ -72,5 +63,4 @@ export class ChartSecondService {
       { label: "", value: "" }
     ]
   }
-
 }

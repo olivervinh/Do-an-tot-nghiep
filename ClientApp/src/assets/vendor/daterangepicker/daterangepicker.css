@@ -170,7 +170,6 @@
     .daterangepicker .calendar-time select.disabled {
       color: #ccc;
       cursor: not-allowed; }
-
 .ranges {
   font-size: 11px;
   float: none;
@@ -198,7 +197,6 @@
       background-color: #08c;
       border: 1px solid #08c;
       color: #fff; }
-
 /*  Larger Screen Styling */
 @media (min-width: 564px) {
   .daterangepicker {

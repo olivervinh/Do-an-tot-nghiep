@@ -17,10 +17,7 @@ import * as signalR from '@microsoft/signalr';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit, AfterViewInit {
-
-  
   @ViewChild(MatSort) sort: MatSort;
- 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   productList: any[];
   constructor(public service:CategoryService,
@@ -28,11 +25,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
               public http: HttpClient,
               public dialog: MatDialog,
               public toastService: ToastServiceService) { }
-
 displayedColumns: string[] = ['id', 'ten',
   'actions'];
-
-
   public category :  Category
   ngOnInit(): void {
     this.service.getAllCategories();
@@ -40,33 +34,26 @@ displayedColumns: string[] = ['id', 'ten',
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {
     return console.error(err.toString());
   });
-
-
   connection.on("BroadcastMessage", () => {
     this.service.getAllCategories();
   });
   }
-  
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;
   }
-
   onModalDialog(){
     this.service.category = new Category()
     this.dialog.open(CategoryComponent)
   }
-
  doFilter = (value: string) => {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
 }
-
   populateForm(selectedRecord:Category){
     this.service.category = Object.assign({},selectedRecord)
     this.dialog.open(CategoryComponent)

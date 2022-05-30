@@ -1,27 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { environment } from '../../../../../../environments/environment';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { CategoryService } from '../../categories/category.service';
 import { DiscountCodeService } from '../discount-code.service';
-
 @Component({
   selector: 'app-discout-code',
   templateUrl: './discout-code.component.html',
   styleUrls: ['./discout-code.component.scss']
 })
 export class DiscoutCodeComponent implements OnInit {
-
   constructor(public service: DiscountCodeService,
     public toastService: ToastServiceService,
    private http: HttpClient,
   ) {
-
   }
   get SoTienGiam() { return this.newFormGroup.get('SoTienGiam'); }
-
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
       SoTienGiam: new FormControl(null,
@@ -31,7 +26,6 @@ export class DiscoutCodeComponent implements OnInit {
     });
   }
   public newFormGroup: FormGroup;
-
   onSubmit = (data) => {
     if (this.service.magiamgia.id == 0) {
       const formData = new FormData()
@@ -61,4 +55,3 @@ export class DiscoutCodeComponent implements OnInit {
     }
   }
 }
-

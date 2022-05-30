@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Product } from '../model/product.model';
 import { take, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,15 +20,12 @@ export class CartService {
     }
     this.itemsSubject.next(existingCartItems);
   }
-
   private itemsSubject1 = new BehaviorSubject<Product[]>([]);
   items1$ = this.itemsSubject1.asObservable();
   private itemsSubject = new BehaviorSubject<Product[]>([]);
   items$ = this.itemsSubject.asObservable();
-
   addToCart(product:Product) {
     const clicks = localStorage.getItem('idUser');
-
       this.items$.pipe(
         take(1),
         map((products) => {
@@ -37,11 +33,9 @@ export class CartService {
           localStorage.setItem('products', JSON.stringify(products));
         }),
       ).subscribe();
-
   }
   addToLove(product:Product) {
     const clicks = localStorage.getItem('idUser');
-
       this.items1$.pipe(
         take(1),
         map((products) => {
@@ -49,7 +43,6 @@ export class CartService {
           localStorage.setItem('loves', JSON.stringify(products));
         }),
       ).subscribe();
-
   }
   DeleteProduct(product:Product) {
     const clicks = localStorage.getItem('idUser');
@@ -62,7 +55,6 @@ export class CartService {
         }
         ),
       ).subscribe();
-
   }
   DeleteProductInLove(product:Product) {
       this.items1$.pipe(
@@ -74,7 +66,6 @@ export class CartService {
         }
         ),
       ).subscribe();
-
   }
   LoadCard(){
     const clicks = localStorage.getItem('idUser');
@@ -85,5 +76,4 @@ export class CartService {
       }
     );
   }
-
 }

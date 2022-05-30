@@ -5,19 +5,16 @@ import { environment } from '../../../../../../environments/environment';
 import { ToastServiceService } from '../../../shared/toast-service.service';
 import { CategoriesComponent } from '../categories.component';
 import { CategoryService } from '../category.service';
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-
   constructor(public service : CategoryService,
     public toastService: ToastServiceService,
     public http :HttpClient ,
   ) {
-  
    }
    get name() { return this.newFormGroup.get('Name'); }
 ngOnInit(): void {
@@ -29,7 +26,6 @@ Name: new FormControl("",
 });
 }
 public newFormGroup: FormGroup;
-
 onSubmit=(data) =>{
 if(this.service.category.id==0){
 const formData = new FormData();
@@ -62,4 +58,3 @@ error=>{
 }
 }
 }
-

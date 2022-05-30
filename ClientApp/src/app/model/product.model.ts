@@ -18,8 +18,6 @@ export interface Product {
     imageSanPhams:imageSanPhams[];
     sanPhamBienThes:sanPhamBienThes[];
     like?:number;
-
-   
 }
 export interface sanPhamBienThes {
     id?:number;
@@ -27,12 +25,9 @@ export interface sanPhamBienThes {
     tenMau?:string;
     soLuongTon?:number;
     tenSize?:string;
-
 }
-
 export interface imageSanPhams {
     id?:number;
     imageName?:string;
     idSanPham?:number;
-
 }

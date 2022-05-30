@@ -6,17 +6,13 @@ declare var $: any;
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
   constructor() { }
-
   ngOnInit(): void {
     $('.js-show-sidebar').on('click',function(){
       $('.js-sidebar').addClass('show-sidebar');
   });
-
   $('.js-hide-sidebar').on('click',function(){
       $('.js-sidebar').removeClass('show-sidebar');
   });
   }
-
 }

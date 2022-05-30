@@ -15,7 +15,6 @@ import { TaoPhieuNhapComponent } from "./tao-phieu-nhap/tao-phieu-nhap.component
 })
 export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     public service: TaoPhieuNhapService,
@@ -24,7 +23,6 @@ export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     public serviceToast: ToastServiceService
   ) {}
-
   displayedColumns: string[] = [
     "id",
     "soChungTu",
@@ -34,14 +32,12 @@ export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
     "nguoiLapPhieu",
     "actions",
   ];
-
   ngOnInit(): void {
     this.service.getAllPhieuNhaps();
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl("https://localhost:44302/notify")
       .build();
-
     connection
       .start()
       .then(function () {
@@ -50,7 +46,6 @@ export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
       .catch(function (err) {
         return console.error(err.toString());
       });
-
     connection.on("BroadcastMessage", () => {
       this.service.getAllPhieuNhaps();
     });
@@ -58,7 +53,6 @@ export class TaoPhieuNhapsComponent implements OnInit, AfterViewInit {
   doFilter = (value: string) => {
     this.service.dataSource.filter = value.trim().toLocaleLowerCase();
   };
-
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;

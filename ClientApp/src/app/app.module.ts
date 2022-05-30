@@ -69,8 +69,6 @@ import { environment } from 'src/environments/environment';
     RegisterComponent,
     InfoUserComponent,
     LoginfacebookComponent
-
-
   ],
   imports: [
     FacebookModule.forRoot(),

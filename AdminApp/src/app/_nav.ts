@@ -1,5 +1,4 @@
 import { INavData } from '@coreui/angular';
-
 export const navItems: INavData[] = [
   {
     name:"THỐNG KÊ",
@@ -22,7 +21,6 @@ export const navItems: INavData[] = [
       },
     ]
   },
-
   {
     name:"QUẢN LÝ",
     children:
@@ -84,8 +82,6 @@ export const navItems: INavData[] = [
       },
     ]
   },
-  
-
   {
     name:"HÓA ĐƠN",
     children:
@@ -102,6 +98,4 @@ export const navItems: INavData[] = [
       },
     ]
   },
-  
-  
 ];

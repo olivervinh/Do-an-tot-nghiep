@@ -5,7 +5,6 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { environment } from "../../../../../environments/environment";
-
 @Injectable({
     providedIn: 'root'
   })
@@ -16,7 +15,6 @@ export class SanPhamBienTheService{
     sanphambienthe:GiaSanPhamMauSacSanPhamSize = new GiaSanPhamMauSacSanPhamSize()
     readonly url=environment.URL_API+"sanphambienthes"
     constructor(public http:HttpClient) { }
-
     delete(id:number):Observable<any>{
       return this.http.delete<any>(`${this.url}/${id}`)
     }
@@ -42,11 +40,9 @@ export class SanPhamBienTheService{
       return this.http.get(environment.URL_API+"mausacs/tenmauloai")
     }
   }
-
   export class LoaiMau{
     loaiTenMau: string
   }
-
   export class SanPhamBienThe{
     id : number = 0
     mauId : number 
@@ -54,7 +50,6 @@ export class SanPhamBienTheService{
     sizeId : number
     soLuongTon:number =0
   }
-  
   export class GiaSanPhamMauSacSanPhamSize{
     id : number
     maMau : string

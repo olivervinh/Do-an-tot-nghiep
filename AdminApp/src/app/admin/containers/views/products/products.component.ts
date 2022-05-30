@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Product, ProductService } from './product.service'
 import * as signalR from '@microsoft/signalr';
-
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +15,6 @@ import { ImagesmodelComponent } from './imagesmodel/imagesmodel.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { ToastServiceService } from '../../shared/toast-service.service';
 import { SanPhamBienTheService } from '../san-pham-bien-thes/san-pham-bien-the.service';
-
 import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-products',
@@ -25,9 +22,7 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, AfterViewInit {
-
   @ViewChild(MatSort) sort: MatSort;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public servicespbt: SanPhamBienTheService,
     public service: ProductService,
@@ -36,8 +31,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     public http: HttpClient,
     public dialog: MatDialog,
     public serviceToast: ToastServiceService,) { }
-
-
   displayedColumns: string[] = ['id', 'ten', 'hinh',
     'gia',
     'giaNhap',
@@ -59,34 +52,28 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         },
         error=>{
           console.log(error);
-          
         }
       )
     }
-
   ngOnInit() {
     this.service.getAllProducts();
     const connection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:44302/notify')
       .build();
-
     connection.start().then(function () {
       console.log('SignalR Connected!');
     }).catch(function (err) {
       return console.error(err.toString());
     });
-
     connection.on("BroadcastMessage", () => {
       this.service.getAllProducts();
     });
   }
-
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;
   }
- 
   public doFilter = (value: string) => {
     this.service.dataSource.filter = value.trim().toLocaleLowerCase();
   }
@@ -99,7 +86,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
   exportGeneratePdf() {
     window.open("https://localhost:44302/api/GeneratePdf/allsanpham", "_blank");
-
   }
   onSelectedEdit() {
     this.router.navigate(['admin/product/edit/' + this.service.product.id]);
@@ -125,6 +111,4 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       )
     }
   }
-
-
 }

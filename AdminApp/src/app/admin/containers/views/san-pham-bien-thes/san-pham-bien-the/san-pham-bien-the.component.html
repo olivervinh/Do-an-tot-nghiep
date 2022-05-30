@@ -2,7 +2,6 @@
     <div class="container" style="width: 30vw;">
         <button class="btn-dialog-close" mat-stroked-button [mat-dialog-close]="true" tabIndex="-1" style="float: right;"><mat-icon>clear</mat-icon></button>
         <br>
-
         <div class="form-group">
             <span class="label label-default">Tên sản phẩm</span>
             <select class="form-control" [(ngModel)]="service.sanphambienthe.id_SanPham" formControlName="Id_SanPham">
@@ -10,7 +9,6 @@
                     [value]="sanpham.id">{{sanpham.ten}}</option>
             </select>
             <div *ngIf="Id_SanPham.invalid && (Id_SanPham.dirty || Id_SanPham.touched)" class="alert alert-danger">
-
                 <div *ngIf="Id_SanPham.errors.required">
                     Tên sản phẩm không được bỏ trống
                 </div>
@@ -28,7 +26,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <span class="label label-default">Tên Size</span>
             <select class="form-control" [(ngModel)]="service.sanphambienthe.id_Size" formControlName="Id_Size">
@@ -36,7 +33,6 @@
                  [value]="size.id">{{size.sizeLoaiTen}}</option>
             </select>
             <div *ngIf="Id_Size.invalid && (Id_Size.dirty || Id_Size.touched)" class="alert alert-danger">
-
                 <div *ngIf="Id_Size.errors.required">
                     Size không được bỏ trống
                 </div>
@@ -46,13 +42,10 @@
             <span class="label label-default">Số lượng tồn</span>
             <input class="form-control" formControlName="SoLuongTon" [(ngModel)]="service.sanphambienthe.soLuongTon" readonly>
             <div *ngIf="SoLuongTon.invalid && (SoLuongTon.dirty || SoLuongTon.touched)" class="alert alert-danger">
-
                 <div *ngIf="SoLuongTon.errors.required">
                     Số lượng tồn không được bỏ trống
                 </div>
-
             </div>
-
         </div>
         <div class="form-group" style="justify-content:center;display: flex;">
             <button type="submit" class="btn btn-primary" [mat-dialog-close]="true" [disabled]="this.newFormGroup.invalid">Submit</button>

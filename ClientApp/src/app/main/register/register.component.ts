@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseService } from 'src/app/service/base.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -22,7 +21,6 @@ export class RegisterComponent extends BaseService implements OnInit {
     super();
     this.register={};
     this._unsubscribeAll = new Subject();
-
    }
    check(){
     if(this.userFormGroup.value.Password!=this.userFormGroup.value.RePassword)
@@ -35,7 +33,6 @@ export class RegisterComponent extends BaseService implements OnInit {
     {
       this.registerAccount()
     }
-
    }
    registerAccount(){
     this.http.post("https://localhost:44302/api/auth/registerCustomer",{
@@ -49,10 +46,8 @@ export class RegisterComponent extends BaseService implements OnInit {
       }
     )
   }
-
   ngOnInit(): void {
     this.userFormGroup = this._formBuilder.group({
-
       FirstName: ['', [Validators.required]],
       LastName: ['', Validators.required],
       Email: ['', Validators.required],
@@ -72,8 +67,4 @@ export class RegisterComponent extends BaseService implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
 }
-
-
-
-
 }

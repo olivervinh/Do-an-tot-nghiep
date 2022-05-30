@@ -24,7 +24,6 @@
         <th>Địa chỉ </th>
         <td *ngIf="this.hd.diaChi">{{this.hd.diaChi}}</td>
     </tr>
-
     <tr>
         <th>Ngày tạo: </th>
         <td *ngIf="this.hd.hoaDon.ngayTao">{{this.hd.hoaDon.ngayTao}}</td>
@@ -37,8 +36,6 @@
         <th>Trạng thái: </th>
         <td *ngIf="this.hd.hoaDon.trangThai">{{this.hd.hoaDon.trangThai}}</td>
     </tr>
-
-
 </table>
 <table class="table">
     <thead>
@@ -64,7 +61,6 @@
             <th>
                 Giá bán
             </th>
-
             <th>
                 Thành tiền (VNĐ)
             </th>
@@ -100,7 +96,6 @@
         <h4 style="font-weight: bold; text-underline-position: auto;" *ngIf="this.hd.hoaDon.tongTien">Tổng tiền: {{this.hd.hoaDon.tongTien}} VNĐ</h4>
     </tbody>
 </table>
-
 <!-- <button mat-button color="accent" style="float: left;" (click)="onModalDialog()">
     <mat-icon>add</mat-icon>
     <p style="display: inline-block;margin-top: 0.9vh;">Thêm</p>
@@ -115,7 +110,6 @@
     <h3>Tổng tền hóa đơn: {{getTongTienThisHoaDon()}} VNĐ</h3>
     <button mat-button >Xuất EXEL</button>
 </div>
-
 <table mat-table [dataSource]="this.service.dataSource2" matSort  class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="IdCTHD">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Id </th>
@@ -125,17 +119,14 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên sản phẩm  </th>
         <td mat-cell *matCellDef="let element"> {{element.tenSanPham}} </td>
     </ng-container>
-   
     <ng-container matColumnDef="gia">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Giá </th>
         <td mat-cell *matCellDef="let element"> {{element.gia}} </td>
     </ng-container>
-    
     <ng-container matColumnDef="soLuong">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Số lượng </th>
         <td mat-cell *matCellDef="let element"> {{element.soLuong}} </td>
     </ng-container>
-    
     <ng-container matColumnDef="tenMau">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="make-gold"> Tên màu  </th>
         <td mat-cell *matCellDef="let element"> {{element.tenMau}} </td>

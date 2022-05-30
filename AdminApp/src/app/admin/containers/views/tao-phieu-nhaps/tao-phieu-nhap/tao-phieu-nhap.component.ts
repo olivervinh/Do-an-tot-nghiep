@@ -15,8 +15,6 @@ import { Router } from '@angular/router';
   }]
 })
 export class TaoPhieuNhapComponent implements OnInit {
-
-
   constructor(public service: TaoPhieuNhapService,
     private http: HttpClient,
     private route: Router,
@@ -30,14 +28,11 @@ export class TaoPhieuNhapComponent implements OnInit {
   motnhacungcap:any
   idUser:any
   ngOnInit(): void {
-
     this.service.getnhacungcaphttp().subscribe(
       data => {
         Object.assign(this.nhacungcaps, data)
       }
     )
-
-
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: []
     });
@@ -47,9 +42,7 @@ export class TaoPhieuNhapComponent implements OnInit {
     this.newFormGroupChiTiet = new FormGroup({
       GiaNhapSanPhamBienThe: new FormControl(null,
         [
-          
         ]),
-       
       TenSanPhamBienThe: new FormControl(null,
         [
           Validators.required
@@ -70,8 +63,6 @@ export class TaoPhieuNhapComponent implements OnInit {
   public secondFormGroup: FormGroup;
   public newFormGroupChiTiet: FormGroup;
   public newFormGroupPhieuNhap: FormGroup;
-  
-
   get TenSanPhamBienThe() { return this.newFormGroupChiTiet.get('TenSanPhamBienThe'); }
   get SoLuongNhap() { return this.newFormGroupChiTiet.get('SoLuongNhap'); }
   get GiaNhapSanPhamBienThe() { return this.newFormGroupChiTiet.get('GiaNhapSanPhamBienThe'); }
@@ -86,24 +77,19 @@ idncc:any
     }
     this.idncc=obj.id
     console.log("object :", obj);
-
     this.service.gettensanphamhttp(obj).subscribe(res => {
       this.sanphams = res;
       console.log(this.sanphams);
-
     });
-
     this.service.getonenhacungcaphttp(obj).subscribe(res => {
       this.motnhacungcap = res;
       console.log("mot nha cung cap",this.motnhacungcap);
-
     });
   }
   selectedFruit = null;
   getSanPhamBienTheSanPham(event) {
     this.selectedFruit = 'Apple'
     console.log(this.selectedFruit);
-    
     var obj = {
       id: event.target.value
     }
@@ -111,15 +97,11 @@ idncc:any
       this.sanphambienthes = res;
       console.log("san pham bien the",this.sanphambienthes);
       this.GiaNhapSanPhamBienThes(this.sanphambienthes[0].giaNhap)
-     
     });
   }
- 
   onSubmitChiTiet = (data) => {
       this.chitiets.push(data)
       console.log("chi tiet", this.chitiets)
-    
-    
   }
   tongTien(){
     let sum = 0
@@ -151,11 +133,7 @@ idncc:any
         this.route.navigate(["admin/taophieunhapsuccess"])
       },
       error=>{
-        
       }
     )
-
-    
-    
   }
 }

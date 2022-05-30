@@ -3,7 +3,6 @@ import * as signalR from "@microsoft/signalr";
 import { ChartThirdService } from "./chart-third.service";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import { Label } from "ng2-charts";
-
 @Component({
   selector: "app-chart-third",
   templateUrl: "./chart-third.component.html",
@@ -12,38 +11,30 @@ import { Label } from "ng2-charts";
 export class ChartThirdComponent implements OnInit {
   soLuongTon: any;
   errorMessage: any;
- 
   // Specifies the path of the RDL report file
   public reportPath: string;
   serviceUrl: string;
-
   constructor(private service: ChartThirdService) {
     // this.serviceUrl = 'https://demos.boldreports.com/services/api/ReportViewer';
     // this.reportPath = '~/Resources/docs/sales-order-detail.rdl';
     this.serviceUrl = "https://demos.boldreports.com/services/api/ReportViewer";
     this.reportPath = 'website-visitor-analysis.rdl';
- 
   }
-
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = "bar";
   public barChartLegend = true;
-
   public barChartData: ChartDataSets[] = [
     { data: [], label: "Nhà cung cấp", backgroundColor: "rgb(253, 255, 0)" },
   ];
-
   public barChartLabels1: Label[] = [];
   public barChartType1: ChartType = "bar";
   public barChartLegend1 = true;
-
   public barChartData1: ChartDataSets[] = [
     { data: [], label: "Nhà cung cấp", backgroundColor: "rgb(150, 250,0)" },
   ];
-
   ngOnInit(): void {
     this.getSoLuongTon();
     this.NhaCungCapTongTien();
@@ -52,7 +43,6 @@ export class ChartThirdComponent implements OnInit {
       .configureLogging(signalR.LogLevel.Information)
       .withUrl("https://localhost:44302/notify")
       .build();
-
     connection
       .start()
       .then(function () {
@@ -80,7 +70,6 @@ export class ChartThirdComponent implements OnInit {
   }): void {
     console.log(event, active);
   }
-
   public chartHovered({
     event,
     active,
@@ -90,7 +79,6 @@ export class ChartThirdComponent implements OnInit {
   }): void {
     console.log(event, active);
   }
-
   public randomize(): void {
     this.barChartType = this.barChartType === "bar" ? "line" : "bar";
   }
@@ -114,7 +102,6 @@ export class ChartThirdComponent implements OnInit {
         console.log("do dai", this.lenght1);
         this.barChartLabels = new Array(this.lenght1);
         this.barChartData[0].data = new Array(this.lenght1);
-
         for (var i = 0; i < this.lenght1; i++) {
           this.barChartLabels[i] = this.ncctongtien[i].ten;
           this.barChartData[0].data[i] = this.ncctongtien[i].tongTien;
@@ -135,7 +122,6 @@ export class ChartThirdComponent implements OnInit {
         console.log("do dai", this.lenght2);
         this.barChartLabels1 = new Array(this.lenght2);
         this.barChartData1[0].data = new Array(this.lenght2);
-
         for (var i = 0; i < this.lenght2; i++) {
           this.barChartLabels1[i] = this.nccsoluong[i].ten;
           this.barChartData1[0].data[i] = this.nccsoluong[i].soLuong;

@@ -1,5 +1,3 @@
-
-  
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -12,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit  {
-
   list_item:any;
   tongtien:any;
    Tinh: string;
@@ -76,7 +73,6 @@ export class CheckoutComponent implements OnInit  {
       this.DiaChi='';
     }
   }
-
  deleteSanPham(item):void {
   const clicks = localStorage.getItem('idUser');
    let delproduct : deleteProduct = new deleteProduct()
@@ -98,9 +94,7 @@ export class CheckoutComponent implements OnInit  {
         this.cartService.DeleteProduct(item.productDeatail);
       });
     })
-
 }
-
   ngOnInit(): void {
 }
   maGiamGia():void{
@@ -111,13 +105,10 @@ export class CheckoutComponent implements OnInit  {
     }
     else
     {
-
-
     this.check = this.list_MGG.filter(d=>d.code==this.MaGiamGia)[0];
     this.check_sudung = this.list_MGGSD.filter(d=>d==this.MaGiamGia)[0];
     if(this.check!=null&&this.check_sudung==null)
     {
-
       this.list_MGGSD.push(this.MaGiamGia)
       this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
       Swal.fire("Áp dụng mã giảm giá thành công .", '', 'success')
@@ -131,10 +122,8 @@ export class CheckoutComponent implements OnInit  {
       {
         Swal.fire("Mã giảm giá không tồn tại .", '', 'error')
       }
-
     }
   }
-
   }
   onSubmit(){
     if (localStorage.getItem("products") === null) {
@@ -152,7 +141,6 @@ export class CheckoutComponent implements OnInit  {
       DiaChi:this.DiaChi,
       TongTien:this.tongThanhToan-25000,
       Id_User:clicks
-
     }).subscribe(
       res=>{
         Swal.fire("Đặt hàng thành công.", '', 'success').then(function () {
@@ -162,9 +150,7 @@ export class CheckoutComponent implements OnInit  {
     );
   })
     }
-
 }
-
 ChangeSoLuong(cartID,i){
   const clicks = localStorage.getItem('idUser');
   this.http.post("https://localhost:44302/api/Carts/update/",{
@@ -185,7 +171,6 @@ ChangeSoLuong(cartID,i){
 }
   updateCongSanPham(cartID,soLuong){
     const clicks = localStorage.getItem('idUser');
-
     this.http.post("https://localhost:44302/api/Carts/update/",{
     CartID:cartID,
     SoLuong:soLuong+1,
@@ -198,12 +183,9 @@ ChangeSoLuong(cartID,i){
             this.tongtien=this.tongtien+(this.list_item[i].productDetail.giaBan*this.list_item[i].soLuong);
           this.tongThanhToan=this.tongtien+25000;
         }
-
       }
-
     );
     this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
-
   }
   updateTruSanPham(cartID,soLuong){
     const clicks = localStorage.getItem('idUser');
@@ -228,10 +210,8 @@ ChangeSoLuong(cartID,i){
           this.tongThanhToan=this.tongtien+25000;
         }
         }
-
     );
     this.tongThanhToan=this.tongtien+25000-this.check.soTienGiam;
-
   }
   changTinhThanh(event:any):void{
     this.Tinh=event;
@@ -245,7 +225,6 @@ ChangeSoLuong(cartID,i){
     const search =this.list_quan_huyen.filter(d=>d.name===Huyen)[0];
     this.list_xa_phuong=search.wards;
   }
-
 }
 export class deleteProduct{
   id_sanpham : number

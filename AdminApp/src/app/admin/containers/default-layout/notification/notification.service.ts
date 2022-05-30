@@ -3,18 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
-
 import { NotificationCheckOutCountResult, NotificationCountResult, NotificationResult, NotificationCheckOutResult } from './notification';
-
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-
   private notificationsUrl = environment.URL_API + 'notifications';
-
   constructor(private http: HttpClient) { }
-
   getNotificationCount(): Observable<NotificationCountResult> {
     const url = environment.URL_API + 'notifications/notificationcount';
     return this.http.get<NotificationCountResult>(url)
@@ -22,7 +17,6 @@ export class NotificationService {
         catchError(this.handleError)
       );
   }
-
   getNotificationMessage(): Observable<Array<NotificationResult>> {
     const url = `${this.notificationsUrl}/notificationresult`;
     return this.http.get<Array<NotificationResult>>(url)
@@ -30,7 +24,6 @@ export class NotificationService {
         catchError(this.handleError)
       );
   }
-
   deleteNotifications(): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const url = `${this.notificationsUrl}/deletenotifications`;
@@ -39,7 +32,6 @@ export class NotificationService {
         catchError(this.handleError)
       );
   }
-
   private handleError(err) {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
@@ -50,7 +42,6 @@ export class NotificationService {
     console.error(err);
     return throwError(errorMessage);
   }
-
   getNotificationCheckOutCount(): Observable<NotificationCheckOutCountResult> {
     const url = environment.URL_API + 'notificationcheckout/notificationcheckoutcount';
     return this.http.get<NotificationCheckOutCountResult>(url)

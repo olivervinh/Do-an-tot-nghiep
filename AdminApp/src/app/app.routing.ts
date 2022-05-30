@@ -1,35 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 // Import Containers
 import { DefaultLayoutComponent } from './admin/containers';
 import { RegistrationFormComponent } from './admin/containers/views/account/registration-form/registration-form.component';
 import { AspNetUsersComponent } from './admin/containers/views/asp-net-users/asp-net-users.component';
-
 import { AuthGuard } from './admin/containers/views/auth.guard';
 import { BrandsComponent } from './admin/containers/views/brands/brands.component';
 import { CategoriesComponent } from './admin/containers/views/categories/categories.component';
-
-
 import { P404Component } from './admin/containers/views/error/404.component';
 import { P500Component } from './admin/containers/views/error/500.component';
 import { SanPhamBienThesComponent } from './admin/containers/views/san-pham-bien-thes/san-pham-bien-thes.component';
-
 import { HoaDonsComponent } from './admin/containers/views/hoa-dons/hoa-dons.component';
-
 import { LoginComponent } from './admin/containers/views/account/login/login.component';
 import { MauSacsComponent } from './admin/containers/views/mau-sacs/mau-sacs.component';
 import { ProductsComponent } from './admin/containers/views/products/products.component';
-
-
 import { SizesComponent } from './admin/containers/views/sizes/sizes.component';
 import { ProductdetailComponent } from './admin/containers/views/products/productdetail/productdetail.component';
 import { ProductComponent } from './admin/containers/views/products/product/product.component';
 import { HoaDonComponent } from './admin/containers/views/hoa-dons/hoa-don/hoa-don.component';
-
 import { DashboardComponent } from './admin/containers/views/dashboard/dashboard.component';
 import { ChartJSComponent } from './admin/containers/views/chartjs/chartjs.component';
-
 import { UserdetailComponent } from './admin/containers/userdetail/userdetail.component';
 import { WidgetsComponent } from './admin/containers/views/widgets/widgets.component';
 import { ProfileComponent } from './admin/containers/views/profile/profile.component';
@@ -44,12 +34,7 @@ import { TaoPhieuNhapDetailComponent } from './admin/containers/views/tao-phieu-
 import { ChartThirdComponent } from './admin/containers/views/chart-third/chart-third.component';
 import { ChatsComponent } from './admin/containers/views/chats/chats.component';
 import { BlogsComponent } from './admin/containers/views/blogs/blogs.component';
-
-
-
-
 // import { DefaultLayoutClientComponent } from './client/containers/default-layout-client/default-layout-client.component';
-
 export const routes: Routes = [
   {
     path: '',
@@ -88,7 +73,6 @@ export const routes: Routes = [
       title: 'Register Page'
     }
   },
-
   {
     path: '',
     component: DefaultLayoutComponent, canActivate: [AuthGuard],
@@ -124,7 +108,6 @@ export const routes: Routes = [
         path: 'admin/chartjs',
         component: ChartJSComponent, canActivate: [AuthGuard],
       },
-
       {
         path: 'admin/product/add',
         component: ProductComponent, canActivate: [AuthGuard],
@@ -173,18 +156,14 @@ export const routes: Routes = [
         path: 'admin/mausacs',
         component: MauSacsComponent, canActivate: [AuthGuard],
       },
-  
       {
         path: 'admin/hoadons',
         component: HoaDonsComponent, canActivate: [AuthGuard],
       },
-
       {
         path: 'admin/aspnetusers',
         component: AspNetUsersComponent, canActivate: [AuthGuard],
       },
-
-  
       {
         path: 'admin/taophieunhap',
         component: TaoPhieuNhapsComponent, canActivate: [AuthGuard],
@@ -217,7 +196,6 @@ export const routes: Routes = [
   },
   { path: '**', component: P404Component }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule]

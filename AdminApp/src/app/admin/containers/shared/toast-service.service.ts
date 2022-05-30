@@ -4,9 +4,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class ToastServiceService {
-
   constructor(    public toastr: ToastrService,) { }
-
   showToastDonHangTaoThanhCong(){
     this.toastr.success("Đơn hàng tạo thành công")
   }
@@ -34,5 +32,4 @@ export class ToastServiceService {
   showToastDangNhapThatBai(){
     this.toastr.error("Đăng nhập thất bại")
   }
-  
 }

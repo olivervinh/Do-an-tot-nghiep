@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { CardsComponent } from './cards.component';
 import { FormsComponent } from './forms.component';
 import { SwitchesComponent } from './switches.component';
@@ -13,7 +12,6 @@ import { PopoversComponent } from './popovers.component';
 import { ProgressComponent } from './progress.component';
 import { TooltipsComponent } from './tooltips.component';
 import { NavbarsComponent } from './navbars/navbars.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -112,7 +110,6 @@ const routes: Routes = [
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

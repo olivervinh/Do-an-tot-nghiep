@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./bill_details.component.scss']
 })
 export class BillDetailsComponent implements OnInit {
-
   list_hoadon:any;
   id_bill:any;
   bill:any;
@@ -19,7 +18,6 @@ export class BillDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id_bill = params['id'];
       this.http.post("https://localhost:44302/api/hoadons/hoadon/"+this.id_bill,{
-
   }).subscribe(
     res=>{
       this.bill=res;
@@ -59,7 +57,6 @@ loadChiTietPhieu()
     }
     });
  }
-
   ngOnInit(): void {
   }
 }

@@ -18,13 +18,9 @@ export class DefaultLayoutComponent implements OnInit {
   notification: NotificationCountResult;
   messages: Array<NotificationResult>;
   errorMessage = '';
-
-
   notificationCheckOut: NotificationCheckOutCountResult;
   messagesCheckOut: Array<NotificationCheckOutResult>;
   fullname: string;
-
-
   constructor(
     private notificationService: NotificationService,
     private modalService: ModalService,
@@ -45,13 +41,11 @@ export class DefaultLayoutComponent implements OnInit {
       .configureLogging(signalR.LogLevel.Information)
       .withUrl('https://localhost:44302/notify')
       .build();
-
     connection.start().then(function () {
       console.log('SignalR Connected!');
     }).catch(function (err) {
       return console.error(err.toString());
     });
-
     connection.on("BroadcastMessage", () => {
       this.getNotificationCount();
     });
@@ -62,12 +56,9 @@ export class DefaultLayoutComponent implements OnInit {
   collapse() {
     this.isExpanded = false;
   }
-
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
-
-
   deleteNotificationCheckOuts(): void {
     if (confirm(`Are you sure want to delete all checkout notifications?`)) {
       this.notificationService.deleteNotificationCheckOuts()
@@ -87,7 +78,6 @@ export class DefaultLayoutComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
   }
-
   getNotificationCheckOutMessage() {
     this.notificationService.getNotificationCheckOutMessage().subscribe(
       messages => {
@@ -96,9 +86,6 @@ export class DefaultLayoutComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
   }
-
-
-
   getNotificationCount() {
     this.notificationService.getNotificationCount().subscribe(
       notification => {
@@ -107,7 +94,6 @@ export class DefaultLayoutComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
   }
-
   getNotificationMessage() {
     this.notificationService.getNotificationMessage().subscribe(
       messages => {
@@ -116,7 +102,6 @@ export class DefaultLayoutComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
   }
-
   deleteNotifications(): void {
     if (confirm(`Are you sure want to delete all notifications?`)) {
       this.notificationService.deleteNotifications()
@@ -132,7 +117,6 @@ export class DefaultLayoutComponent implements OnInit {
     this.getNotificationMessage();
     this.modalService.open('custom-modal');
   }
-
   closeModal() {
     this.modalService.close('custom-modal');
   }
@@ -148,7 +132,6 @@ export class DefaultLayoutComponent implements OnInit {
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
-
   routeCheckOut() {
     this.modalService.close('custom-modal-checkout');
     this.modalService.close('custom-modal');
@@ -161,4 +144,3 @@ export class UserIdenity {
   imagePath: string
   email: string
 }
-

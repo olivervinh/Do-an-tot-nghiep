@@ -9,7 +9,6 @@
   position: fixed;
   background: #0b0b0b;
   opacity: 0.8; }
-
 .mfp-wrap {
   top: 0;
   left: 0;
@@ -19,7 +18,6 @@
   position: fixed;
   outline: none !important;
   -webkit-backface-visibility: hidden; }
-
 .mfp-container {
   text-align: center;
   position: absolute;
@@ -29,16 +27,13 @@
   top: 0;
   padding: 0 8px;
   box-sizing: border-box; }
-
 .mfp-container:before {
   content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle; }
-
 .mfp-align-top .mfp-container:before {
   display: none; }
-
 .mfp-content {
   position: relative;
   display: inline-block;
@@ -46,29 +41,23 @@
   margin: 0 auto;
   text-align: left;
   z-index: 1045; }
-
 .mfp-inline-holder .mfp-content,
 .mfp-ajax-holder .mfp-content {
   width: 100%;
   cursor: auto; }
-
 .mfp-ajax-cur {
   cursor: progress; }
-
 .mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
   cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
   cursor: zoom-out; }
-
 .mfp-zoom {
   cursor: pointer;
   cursor: -webkit-zoom-in;
   cursor: -moz-zoom-in;
   cursor: zoom-in; }
-
 .mfp-auto-cursor .mfp-content {
   cursor: auto; }
-
 .mfp-close,
 .mfp-arrow,
 .mfp-preloader,
@@ -76,13 +65,10 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none; }
-
 .mfp-loading.mfp-figure {
   display: none; }
-
 .mfp-hide {
   display: none !important; }
-
 .mfp-preloader {
   color: #CCC;
   position: absolute;
@@ -97,13 +83,10 @@
     color: #CCC; }
     .mfp-preloader a:hover {
       color: #FFF; }
-
 .mfp-s-ready .mfp-preloader {
   display: none; }
-
 .mfp-s-error .mfp-content {
   display: none; }
-
 button.mfp-close,
 button.mfp-arrow {
   overflow: visible;
@@ -117,11 +100,9 @@ button.mfp-arrow {
   z-index: 1046;
   box-shadow: none;
   touch-action: manipulation; }
-
 button::-moz-focus-inner {
   padding: 0;
   border: 0; }
-
 .mfp-close {
   width: 44px;
   height: 44px;
@@ -142,10 +123,8 @@ button::-moz-focus-inner {
     opacity: 1; }
   .mfp-close:active {
     top: 1px; }
-
 .mfp-close-btn-in .mfp-close {
   color: #333; }
-
 .mfp-image-holder .mfp-close,
 .mfp-iframe-holder .mfp-close {
   color: #FFF;
@@ -153,7 +132,6 @@ button::-moz-focus-inner {
   text-align: right;
   padding-right: 6px;
   width: 100%; }
-
 .mfp-counter {
   position: absolute;
   top: 0;
@@ -162,7 +140,6 @@ button::-moz-focus-inner {
   font-size: 12px;
   line-height: 18px;
   white-space: nowrap; }
-
 .mfp-arrow {
   position: absolute;
   opacity: 0.65;
@@ -198,7 +175,6 @@ button::-moz-focus-inner {
     border-top-width: 21px;
     border-bottom-width: 21px;
     opacity: 0.7; }
-
 .mfp-arrow-left {
   left: 0; }
   .mfp-arrow-left:after {
@@ -207,7 +183,6 @@ button::-moz-focus-inner {
   .mfp-arrow-left:before {
     margin-left: 25px;
     border-right: 27px solid #3F3F3F; }
-
 .mfp-arrow-right {
   right: 0; }
   .mfp-arrow-right:after {
@@ -215,7 +190,6 @@ button::-moz-focus-inner {
     margin-left: 39px; }
   .mfp-arrow-right:before {
     border-left: 27px solid #3F3F3F; }
-
 .mfp-iframe-holder {
   padding-top: 40px;
   padding-bottom: 40px; }
@@ -225,7 +199,6 @@ button::-moz-focus-inner {
     max-width: 900px; }
   .mfp-iframe-holder .mfp-close {
     top: -40px; }
-
 .mfp-iframe-scaler {
   width: 100%;
   height: 0;
@@ -240,7 +213,6 @@ button::-moz-focus-inner {
     height: 100%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     background: #000; }
-
 /* Main image in popup */
 img.mfp-img {
   width: auto;
@@ -251,7 +223,6 @@ img.mfp-img {
   box-sizing: border-box;
   padding: 40px 0 40px;
   margin: 0 auto; }
-
 /* The shadow behind the image */
 .mfp-figure {
   line-height: 0; }
@@ -275,7 +246,6 @@ img.mfp-img {
     line-height: 14px; }
   .mfp-figure figure {
     margin: 0; }
-
 .mfp-bottom-bar {
   margin-top: -36px;
   position: absolute;
@@ -283,20 +253,16 @@ img.mfp-img {
   left: 0;
   width: 100%;
   cursor: auto; }
-
 .mfp-title {
   text-align: left;
   line-height: 18px;
   color: #F3F3F3;
   word-wrap: break-word;
   padding-right: 36px; }
-
 .mfp-image-holder .mfp-content {
   max-width: 100%; }
-
 .mfp-gallery .mfp-image-holder .mfp-figure {
   cursor: pointer; }
-
 @media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {
   /**
        * Remove all paddings around the image on small screen
@@ -335,7 +301,6 @@ img.mfp-img {
     position: fixed;
     text-align: center;
     padding: 0; } }
-
 @media all and (max-width: 900px) {
   .mfp-arrow {
     -webkit-transform: scale(0.75);

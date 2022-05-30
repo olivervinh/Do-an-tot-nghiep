@@ -8,12 +8,10 @@ import { UserService } from 'src/app/service/account/user.service';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-
   list_hoadon:any;
   constructor(public http:HttpClient,private userService: UserService) {
     userService.checkLogin();
    }
-
   ngOnInit(): void {
     const clicks = localStorage.getItem('idUser');
     this.http.post("https://localhost:44302/api/hoadons/danhsachhoadon/",{
@@ -26,13 +24,11 @@ export class HistoryComponent implements OnInit {
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {
     return console.error(err.toString());
   });
-
   connection.on("BroadcastMessage", () => {
     this.http.post("https://localhost:44302/api/hoadons/danhsachhoadon/",{
       idUser:clicks

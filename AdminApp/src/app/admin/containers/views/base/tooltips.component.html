@@ -25,25 +25,21 @@
               placement="top">
         Tooltip on top
       </button>
-
       <button type="button" class="btn btn-default btn-secondary"
               tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
               placement="right">
         Tooltip on right
       </button>
-
       <button type="button" class="btn btn-default btn-secondary"
               tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
               placement="auto">
         Tooltip auto
       </button>
-
       <button type="button" class="btn btn-default btn-secondary"
               tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
               placement="left">
         Tooltip on left
       </button>
-
       <button type="button" class="btn btn-default btn-secondary"
               tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
               placement="bottom">
@@ -71,7 +67,6 @@
       <button type="button" class="btn btn-info" [tooltip]="content">
         Simple binding
       </button>
-
       <ng-template #tolTemplate>Just another: {{content}}</ng-template>
       <button type="button" class="btn btn-warning" [tooltip]="tolTemplate">
         TemplateRef binding
@@ -124,7 +119,6 @@
             Hover over me!
           </button>
         </div>
-
         <div class="col-xs-6 col-6">
           <p>Mobile</p>
           <button type="button" class="btn btn-info"
@@ -147,7 +141,6 @@
   This text has attached tooltip
   </span>
       </p>
-
       <button type="button" class="btn btn-success" (click)="pop.show()">
         Show
       </button>

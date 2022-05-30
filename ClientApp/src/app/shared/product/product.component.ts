@@ -29,13 +29,11 @@ export class ProductComponent implements OnInit, AfterViewInit{
   {
     this.chose_gia=1;
     this.chose_mau=1
-
     this.http
     .get('https://localhost:44302/api/mausacs/mausac/', {}
     ).subscribe(resp => {
         this.mausac = resp;
     });
-  
     this.responsiveOptions = [
       {
           breakpoint: '1024px',
@@ -54,9 +52,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
       }
   ];
   }
-
   ngOnInit(){
-
     this.service.getlaytatcasanpham().subscribe(resp => {
   this.list_product = resp as Product[];
         this.list_product_male= this.list_product.filter(d=>d.gioiTinh==1);
@@ -71,13 +67,11 @@ export class ProductComponent implements OnInit, AfterViewInit{
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
     .build();
-
   connection.start().then(function () {
     console.log('SignalR Connected!');
   }).catch(function (err) {
     return console.error(err.toString());
   });
-
   connection.on("BroadcastMessage", () => {
     this.service.getlaytatcasanpham().subscribe(resp => {
         this.list_product = resp as Product[];
@@ -85,13 +79,10 @@ export class ProductComponent implements OnInit, AfterViewInit{
         this.list_product_female= this.list_product.filter(d=>d.gioiTinh==2);
     });
   });
-
-
   connection.on("BroadcastMessage", () => {
     this.service.getsanphammoi().subscribe(resp => {
         this.products = resp as Product[];
         this.statusData = true;
-   
     });
   });
   }   
@@ -113,12 +104,10 @@ export class ProductComponent implements OnInit, AfterViewInit{
             this.list_product.filter(d=>d.id==idSanPham)[0].like==null;
             Swal.fire("Sản phẩm được xoá khỏi danh sách yêu thích", '', 'success');
         }
-
     });
     this.cart.addToLove(this.list_product.filter(d=>d.id==idSanPham)[0]);
   }
   searchTheoGia(thap,cao,choser){
-
     this.http
     .post('https://localhost:44302/api/sanphams/sapxepsanpham', {
       Thap:thap,
@@ -164,17 +153,14 @@ export class ProductComponent implements OnInit, AfterViewInit{
     $('.js-show-filter').on('click',function(){
       $(this).toggleClass('show-filter');
       $('.panel-filter').slideToggle(400);
-
       if($('.js-show-search').hasClass('show-search')) {
           $('.js-show-search').removeClass('show-search');
           $('.panel-search').slideUp(400);
       }
   });
-
   $('.js-show-search').on('click',function(){
       $(this).toggleClass('show-search');
       $('.panel-search').slideToggle(400);
-
       if($('.js-show-filter').hasClass('show-filter')) {
           $('.js-show-filter').removeClass('show-filter');
           $('.panel-filter').slideUp(400);
@@ -182,16 +168,13 @@ export class ProductComponent implements OnInit, AfterViewInit{
   });
   var $topeContainer = $('.isotope-grid');
   var $filter = $('.filter-tope-group');
-
   // filter items on button click
   $filter.each(function () {
       $filter.on('click', 'button', function () {
           var filterValue = $(this).attr('data-filter');
           $topeContainer.isotope({filter: filterValue});
       });
-
   });
-
   // init Isotope
   $(window).on('load', function () {
       var $grid = $topeContainer.each(function () {
@@ -206,15 +189,12 @@ export class ProductComponent implements OnInit, AfterViewInit{
           });
       });
   });
-
   var isotopeButton = $('.filter-tope-group button');
-
   $(isotopeButton).each(function(){
       $(this).on('click', function(){
           for(var i=0; i<isotopeButton.length; i++) {
               $(isotopeButton[i]).removeClass('how-active1');
           }
-
           $(this).addClass('how-active1');
       });
   });
@@ -222,44 +202,33 @@ export class ProductComponent implements OnInit, AfterViewInit{
     e.preventDefault();
     $('.js-modal1').addClass('show-modal1');
 });
-
 $('.js-hide-modal1').on('click',function(){
     $('.js-modal1').removeClass('show-modal1');
 });
 $('.wrap-slick1').each(function(){
   var wrapSlick1 = $(this);
   var slick1 = $(this).find('.slick1');
-
-
   var itemSlick1 = $(slick1).find('.item-slick1');
   var layerSlick1 = $(slick1).find('.layer-slick1');
   var actionSlick1 = [];
-
-
   $(slick1).on('init', function(){
       var layerCurrentItem = $(itemSlick1[0]).find('.layer-slick1');
-
       for(var i=0; i<actionSlick1.length; i++) {
           clearTimeout(actionSlick1[i]);
       }
-
       $(layerSlick1).each(function(){
           $(this).removeClass($(this).data('appear') + ' visible-true');
       });
-
       for(var i=0; i<layerCurrentItem.length; i++) {
           actionSlick1[i] = setTimeout(function(index) {
               $(layerCurrentItem[index]).addClass($(layerCurrentItem[index]).data('appear') + ' visible-true');
           },$(layerCurrentItem[i]).data('delay'),i);
       }
   });
-
-
   var showDot = false;
   if($(wrapSlick1).find('.wrap-slick1-dots').length > 0) {
       showDot = true;
   }
-
   $(slick1).slick({
       pauseOnFocus: false,
       pauseOnHover: false,
@@ -284,29 +253,20 @@ $('.wrap-slick1').each(function(){
                   '<span class="caption-dots-slick1">' + caption + '</span>';
       },
   });
-
   $(slick1).on('afterChange', function(event, slick, currentSlide){
-
       var layerCurrentItem = $(itemSlick1[currentSlide]).find('.layer-slick1');
-
       for(var i=0; i<actionSlick1.length; i++) {
           clearTimeout(actionSlick1[i]);
       }
-
       $(layerSlick1).each(function(){
           $(this).removeClass($(this).data('appear') + ' visible-true');
       });
-
       for(var i=0; i<layerCurrentItem.length; i++) {
           actionSlick1[i] = setTimeout(function(index) {
               $(layerCurrentItem[index]).addClass($(layerCurrentItem[index]).data('appear') + ' visible-true');
           },$(layerCurrentItem[i]).data('delay'),i);
       }
-
   });
-
 });
-
-
   }
 }

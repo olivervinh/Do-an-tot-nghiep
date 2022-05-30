@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-
 @Component({
   templateUrl: 'widgets.component.html'
 })
 export class WidgetsComponent {
-
   // lineChart1
   public lineChart1Data: Array<any> = [
     {
@@ -31,7 +29,6 @@ export class WidgetsComponent {
           fontSize: 2,
           fontColor: 'transparent',
         }
-
       }],
       yAxes: [{
         display: false,
@@ -64,7 +61,6 @@ export class WidgetsComponent {
   ];
   public lineChart1Legend = false;
   public lineChart1Type = 'line';
-
   // lineChart2
   public lineChart2Data: Array<any> = [
     {
@@ -89,7 +85,6 @@ export class WidgetsComponent {
           fontSize: 2,
           fontColor: 'transparent',
         }
-
       }],
       yAxes: [{
         display: false,
@@ -123,8 +118,6 @@ export class WidgetsComponent {
   ];
   public lineChart2Legend = false;
   public lineChart2Type = 'line';
-
-
   // lineChart3
   public lineChart3Data: Array<any> = [
     {
@@ -169,8 +162,6 @@ export class WidgetsComponent {
   ];
   public lineChart3Legend = false;
   public lineChart3Type = 'line';
-
-
   // barChart1
   public barChart1Data: Array<any> = [
     {
@@ -206,7 +197,6 @@ export class WidgetsComponent {
   ];
   public barChart1Legend = false;
   public barChart1Type = 'bar';
-
   // lineChart4
   public lineChart4Data: Array<any> = [
     {
@@ -244,8 +234,6 @@ export class WidgetsComponent {
   ];
   public lineChart4Legend = false;
   public lineChart4Type = 'line';
-
-
   // barChart2
   public barChart2Data: Array<any> = [
     {
@@ -284,8 +272,6 @@ export class WidgetsComponent {
   ];
   public barChart2Legend = false;
   public barChart2Type = 'bar';
-
-
   // barChart3
   public barChart3Data: Array<any> = [
     {
@@ -335,8 +321,6 @@ export class WidgetsComponent {
   ];
   public barChart3Legend = false;
   public barChart3Type = 'bar';
-
-
   // lineChart5
   public lineChart5Data: Array<any> = [
     {

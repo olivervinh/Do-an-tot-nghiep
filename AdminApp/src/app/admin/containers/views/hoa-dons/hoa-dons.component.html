@@ -46,7 +46,6 @@
             <p *ngIf="element.trangThai==3">
                 Đã hủy
             </p>
-
         </td>
     </ng-container>
     <ng-container matColumnDef="actions">
@@ -60,12 +59,8 @@
             </button>
         </td>
     </ng-container>
-
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
 </table>
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
 </mat-paginator>

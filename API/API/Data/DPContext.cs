@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace API.Data
 {
-    public partial class DPContext : IdentityDbContext
+    public class DPContext : IdentityDbContext
     {
         public DPContext(DbContextOptions<DPContext> options) : base(options) { }
         public DbSet<NotificationCheckout> NotificationCheckouts { get; set; }

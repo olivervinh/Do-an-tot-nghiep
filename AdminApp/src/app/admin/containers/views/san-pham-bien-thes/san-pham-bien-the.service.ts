@@ -31,7 +31,7 @@ export class SanPhamBienTheService{
     }
     /* Dùng cho component modal thêm xóa sửa */
     getAllSanPhams(){
-      return this.http.get(environment.URL_API+"sanphams/sp")
+      return this.http.get(environment.URL_API+"sanphams")
     }
     getAllTenSizeLoai(){
       return this.http.get(environment.URL_API+"sizes/tensizeloai")

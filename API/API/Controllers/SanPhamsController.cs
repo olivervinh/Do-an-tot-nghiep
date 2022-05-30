@@ -134,11 +134,6 @@ namespace API.Controllers
                 return Json(2);
             }
         }
-        [HttpGet("sp")]
-        public async Task<ActionResult<IEnumerable<SanPham>>> GetSps()
-        {
-            return await _context.SanPhams.ToListAsync();
-        }
         // GET: api/SanPhams
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SanPhamLoaiThuongHieu>>> GetSanPhams()
@@ -167,7 +162,7 @@ namespace API.Controllers
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
                        TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
                        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   }).ToListAsync();
+                   }).Take(20).ToListAsync();
             return list;
         }
         // GET: api/SanPhams/5
@@ -395,7 +390,7 @@ namespace API.Controllers
             List<ImageSanPham> listImage;
             listImage = await _context.ImageSanPhams.Where(s => s.IdSanPham == id).ToListAsync();
             List<SanPhamBienTheMauSize> listSPBT;
-            var kb1 = from s in _context.SanPhamBienThes
+            var temp = from s in _context.SanPhamBienThes
                       join z in _context.Sizes
                       on s.SizeId equals z.Id
                       join m in _context.MauSacs
@@ -408,7 +403,7 @@ namespace API.Controllers
                           TenSize = z.TenSize,
                           Id_SanPham = s.Id_SanPham,
                       };
-            listSPBT = await kb1.Where(s => s.Id_SanPham == id).ToListAsync();
+            listSPBT = await temp.Where(s => s.Id_SanPham == id).ToListAsync();
             var kb = from s in _context.SanPhams
                      join spbt in _context.SanPhamBienThes
                      on s.Id equals spbt.Id_SanPham
@@ -444,33 +439,6 @@ namespace API.Controllers
             pr = kb.FirstOrDefault(s => s.Id == id);
             return pr;
         }
-        [HttpGet("laytatcasanpham")]
-        public async Task<ActionResult<IEnumerable<SanPhamLoaiThuongHieu>>> Laytatcasanpham()
-        {
-            var listIdSanPhamliked = await _context.UserLikes.Select(s => s.IdSanPham).ToListAsync();
-            var kb = _context.SanPhams.Select(
-                   s => new SanPhamLoaiThuongHieu()
-                   {
-                       Id = s.Id,
-                       Ten = s.Ten,
-                       GiaBan = s.GiaBan,
-                       Tag = s.Tag,
-                       KhuyenMai = s.KhuyenMai,
-                       MoTa = s.MoTa,
-                       HuongDan = s.HuongDan,
-                       GioiTinh = s.GioiTinh,
-                       ThanhPhan = s.ThanhPhan,
-                       IsLike = listIdSanPhamliked.Contains(s.Id),
-                       TrangThaiSanPham = s.TrangThaiSanPham,
-                       TrangThaiHoatDong = s.TrangThaiHoatDong,
-                       Id_Loai = s.Id_Loai,
-                       Id_NhanHieu = s.Id_NhanHieu,
-                       TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
-                       TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
-                       Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   }).Where(s => s.TrangThaiHoatDong == true).ToList();
-            return kb;
-        }
         [HttpGet("topsanphammoi")]
         public async Task<ActionResult<IEnumerable<SanPhamLoaiThuongHieu>>> DanhSachHangMoi()
         {
@@ -493,7 +461,7 @@ namespace API.Controllers
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
                        TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
                        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   }).Where(s=>s.TrangThaiSanPham=="new"&&s.TrangThaiHoatDong==true);
+                   }).Take(20).Where(s=>s.TrangThaiSanPham=="new"&&s.TrangThaiHoatDong==true);
             return await kb.ToListAsync();
         }
         [HttpPost("sapxepsanpham")]
@@ -518,7 +486,7 @@ namespace API.Controllers
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
                        TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
                        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   });
+                   }).Take(20);
             return Json(await kb.ToListAsync());
         }
         [HttpPost("searchtheomau")]
@@ -546,7 +514,7 @@ namespace API.Controllers
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
                        TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
                        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   });
+                   }).Take(20);
             return Json(await kb.ToListAsync());
         }
     }

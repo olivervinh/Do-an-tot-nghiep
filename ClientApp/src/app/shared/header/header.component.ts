@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {UserIdenity} from '../../model/user.model'
 import { CartService } from 'src/app/service/product.service';
+import { environment } from 'src/environments/environment';
 declare var $: any;
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit  {
      user:any;
   constructor(public http:HttpClient,private cartService: CartService)
   {
-    this.http.get("https://localhost:44302/api/Auth/AuthHistory").subscribe(
+    this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
     res=>{
       this.user = res;
     },

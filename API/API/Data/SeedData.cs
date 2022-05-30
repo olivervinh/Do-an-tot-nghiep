@@ -16,7 +16,7 @@ namespace API.Data
                 var context = serviceScope.ServiceProvider.GetService<DPContext>();
                 context.Database.EnsureCreated();
                 var count = await context.SanPhams.CountAsync();
-                if(count < 4500)
+                if(count < 1000000)
                 {
                     for (var i = 0; i < 10000000; i++)
                     {

@@ -9,6 +9,7 @@ import { switchAll } from 'rxjs/operators';
 import * as signalR from '@microsoft/signalr';
 import { ProductService } from './product.service';
 import { SharedService } from '../shared.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -30,7 +31,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
     this.chose_gia=1;
     this.chose_mau=1
     this.http
-    .get('https://localhost:44302/api/mausacs/mausac/', {}
+    .get(environment.URL_API+'mausacs/mausac/', {}
     ).subscribe(resp => {
         this.mausac = resp;
     });
@@ -89,7 +90,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
   like(idSanPham){
     const clicks = localStorage.getItem('idUser');
     this.http
-    .post('https://localhost:44302/api/sanphams/like/', {
+    .post(environment.URL_API+'sanphams/like/', {
         IdSanPham:idSanPham,
         IdUser:clicks,
       }
@@ -109,7 +110,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
   }
   searchTheoGia(thap,cao,choser){
     this.http
-    .post('https://localhost:44302/api/sanphams/sapxepsanpham', {
+    .post(environment.URL_API+'sanphams/sapxepsanpham', {
       Thap:thap,
       Cao:cao
     }
@@ -123,7 +124,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
   searchthemau(mausac,chose)
   {
     this.http
-    .post('https://localhost:44302/api/sanphams/searchtheomau', {
+    .post(environment.URL_API+'sanphams/searchtheomau', {
       mausac:mausac
     }
     ).subscribe(resp => {
@@ -140,7 +141,7 @@ export class ProductComponent implements OnInit, AfterViewInit{
       var kq;
     const clicks = localStorage.getItem('idUser');
     this.http
-    .post('https://localhost:44302/api/sanphams/checklike/', {
+    .post(environment.URL_API+'sanphams/checklike/', {
         IdSanPham:idSanPham,
         IdUser:clicks,
       }

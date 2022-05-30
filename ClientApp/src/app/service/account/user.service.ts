@@ -23,7 +23,6 @@ export class UserService extends BaseService  {
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
     // header component resulting in authed user nav links disappearing despite the fact user is still logged in
     this._authNavStatusSource.next(this.loggedIn);
-    this.baseUrl = "https://localhost:44302/api/"
   }
    login(userName, password):boolean {
      var check=false;
@@ -41,7 +40,7 @@ export class UserService extends BaseService  {
           check=true;
           this._authNavStatusSource.next(true);
           const clicks = localStorage.getItem('idUser');
-      this.http.post("https://localhost:44302/api/Carts/getCart/"+clicks,{}).subscribe(
+      this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
         res=>{
           var list_item = res;
           localStorage.setItem('products',JSON.stringify(list_item));

@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 namespace API.Helper
 {
-    public static  class FileHelper
+    public static class FileHelper
     {
         private static string GetContentType(string path)
         {

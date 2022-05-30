@@ -76,13 +76,7 @@ namespace API.Controllers
             var imageBlogs = _context.ImageBlogs.ToArray().Where(s => s.FkBlogId == id);
             foreach (var i in imageBlogs)
             {
-                try
-                {
-                    System.IO.File.Delete(Path.Combine("wwwroot/Images/list-image-blog", i.ImageName));
-                }
-                catch (Exception)
-                {
-                }
+                FileHelper.DeleteFileOnTypeAndNameAsync("blog", i.ImageName);
             }
             if (upload.files != null)
             {

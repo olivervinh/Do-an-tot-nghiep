@@ -47,7 +47,7 @@ namespace API.Controllers
                          TenSize = s.TenSize,
                          SoLuongTon = g.SoLuongTon
                      };
-            return await kb.ToListAsync();
+            return await kb.Take(50).ToListAsync();
         }
         // GET: api/SanPhamBienThes/5
         [HttpGet("{id}")]

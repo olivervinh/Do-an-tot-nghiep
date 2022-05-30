@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 namespace API.Helper
@@ -41,16 +43,51 @@ namespace API.Helper
             }
             return null;
         }
-        public static bool DeleteFileOnPathAsync(string path)
+        public static bool DeleteFileOnTypeAndNameAsync(string type , string name)
         {
             try
             {
-                File.Delete(Path.Combine(path));
-                return true;
+                if (type == "product")
+                {
+                   File.Delete(Path.Combine("wwwroot/Images/list-image-product", name));
+                    return true;
+                }
+                else
+                {
+                    File.Delete(Path.Combine("wwwroot/Images/list-image-blog", name));
+                    return true;
+                }
             }
             catch (Exception)
             {
                 return false;
+            }
+        }
+        public static async Task<string> UploadImageAndReturnFileNameAsync(UploadSanpham sanpham, UploadBlog blog,string type, IFormFile[] file,int i)
+        {
+            if (type == "product")
+            {
+                var path = Path.Combine(
+                      Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-product",
+                     sanpham.Ten + i + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file[i].CopyToAsync(stream);
+                }
+                return sanpham.Ten + i + "." + file[i].FileName.Split(".")
+                            [file[i].FileName.Split(".").Length - 1];
+            }
+            else
+            {
+                var path = Path.Combine(
+                     Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-blog",
+                    blog.TieuDe + i + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file[i].CopyToAsync(stream);
+                }
+                return blog.TieuDe + i + "." + file[i].FileName.Split(".")
+                            [file[i].FileName.Split(".").Length - 1];
             }
         }
     }

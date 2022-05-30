@@ -41,7 +41,7 @@ namespace API.Controllers
         [HttpPost("mau/{id}")]
         public async Task<ActionResult<IEnumerable<MauSac>>> Mau(int idLoai)
         {
-            return await _context.MauSacs.Where(d => d.Id_Loai == 7).ToListAsync();
+            return await _context.MauSacs.Where(d => d.Id_Loai == idLoai).ToListAsync();
         }
         [HttpPost("like")]
         public async Task<ActionResult> LikeSanPham(UserLike userlike)
@@ -209,11 +209,9 @@ namespace API.Controllers
             sanpham.ThanhPhan = upload.ThanhPhan;
             sanpham.TrangThaiHoatDong = upload.TrangThaiHoatDong;
             sanpham.TrangThaiSanPham = upload.TrangThaiSanPham;
-            SanPham sp;
-            sp = _context.SanPhams.Find(id);
             if (upload.Id_NhanHieu == null)
             {
-                sanpham.Id_NhanHieu = sp.Id_NhanHieu;
+                sanpham.Id_NhanHieu = sanpham.Id_NhanHieu;
             }
             else
             {
@@ -221,7 +219,7 @@ namespace API.Controllers
             }
             if (upload.Id_Loai == null)
             {
-                sanpham.Id_Loai = sp.Id_Loai;
+                sanpham.Id_Loai = sanpham.Id_Loai;
             }
             else
             {
@@ -229,7 +227,7 @@ namespace API.Controllers
             }
             if (upload.Id_NhaCungCap == null)
             {
-                sanpham.Id_NhaCungCap = sp.Id_NhaCungCap;
+                sanpham.Id_NhaCungCap = sanpham.Id_NhaCungCap;
             }
             Notification notification = new Notification()
             {
@@ -244,31 +242,17 @@ namespace API.Controllers
             var imageSanPhams = _context.ImageSanPhams.ToArray().Where(s => s.IdSanPham == id);
             foreach (var i in imageSanPhams)
             {
-                try
-                {
-                    System.IO.File.Delete(Path.Combine("wwwroot/Images/list-image-product", i.ImageName));
-                }
-                catch (Exception)
-                {
-                }
+               FileHelper.DeleteFileOnTypeAndNameAsync("product", i.ImageName);
             }
             if (upload.files != null)
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-                    if (file[i].Length > 0)
+                    if (file[i].Length > 0 && file[i].Length< 5120)
                     {
-                        var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-product",
-                       upload.Ten + i + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file[i].CopyToAsync(stream);
-                        }
                         listImage.Add(new ImageSanPham()
                         {
-                            ImageName = upload.Ten + i + "." + file[i].FileName.Split(".")
-                            [file[i].FileName.Split(".").Length - 1],
+                            ImageName = await FileHelper.UploadImageAndReturnFileNameAsync(upload, null, "product", (IFormFile[])upload.files, i),
                             IdSanPham = sanpham.Id,
                         });
                     }
@@ -324,28 +308,16 @@ namespace API.Controllers
             var file = upload.files.ToArray();
             _context.SanPhams.Add(sanpham);
             await _context.SaveChangesAsync();
-            SanPham spTest;
-            spTest = await _context.SanPhams.FindAsync(sanpham.Id);
             if (upload.files != null)
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-                    if (file[i].Length > 0)
+                    if (file[i].Length > 0 && file[i].Length < 5120)
                     {
-                        ImageSanPham imageSanPham1 = new ImageSanPham();
-                        _context.ImageSanPhams.Add(imageSanPham1);
-                        await _context.SaveChangesAsync();
-                        var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-product",
-                       upload.Ten + imageSanPham1.Id + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file[i].CopyToAsync(stream);
-                        }
-                        imageSanPham1.ImageName = upload.Ten + imageSanPham1.Id + "." + file[i].FileName.Split(".")
-                            [file[i].FileName.Split(".").Length - 1];
-                        imageSanPham1.IdSanPham = spTest.Id;
-                        _context.ImageSanPhams.Update(imageSanPham1);
+                        var imageSanPham = new ImageSanPham();
+                        imageSanPham.ImageName = await FileHelper.UploadImageAndReturnFileNameAsync(upload, null, "product", (IFormFile[])upload.files, i);
+                        imageSanPham.IdSanPham = sanpham.Id;
+                        _context.ImageSanPhams.Update(imageSanPham);
                         await _context.SaveChangesAsync();
                     }
                 }
@@ -353,30 +325,45 @@ namespace API.Controllers
             await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
         }
-        // DELETE: api/Blogs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBlog(int id)
+        public async Task<IActionResult> DeleteSanPham(int id)
         {
-            var imageBlogs = _context.ImageBlogs.ToArray().Where(s => s.FkBlogId == id);
-            foreach (var i in imageBlogs)
+            var imageSanPhams = _context.ImageSanPhams.ToArray().Where(s => s.IdSanPham == id);
+            foreach (var i in imageSanPhams)
             {
-                try
-                {
-                    System.IO.File.Delete(Path.Combine("wwwroot/Images/list-image-blog", i.ImageName));
-                }
-                catch (Exception)
-                {
-                }
+                FileHelper.DeleteFileOnTypeAndNameAsync("product",i.ImageName);
             }
-            _context.ImageBlogs.RemoveRange(imageBlogs);
-            var blog = await _context.Blogs.FindAsync(id);
-            _context.Blogs.Remove(blog);
+            Models.SanPhamBienThe[] spbts;
+            spbts = _context.SanPhamBienThes.Where(s => s.Id_SanPham == id).ToArray();
+            _context.SanPhamBienThes.RemoveRange(spbts);
+            ImageSanPham[] images;
+            images = _context.ImageSanPhams.Where(s => s.IdSanPham == id).ToArray();
+            _context.ImageSanPhams.RemoveRange(images);
             await _context.SaveChangesAsync();
+            var sanPham = await _context.SanPhams.FindAsync(id);
+            if (sanPham == null)
+            {
+                return NotFound();
+            }
+            var CategoryConstraint = _context.Loais.Where(s => s.Id == id);
+            var BrandConstraint = _context.NhanHieus.SingleOrDefaultAsync(s => s.Id == id);
+            if (CategoryConstraint != null)
+            {
+                _context.SanPhams.Remove(sanPham);
+            }
+            if (BrandConstraint != null)
+            {
+                _context.SanPhams.Remove(sanPham);
+            }
+            Notification notification = new Notification()
+            {
+                TenSanPham = sanPham.Ten,
+                TranType = "Delete"
+            };
+            _context.Notifications.Add(notification);
+            await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
-        }
-        private bool SanPhamExists(int id)
-        {
-            return _context.SanPhams.Any(e => e.Id == id);
         }
         [HttpGet("loai/{id}")]
         public async Task<ActionResult<IEnumerable<SanPham>>> GetCategory(int id)

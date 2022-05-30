@@ -25,7 +25,6 @@ using Constants = API.Helpers.Constants;
 using API.Helper.Factory;
 using API.Helper.SignalR;
 using API.Helper.Middleware;
-
 namespace API
 {
     public class Startup

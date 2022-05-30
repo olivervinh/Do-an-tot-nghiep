@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 namespace API.Data
 {
     public class SeedData

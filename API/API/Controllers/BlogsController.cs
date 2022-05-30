@@ -11,6 +11,8 @@ using API.Dtos;
 using API.Models;
 using API.Helper.SignalR;
 using API.Helper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 namespace API.Controllers
 {
@@ -86,19 +88,11 @@ namespace API.Controllers
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-                    if (file[i].Length > 0)
+                    if (file[i].Length > 0 && file[i].Length < 5120)
                     {
-                        var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-blog",
-                       upload.TieuDe + i + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file[i].CopyToAsync(stream);
-                        }
                         listImage.Add(new ImageBlog()
                         {
-                            ImageName = upload.TieuDe + i + "." + file[i].FileName.Split(".")
-                            [file[i].FileName.Split(".").Length - 1],
+                            ImageName =await FileHelper.UploadImageAndReturnFileNameAsync(null,upload,"blog", (IFormFile[])upload.files,i),
                             FkBlogId = blog.Id,
                         });
                     }
@@ -145,22 +139,14 @@ namespace API.Controllers
             {
                 for (int i = 0; i < file.Length; i++)
                 {
-                    if (file[i].Length > 0)
+                    if (file[i].Length > 0 && file[i].Length < 5120)
                     {
-                        ImageBlog imageBlog1 = new ImageBlog();
-                        _context.ImageBlogs.Add(imageBlog1);
+                        ImageBlog imageBlog = new ImageBlog();
+                        _context.ImageBlogs.Add(imageBlog);
                         await _context.SaveChangesAsync();
-                        var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/Images/list-image-blog",
-                       upload.TieuDe + imageBlog1.Id + "." + file[i].FileName.Split(".")[file[i].FileName.Split(".").Length - 1]);
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await file[i].CopyToAsync(stream);
-                        }
-                        imageBlog1.ImageName = upload.TieuDe + imageBlog1.Id + "." + file[i].FileName.Split(".")
-                            [file[i].FileName.Split(".").Length - 1];
-                        imageBlog1.FkBlogId = Test.Id;
-                        _context.ImageBlogs.Update(imageBlog1);
+                        imageBlog.ImageName = await FileHelper.UploadImageAndReturnFileNameAsync(null, upload, "blog", (IFormFile[])upload.files, i);
+                        imageBlog.FkBlogId = Test.Id;
+                        _context.ImageBlogs.Update(imageBlog);
                         await _context.SaveChangesAsync();
                     }
                 }
@@ -175,7 +161,7 @@ namespace API.Controllers
             var imageBlogs = _context.ImageBlogs.ToArray().Where(s => s.FkBlogId == id);
             foreach (var i in imageBlogs)
             {
-                System.IO.File.Delete(Path.Combine("wwwroot/Images/list-image-blog", i.ImageName));
+                FileHelper.DeleteFileOnTypeAndNameAsync("blog", i.ImageName);
             }
             _context.ImageBlogs.RemoveRange(imageBlogs);
             var blog = await _context.Blogs.FindAsync(id);

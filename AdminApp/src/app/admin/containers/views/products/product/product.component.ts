@@ -18,9 +18,7 @@ import { NhaCungCapService } from '../../nhacungcaps/nhacungcap.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
   public product: Product
-
   //Begin Review multile file before upload
   public newForm: FormGroup;
   urls = new Array<string>();
@@ -46,8 +44,6 @@ export class ProductComponent implements OnInit {
   //End Review multile file before upload
   public Editor = ClassicEditor;
   selectedFile: FileList;
-
-
   categories: any[] = [];
   brands: any[] = [];
   constructor(public service: ProductService,
@@ -77,6 +73,7 @@ export class ProductComponent implements OnInit {
   get GioiTinh(){return this.newForm.get('GioiTinh')}
 
   ngOnInit(): void {
+    console.log(this.service.product)
     this.serviceCategory.get().subscribe(
       data => {
         Object.assign(this.categories, data)
@@ -101,8 +98,6 @@ export class ProductComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(100),
-
-
       ]),
       GiaBan: new FormControl(null, [
         Validators.required,
@@ -178,8 +173,6 @@ export class ProductComponent implements OnInit {
   clearForm() {
     this.newForm.reset();
   }
-
-
   onSubmit = (data) => {
     if (this.service.product.id == 0) {
       let form = new FormData();
@@ -253,8 +246,6 @@ export class ProductComponent implements OnInit {
     this.newForm.reset();
     this.service.product = new Product();
   }
-
-
   /* DATA SAN PHAM */
   TenSanPhamArray:any = [
     {value: 'Áo ba lỗ', viewValue: 'Áo ba lỗ'},

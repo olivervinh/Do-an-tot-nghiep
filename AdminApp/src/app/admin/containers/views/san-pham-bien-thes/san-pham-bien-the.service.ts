@@ -12,10 +12,8 @@ import { environment } from "../../../../../environments/environment";
 export class SanPhamBienTheService{
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  public dataSource = new MatTableDataSource<SanPhamBienTheTenLoai>();
-    sanphambienthe:SanPhamBienThe = new SanPhamBienThe()
-    spbts: SanPhamBienThe[]
-    tensizeloai:any
+  public dataSource = new MatTableDataSource<GiaSanPhamMauSacSanPhamSize>();
+    sanphambienthe:GiaSanPhamMauSacSanPhamSize = new GiaSanPhamMauSacSanPhamSize()
     readonly url=environment.URL_API+"sanphambienthes"
     constructor(public http:HttpClient) { }
 
@@ -23,12 +21,13 @@ export class SanPhamBienTheService{
       return this.http.delete<any>(`${this.url}/${id}`)
     }
     gethttp():Observable<any>{
-      return this.http.get(environment.URL_API+"sanphambienthes/sanphambienthe")
+      return this.http.get(environment.URL_API+"sanphambienthes")
     }
-    getAllSanPhamBienTheTenLoais(){
+    getAllGiaSanPhamMauSacSanPhamSizes(){
       this.gethttp().subscribe(
         res=>{
-          this.dataSource.data = res as SanPhamBienTheTenLoai[];
+          this.dataSource.data = res as GiaSanPhamMauSacSanPhamSize[];
+          console.log(this.dataSource.data)
         }
       )
     }
@@ -56,9 +55,13 @@ export class SanPhamBienTheService{
     soLuongTon:number =0
   }
   
-  export class SanPhamBienTheTenLoai{
+  export class GiaSanPhamMauSacSanPhamSize{
     id : number
-    mauLoai : string
-    sizeLoai :string
-    sanPham :string
+    maMau : string
+    tenSize :string
+    tenSanPham :string
+    id_Mau : number 
+    id_SanPham : number
+    id_Size : number
+    soLuongTon : number
   }

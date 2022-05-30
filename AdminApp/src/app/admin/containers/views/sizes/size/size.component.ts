@@ -29,6 +29,7 @@ export class SizeComponent implements OnInit {
   get TenSize() { return this.newFormGroup.get('TenSize'); }
   get Id_Loai() { return this.newFormGroup.get('Id_Loai'); }
   ngOnInit(): void {
+    console.log(this.service.size)
     this.newFormGroup = new FormGroup({
       Id_Loai: new FormControl(null,
         [

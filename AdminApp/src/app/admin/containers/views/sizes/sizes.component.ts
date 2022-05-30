@@ -31,9 +31,6 @@ export class SizesComponent implements OnInit, AfterViewInit {
 
 displayedColumns: string[] = ['id', 'tenSize','tenLoai',
   'actions'];
-
-
-
   ngOnInit(): void {
     this.service.getAllSizes();
     const connection = new signalR.HubConnectionBuilder()
@@ -46,27 +43,21 @@ displayedColumns: string[] = ['id', 'tenSize','tenLoai',
   }).catch(function (err) {
     return console.error(err.toString());
   });
-
   connection.on("BroadcastMessage", () => {
     this.service.getAllSizes();
   });
   }
-  
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
     this.service.dataSource.paginator = this.paginator;
   }
-
   onModalDialog(){
     this.service.size = new Size()
     this.dialog.open(SizeComponent)
-    
   }
-
  doFilter = (value: string) => {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
-}
-
+ }
   populateForm(selectedRecord:Size){
     this.service.size = Object.assign({},selectedRecord)
     this.dialog.open(SizeComponent)

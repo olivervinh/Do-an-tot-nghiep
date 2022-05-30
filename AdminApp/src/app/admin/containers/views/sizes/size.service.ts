@@ -28,6 +28,7 @@ export class SizeService{
       this.gethttp().subscribe(
         res=>{
           this.dataSource.data = res as Size[];
+          console.log(this.dataSource.data)
         }
       )
     }
@@ -35,6 +36,6 @@ export class SizeService{
   export class Size{
     id : number = 0
     tenSize : string
-    id_Loai : string 
+    id_Loai : number 
   }
   

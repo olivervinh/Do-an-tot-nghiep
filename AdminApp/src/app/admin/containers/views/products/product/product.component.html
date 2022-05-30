@@ -240,10 +240,6 @@
     <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
 </form> -->
 
-
-
-
-
 <style>
     mat-form-field {
         margin-top: 2rem;
@@ -271,10 +267,7 @@
                 Tên không được có kí tự đặc biệt
             </div>
         </div>
-
     </div>
-
-
     <div class="form-group">
         <label>Giá bán</label>
         <select formControlName="GiaBan" class="form-control" [(ngModel)]="service.product.giaBan" required>
@@ -294,8 +287,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="form-group">
         <label>Giá nhập</label>
         <select class="form-control" formControlName="GiaNhap" [(ngModel)]="service.product.giaNhap" required>
@@ -315,22 +306,16 @@
             </div>
         </div>
     </div>
-
     <div class="form-group">
         <label>Khuyến mãi</label>
         <input class="form-control" formControlName="KhuyenMai" [(ngModel)]="service.product.khuyenMai" required>
-
         <div *ngIf="KhuyenMai.invalid && (KhuyenMai.dirty || KhuyenMai.touched)" class="alert alert-danger">
             <div *ngIf="KhuyenMai.errors.required">
                 Khuyến mãi sản phẩm không được bỏ trống
             </div>
         </div>
     </div>
-
-
-
     <div class="form-group">
-
         <span class="label label-default">Giới tính</span>
         <select class="form-control" formControlName="GioiTinh" [(ngModel)]="service.product.gioiTinh" required>
       <option value=1>Nam</option>
@@ -343,9 +328,6 @@
         </div>
 
     </div>
-
-
-
     <div class="form-group">
         <label>Mô tả</label>
         <select class="form-control" formControlName="MoTa" [(ngModel)]="service.product.moTa">
@@ -440,7 +422,7 @@
 
     <div class="form-group">
         <span class="label label-default">Loại</span>
-        <select class="form-control" [(ngModel)]="service.product.tenLoai" formControlName="Id_Loai" required>
+        <select class="form-control" [(ngModel)]="service.product.id_Loai" formControlName="Id_Loai" required>
       <option *ngFor="let category of this.categories" [value]="category.id">{{category.ten}}</option>
     </select>
         <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
@@ -466,7 +448,7 @@
 
     <div class="form-group">
         <span class="label label-default">Nhãn hiệu</span>
-        <select class="form-control" [(ngModel)]="service.product.tenNhanHieu" formControlName="Id_NhanHieu" required>
+        <select class="form-control" [(ngModel)]="service.product.id_NhanHieu" formControlName="Id_NhanHieu" required>
       <option *ngFor="let brand of this.brands" [value]="brand.id">{{brand.ten}}</option>
     </select>
         <div *ngIf="Id_NhanHieu.invalid && (Id_NhanHieu.dirty || Id_NhanHieu.touched)" class="alert alert-danger">
@@ -499,9 +481,9 @@
     <div class="form-group">
         <label>Trạng thái hoạt động</label>
         <select class="form-control" [(ngModel)]="service.product.trangThaiHoatDong" formControlName="TrangThaiHoatDong" required>
-      <option value="True">Bật
+      <option value=true>Bật
       </option>
-      <option value="False">Tắt
+      <option value=false>Tắt
       </option>
     </select>
         <br>

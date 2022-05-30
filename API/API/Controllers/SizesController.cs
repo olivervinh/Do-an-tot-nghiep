@@ -58,6 +58,7 @@ namespace API.Controllers
                      select new SizeLoai()
                      {
                          Id = s.Id,
+                         Id_Loai = (int)s.Id_Loai,
                          TenLoai = l.Ten,
                          TenSize = s.TenSize
                      };

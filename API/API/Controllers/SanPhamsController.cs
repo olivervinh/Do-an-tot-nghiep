@@ -161,6 +161,7 @@ namespace API.Controllers
                        TrangThaiHoatDong = s.TrangThaiHoatDong,
                        Id_Loai = s.Id_Loai,
                        Id_NhanHieu = s.Id_NhanHieu,
+                       Id_NhaCungCap = s.Id_NhaCungCap,
                        SoLuongComment = _context.UserComments.Where(x => x.IdSanPham == s.Id).Count(),
                        SoLuongLike = _context.UserComments.Where(x => x.IdSanPham == s.Id).Count(),
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),

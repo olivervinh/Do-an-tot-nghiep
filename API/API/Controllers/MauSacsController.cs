@@ -34,6 +34,7 @@ namespace API.Controllers
                      select new MauSacLoai()
                      {
                          Id = s.Id,
+                         Id_Loai = l.Id,
                          TenLoai = l.Ten,
                         MaMau = s.MaMau
                      };

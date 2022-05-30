@@ -8,7 +8,7 @@ import { ToastServiceService } from '../../shared/toast-service.service';
 
 import { SanPhamBienTheComponent } from './san-pham-bien-the/san-pham-bien-thecomponent';
 import * as signalR from '@microsoft/signalr';
-import { SanPhamBienThe, SanPhamBienTheService } from './san-pham-bien-the.service';
+import { SanPhamBienThe, SanPhamBienTheService, GiaSanPhamMauSacSanPhamSize } from './san-pham-bien-the.service';
 @Component({
   selector: 'app-san-pham-bien-thes',
   templateUrl: './san-pham-bien-thes.component.html',
@@ -29,11 +29,9 @@ export class SanPhamBienThesComponent implements OnInit, AfterViewInit {
 
               displayedColumns: string[] = ['id','sanPham','mauLoai','sizeLoai','soLuongTon',
   'actions'];
-
-
-  public sanphambienthe :  SanPhamBienThe
+  public sanphambienthe :  GiaSanPhamMauSacSanPhamSize
   ngOnInit(): void {
-    this.service.getAllSanPhamBienTheTenLoais();
+    this.service.getAllGiaSanPhamMauSacSanPhamSizes();
     const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .withUrl('https://localhost:44302/notify')
@@ -46,11 +44,8 @@ export class SanPhamBienThesComponent implements OnInit, AfterViewInit {
   });
 
   connection.on("BroadcastMessage", () => {
-    this.service.getAllSanPhamBienTheTenLoais();
+    this.service.getAllGiaSanPhamMauSacSanPhamSizes();
   });
-  }
-  onSelectedSPTK(a: SanPhamBienThe):void{
-    this.service.sanphambienthe = a
   }
   ngAfterViewInit(): void {
     this.service.dataSource.sort = this.sort;
@@ -58,7 +53,7 @@ export class SanPhamBienThesComponent implements OnInit, AfterViewInit {
   }
 
   onModalDialog(){
-    this.service.sanphambienthe = new SanPhamBienThe()
+    this.service.sanphambienthe = new GiaSanPhamMauSacSanPhamSize()
     this.dialog.open(SanPhamBienTheComponent)
   }
 
@@ -66,8 +61,7 @@ export class SanPhamBienThesComponent implements OnInit, AfterViewInit {
   this.service.dataSource.filter = value.trim().toLocaleLowerCase();
 }
 
-  populateForm(selectedRecord:SanPhamBienThe){
-    
+  populateForm(selectedRecord:GiaSanPhamMauSacSanPhamSize){
     this.service.sanphambienthe = Object.assign({},selectedRecord)
     this.dialog.open(SanPhamBienTheComponent)
 }
@@ -77,7 +71,7 @@ export class SanPhamBienThesComponent implements OnInit, AfterViewInit {
     this.service.delete(id).subscribe(
       res=>{
         this.serviceToast.showToastXoaThanhCong()
-        this.service.getAllSanPhamBienTheTenLoais()
+        this.service.getAllGiaSanPhamMauSacSanPhamSizes()
       },
       err=>{
         this.serviceToast.showToastXoaThatBai()

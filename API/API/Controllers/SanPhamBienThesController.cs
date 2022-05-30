@@ -26,26 +26,8 @@ namespace API.Controllers
             _context = context;
             _hubContext = hubContext;
         }
-        [HttpGet("sanphambienthe")]
-        public async Task<ActionResult<IEnumerable<SanPhamBienTheMauSizeLoai>>> GetAllSPBTSS()
-        {
-            var query = _context.SanPhamBienThes.Select(b=>new SanPhamBienTheMauSizeLoai() {
-                                Id = b.Id,
-                                SanPham = _context.SanPhams.FirstOrDefault(x=>x.Id==b.Id_SanPham).Ten,
-                                 MauLoai = _context.MauSacs.FirstOrDefault(x=>x.Id==b.Id_Mau).MaMau,
-                SizeLoai = _context.Sizes.FirstOrDefault(x => x.Id == b.SizeId).TenSize,
-                SoLuongTon =b.SoLuongTon
-            });
-            return await query.ToListAsync();
-        }
-        // GET: api/SanPhamBienThes
-        [HttpGet("spbt/{id}")]
-        public async Task<ActionResult<IEnumerable<SanPhamBienThe>>> GetSPBTAll(int id)
-        {
-            return await _context.SanPhamBienThes.Where(s=>s.Id_SanPham==id).ToListAsync();
-        }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GiaSanPham_MauSac_SanPham_Size>>> GetSanPhamBienThes()
+        public async Task<ActionResult<IEnumerable<GiaSanPhamMauSacSanPhamSize>>> GetSanPhamBienThes()
         {
             var kb = from g in _context.SanPhamBienThes
                      join m in _context.MauSacs
@@ -54,14 +36,16 @@ namespace API.Controllers
                      on g.Id_SanPham equals sp.Id
                      join s in _context.Sizes
                      on g.SizeId equals s.Id
-                     select new GiaSanPham_MauSac_SanPham_Size()
+                     select new GiaSanPhamMauSacSanPhamSize()
                      {
-                         //DataHinhAnh = g.DataHinhAnh,
-                         //ImagePath = g.ImagePath,
+                         Id_Mau = m.Id,
+                         Id_SanPham = sp.Id,
+                         Id_Size = s.Id,
                          Id = g.Id,
                          MaMau = m.MaMau,
                          TenSanPham = sp.Ten,
-                        TenSize = s.TenSize,
+                         TenSize = s.TenSize,
+                         SoLuongTon = g.SoLuongTon
                      };
             return await kb.ToListAsync();
         }

@@ -17,14 +17,9 @@ export class ProductService {
   public dataSource = new MatTableDataSource<Product>();
   constructor(public http: HttpClient) { }
   product: Product = new Product();
-
-
-
   delete(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.URL_API + "sanphams"}/${id}`)
   }
-
-  //
   get(): Observable<any> {
     return this.http.get<any>(environment.URL_API + "sanphams")
   }

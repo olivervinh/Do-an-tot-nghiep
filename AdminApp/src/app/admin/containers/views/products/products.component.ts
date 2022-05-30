@@ -104,8 +104,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   onSelectedEdit() {
     this.router.navigate(['admin/product/edit/' + this.service.product.id]);
   }
-
-
   detail(selectedRecord: Product) {
     this.service.product = Object.assign({}, selectedRecord)
     this.onselectedDetail()

@@ -30,6 +30,7 @@ namespace API.Dtos
         public int? UpdateBy { get; set; }
         public int? Id_NhanHieu { get; set; }
         public int? Id_Loai { get; set; }
+        public int? Id_NhaCungCap { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? GiaSanPhams { get; set; }
         public int? SanPhamThietKes { get; set; }

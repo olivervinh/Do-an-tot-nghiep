@@ -28,16 +28,6 @@ export class SanPhamBienTheComponent implements OnInit {
     }
 
   }
-  fileChange1(event) {
-
-    var reader = new FileReader()
-    reader.readAsDataURL(event.target.files[0])
-    reader.onload = (event: any) => {
-      this.imgsrc1 = event.target.result
-    }
-
-
-  }
   urls = new Array<string>();
   selectedFile: File = null;
   detectFiles(event) {
@@ -69,7 +59,6 @@ export class SanPhamBienTheComponent implements OnInit {
     public serviceToast: ToastServiceService,
     public serviceCategory: CategoryService,
     public serviceSanPham: ProductService,
-
     public http: HttpClient) {
 
   }
@@ -77,7 +66,6 @@ export class SanPhamBienTheComponent implements OnInit {
   get Id_SanPham() { return this.newFormGroup.get('Id_SanPham'); }
   get Id_Size() { return this.newFormGroup.get('Id_Size'); }
   get SoLuongTon(){return this.newFormGroup.get('SoLuongTon') }
-
   ngOnInit(): void {
     this.newFormGroup = new FormGroup({
       ImagePath: new FormControl(null),
@@ -94,14 +82,11 @@ export class SanPhamBienTheComponent implements OnInit {
         Validators.required
       ])
     });
-
-
     this.service.getAllTenMauLoai().subscribe(
       data => {
         Object.assign(this.loaitenmau, data)
       }
     )
-
     this.service.getAllTenSizeLoai().subscribe(
       data => {
         Object.assign(this.loaitensize, data)
@@ -121,21 +106,18 @@ export class SanPhamBienTheComponent implements OnInit {
     )
   }
   public newFormGroup: FormGroup;
-
   onSubmit = (data) => {
     if (this.service.sanphambienthe.id == 0) {
       const formData = new FormData();
-
       formData.append('MauId', data.Id_Mau);
       formData.append('SanPhamId', data.Id_SanPham);
       formData.append('SizeId', data.Id_Size);
       formData.append('SoLuongTon', data.SoLuongTon);
       console.log(data);
-
       this.http.post(environment.URL_API + 'sanphambienthes', formData)
         .subscribe(res => {
           this.serviceToast.showToastThemThanhCong()
-          this.service.getAllSanPhamBienTheTenLoais();
+          this.service.getAllGiaSanPhamMauSacSanPhamSizes();
           this.service.sanphambienthe.id = 0;
         }, err => {
           this.serviceToast.showToastThemThatBai()
@@ -151,7 +133,7 @@ export class SanPhamBienTheComponent implements OnInit {
       this.http.put(environment.URL_API + 'sanphambienthes/' + `${this.service.sanphambienthe.id}`, formData)
         .subscribe(res => {
           this.serviceToast.showToastSuaThanhCong()
-          this.service.getAllSanPhamBienTheTenLoais();
+          this.service.getAllGiaSanPhamMauSacSanPhamSizes();
           this.service.sanphambienthe.id = 0;
         }, err => {
           this.serviceToast.showToastSuaThatBai()

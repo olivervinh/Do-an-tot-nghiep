@@ -18,6 +18,7 @@ namespace API.Data
         Task<List<NhaCungCapTongTien>> GetDoanhSoBans();
         Task<Nam2021SoTongTien> GetNam2021TongTien();
         Task<MotHoaDon> HoaDonDetailAsync(int id);
+        Task<MotHoaDon> GetOneOrder(int id);
     }
     /// <summary>
     /// this is class has some custom data connect
@@ -400,6 +401,91 @@ namespace API.Data
                          chiTietHoaDons = list,
                      };
             return await hd.FirstOrDefaultAsync(s => s.Id == id);
+        }
+        public async Task<MotHoaDon> GetOneOrder(int id)
+        {
+            string sql = @"		;with ProductImageTable
+	                            as (
+		                        SELECT ChiTietHoaDons.Id,SanPhams.Ten,ImageSanPhams.ImageName,Sizes.TenSize,MauSacs.MaMau,ChiTietHoaDons.Soluong,cast(SanPhams.GiaBan as decimal(18,2)) as'GiaBan',ChiTietHoaDons.ThanhTien,
+		                        ROW_NUMBER() OVER (PARTITION BY ChiTietHoaDons.Id ORDER BY  ImageSanPhams.Id)  RowNum
+		                        FROM SanPhams 
+								LEFT JOIN ImageSanPhams 
+								ON SanPhams.Id=ImageSanPhams.IdSanPham 
+								inner join SanPhamBienThes
+								on SanPhamBienThes.Id_SanPham = SanPhams.Id
+								inner join Sizes
+								on SanPhamBienThes.SizeId = Sizes.Id
+								inner join MauSacs
+								on SanPhamBienThes.Id_Mau = MauSacs.Id
+								inner join ChiTietHoaDons
+								on ChiTietHoaDons.Id_SanPhamBienThe = SanPhamBienThes.Id
+								inner join HoaDons
+								on HoaDons.Id = ChiTietHoaDons.Id_HoaDon
+								where ChiTietHoaDons.Id_HoaDon = @value
+		                          )
+		                        SELECT Id,Ten,ImageName,TenSize,MaMau,Soluong,GiaBan,ThanhTien
+		                        from ProductImageTable
+	                            where
+                                ProductImageTable.RowNum = 1
+";
+            SqlConnection cnn;
+            cnn = new SqlConnection(_context.Database.GetConnectionString());
+            SqlDataReader reader;
+            SqlCommand cmd;
+            var list = new List<NhieuChiTietHoaDon>();
+            try
+            {
+                await cnn.OpenAsync();
+                SqlParameter param = new SqlParameter();
+                cmd = new SqlCommand(sql, cnn);
+                param.ParameterName = "@value";
+                param.Value = id;
+                cmd.Parameters.Add(param);
+                reader = await cmd.ExecuteReaderAsync();
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        list.Add(new NhieuChiTietHoaDon()
+                        {
+                            Id = (int)reader["Id"],
+                            Ten = (string)reader["Ten"],
+                            Hinh = (string)reader["ImageName"],
+                            GiaBan = (decimal)reader["GiaBan"],
+                            MauSac = (string)reader["MaMau"],
+                            Size = (string)reader["TenSize"],
+                            SoLuong = (int)reader["SoLuong"],
+                            ThanhTien = (decimal)reader["ThanhTien"]
+                        });
+                    }
+                }
+                await cnn.CloseAsync();
+            }
+            catch (Exception)
+            {
+            };
+            var hd = from h in _context.HoaDons
+                     join us in _context.AppUsers
+                     on h.Id_User equals us.Id
+                     select new MotHoaDon()
+                     {
+                         Id = h.Id,
+                         FullName = us.LastName + ' ' + us.FirstName,
+                         DiaChi = us.DiaChi,
+                         Email = us.Email,
+                         SDT = us.SDT,
+                         hoaDon = new HoaDon()
+                         {
+                             Id_User = h.Id_User,
+                             TongTien = h.TongTien,
+                             GhiChu = h.GhiChu,
+                             NgayTao = h.NgayTao,
+                             TrangThai = h.TrangThai
+                         },
+                         chiTietHoaDons = list,
+                     };
+            var result = await hd.FirstOrDefaultAsync(s => s.Id == id);
+            return result;
         }
     }
 }

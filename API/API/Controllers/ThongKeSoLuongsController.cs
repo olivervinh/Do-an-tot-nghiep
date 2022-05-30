@@ -143,8 +143,6 @@ namespace API.Controllers
                 var bug = ex;
                 return BadRequest();
             }
-         
-          
         }
     }
 }

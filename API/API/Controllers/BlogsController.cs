@@ -61,8 +61,6 @@ namespace API.Controllers
             blog.TieuDe = upload.TieuDe;
             blog.NoiDung = upload.NoiDung;
             blog.FkAppUser_NguoiThem = upload.FkUserId;
-            Blog sp;
-            sp = _context.Blogs.Find(id);
             Notification notification = new Notification()
             {
                 TenSanPham = upload.TieuDe,
@@ -127,8 +125,6 @@ namespace API.Controllers
             var file = upload.files.ToArray();
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
-            Blog Test;
-            Test = await _context.Blogs.FindAsync(blog.Id);
             if (upload.files != null)
             {
                 for (int i = 0; i < file.Length; i++)
@@ -139,7 +135,7 @@ namespace API.Controllers
                         _context.ImageBlogs.Add(imageBlog);
                         await _context.SaveChangesAsync();
                         imageBlog.ImageName = await FileHelper.UploadImageAndReturnFileNameAsync(null, upload, "blog", (IFormFile[])upload.files, i);
-                        imageBlog.FkBlogId = Test.Id;
+                        imageBlog.FkBlogId = blog.Id;
                         _context.ImageBlogs.Update(imageBlog);
                         await _context.SaveChangesAsync();
                     }

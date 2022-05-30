@@ -50,43 +50,53 @@ namespace API.Controllers
         [HttpGet("orderdetail/{id}")]
         public async Task<IActionResult> GetOneOrder(int id)
         {
-            var hd = from h in _context.HoaDons
-                     join us in _context.AppUsers
-                     on h.Id_User equals us.Id
-                     select new MotHoaDon()
-                     {
-                         Id = h.Id,
-                         FullName = us.LastName + ' ' + us.FirstName,
-                         DiaChi = us.DiaChi,
-                         Email = us.Email,
-                         SDT = us.SDT,
-                         hoaDon = new HoaDon()
-                         {
-                             Id_User = h.Id_User,
-                             TongTien = h.TongTien,
-                             GhiChu = h.GhiChu,
-                             NgayTao = h.NgayTao,
-                             TrangThai = h.TrangThai
-                         },
-                         chiTietHoaDons = _context.SanPhamBienThes
-                                        .Include(x => x.MauSac)
-                                        .Include(x => x.Size)
-                                        .Include(x => x.SanPham)
-                                        .ThenInclude(x => x.ImageSanPhams)
-                                        .Include(x => x.ChiTietHoaDon).
-                                        Select(x => new NhieuChiTietHoaDon()
-                                        {
-                                            Id = x.ChiTietHoaDon.FirstOrDefault().Id,
-                                            GiaBan = (decimal)x.SanPham.GiaBan,
-                                            Hinh = x.SanPham.ImageSanPhams.FirstOrDefault().ImageName,
-                                            MauSac = x.MauSac.MaMau,
-                                            SoLuong = x.ChiTietHoaDon.FirstOrDefault().Soluong,
-                                            Ten = x.SanPham.Ten,
-                                            Size = x.Size.TenSize,
-                                            ThanhTien = (decimal)x.ChiTietHoaDon.FirstOrDefault().ThanhTien,
-                                        }).ToList(),
-                     };
-            return await _generatePdf.GetPdf("Views/PDFs/GetOrderDetail.cshtml", await hd.FirstOrDefaultAsync(s => s.Id == id));
+            try
+            {
+                var temp = from h in _context.HoaDons
+                           join us in _context.AppUsers
+                           on h.Id_User equals us.Id
+                           select new MotHoaDon()
+                           {
+                               Id = h.Id,
+                               FullName = us.LastName + ' ' + us.FirstName,
+                               DiaChi = us.DiaChi,
+                               Email = us.Email,
+                               SDT = us.SDT,
+                               hoaDon = new HoaDon()
+                               {
+                                   Id_User = h.Id_User,
+                                   TongTien = h.TongTien,
+                                   GhiChu = h.GhiChu,
+                                   NgayTao = h.NgayTao,
+                                   TrangThai = h.TrangThai
+                               },
+                               chiTietHoaDons = _context.SanPhamBienThes
+                                              .Include(x => x.MauSac)
+                                              .Include(x => x.Size)
+                                              .Include(x => x.SanPham)
+                                              .ThenInclude(x => x.ImageSanPhams)
+                                              .Include(x => x.ChiTietHoaDon).
+                                              Select(x => new NhieuChiTietHoaDon()
+                                              {
+                                                  Id = x.ChiTietHoaDon.FirstOrDefault().Id,
+                                                  GiaBan = (decimal)x.SanPham.GiaBan,
+                                                  Hinh = x.SanPham.ImageSanPhams.FirstOrDefault().ImageName,
+                                                  MauSac = x.MauSac.MaMau,
+                                                  SoLuong = x.ChiTietHoaDon.FirstOrDefault().Soluong,
+                                                  Ten = x.SanPham.Ten,
+                                                  Size = x.Size.TenSize,
+                                                  ThanhTien = (decimal)x.ChiTietHoaDon.FirstOrDefault().ThanhTien,
+                                              }).ToList(),
+                           };
+                var hd = await temp.FirstOrDefaultAsync(s => s.Id == id);
+                return await _generatePdf.GetPdf("Views/PDFs/GetOrderDetail.cshtml", hd);
+            }
+            catch (Exception ex)
+            {
+                var bug = ex;
+                return BadRequest();
+            }
+           
         }
         [HttpGet("allsanpham")]
         public async Task<IActionResult> GetAllSanPham()

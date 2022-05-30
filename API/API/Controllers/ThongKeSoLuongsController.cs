@@ -121,16 +121,30 @@ namespace API.Controllers
        [HttpGet("Soluongsanphambanratrongnam")]
         public async Task<ActionResult<SoLuongBanRaTrongNam>> GetSoLuongBanRaTrongNam()
         {
-            var query = from h in _context.HoaDons.Where(x => x.NgayTao.Year == 2021)
-                        join c in _context.ChiTietHoaDons
-                        on h.Id equals c.Id_HoaDon
-                        select new SoLuongBanRaTrongNam()
-                        {
-                            Nam = h.NgayTao.Year,
-                            SoLuong = c.Soluong,
-                        };
-            var nam2021 = await query.GroupBy(x => x.Nam).Select(x => x.FirstOrDefault()).FirstOrDefaultAsync();
-            return nam2021;
+            try
+            {
+                var query = from h in _context.HoaDons.Where(x => x.NgayTao.Year == 2021)
+                            join c in _context.ChiTietHoaDons
+                            on h.Id equals c.Id_HoaDon
+                            select new SoLuongBanRaTrongNam()
+                            {
+                                Nam = h.NgayTao.Year,
+                                SoLuong = c.Soluong,
+                            };
+                var list = await query
+                    .ToListAsync();
+                var nam2021 = list.GroupBy(x => x.Nam)
+                    .Select(x => x.FirstOrDefault())
+                    .FirstOrDefault();
+                return nam2021;
+            }
+            catch(Exception ex)
+            {
+                var bug = ex;
+                return BadRequest();
+            }
+         
+          
         }
     }
 }

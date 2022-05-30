@@ -98,14 +98,13 @@ namespace API.Controllers
             };
             _context.Add(phieuNhap);
             await _context.SaveChangesAsync();
-            var phieuNhapTest = await _context.PhieuNhapHangs.FindAsync(phieuNhap.Id);
             List<ChiTietPhieuNhapHang> listctpn = new List<ChiTietPhieuNhapHang>();
             foreach (var chitietupload in uploadPhieuNhap.ChiTietPhieuNhaps)
             {
                 ChiTietPhieuNhapHang ctpn = new ChiTietPhieuNhapHang();
                 ctpn.Id_SanPhamBienThe = StringHelper.XuLyIdSPBT(chitietupload.TenSanPhamBienThe);
                 ctpn.ThanhTienNhap = chitietupload.GiaNhapSanPhamBienThe*chitietupload.SoLuongNhap;
-                ctpn.Id_PhieuNhapHang = phieuNhapTest.Id;
+                ctpn.Id_PhieuNhapHang = phieuNhap.Id;
                 ctpn.SoluongNhap = chitietupload.SoLuongNhap;
                 SanPhamBienThe spbt = await _context.SanPhamBienThes.FindAsync(StringHelper.XuLyIdSPBT(chitietupload.TenSanPhamBienThe));
                 spbt.SoLuongTon = spbt.SoLuongTon + chitietupload.SoLuongNhap;
@@ -114,23 +113,11 @@ namespace API.Controllers
                 _context.ChiTietPhieuNhapHangs.Add(ctpn);
                 await _context.SaveChangesAsync();
             }
-            _context.PhieuNhapHangs.Update(phieuNhapTest);
+            _context.PhieuNhapHangs.Update(phieuNhap);
             await _context.SaveChangesAsync();
             await _hubContext.Clients.All.BroadcastMessage();
             return Ok();
-        }
-        public decimal SPjoinSPBTTraVeGia(int IdThamSo)
-        {
-            SanPham kb = (SanPham)(from spbt in _context.SanPhamBienThes
-                                   join sp in _context.SanPhams
-                                   on spbt.Id_SanPham equals sp.Id
-                                   select new SanPham()
-                                   {
-                                       Id = (int)spbt.Id,
-                                       GiaBan = sp.GiaBan,
-                                   }).First(s => s.Id == IdThamSo);
-            return (decimal)kb.GiaBan;
-        }
+        } 
         [HttpGet("{id}")]
         public async Task<ActionResult<PhieuNhapChiTietPhieuNhap>> GetDetailPhieuNhapAsync(int id)
         {

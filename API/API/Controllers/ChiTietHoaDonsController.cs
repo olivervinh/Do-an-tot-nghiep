@@ -43,7 +43,6 @@ namespace API.Controllers
         [HttpPost("huydon/{id}")]
         public async Task<ActionResult> HuyDon(int id)
         {
-            //var id = int.Parse(json.GetValue("id").ToString());
             var resuft = await _context.HoaDons.Where(d => d.Id == id).SingleOrDefaultAsync();
             resuft.TrangThai = 2;
             _context.SaveChanges();

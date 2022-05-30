@@ -24,6 +24,8 @@ using API.Helpers;
 using Constants = API.Helpers.Constants;
 using API.Helper.Factory;
 using API.Helper.SignalR;
+using API.Helper.Middleware;
+
 namespace API
 {
     public class Startup
@@ -104,6 +106,7 @@ namespace API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));

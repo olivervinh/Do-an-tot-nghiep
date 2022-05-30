@@ -14,7 +14,8 @@
         </div>
         <div class="form-group">
             <label for="NoiDung">Nội dung</label>
-            <ckeditor formControlName="NoiDung" [editor]="Editor" [(ngModel)]="service.blog.noidung" required></ckeditor>
+            <!-- <ckeditor formControlName="NoiDung" [editor]="Editor" [(ngModel)]="service.blog.noidung" required></ckeditor> -->
+            <textarea class="form-control" formControlName="NoiDung" [(ngModel)]="service.blog.noidung" required></textarea>
         </div>
         <div class="form-group">
             <input class="form-control" type="file" multiple (change)="gopHam($event)" required>

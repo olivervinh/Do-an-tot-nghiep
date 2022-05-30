@@ -1,4 +1,4 @@
-<!-- <style>
+<style>
     mat-form-field {
         margin-top: 2rem;
     }
@@ -24,10 +24,6 @@
             Tên không được có kí tự đặc biệt
         </div>
     </div>
-
-
-
-
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
         <mat-label>Giá bán</mat-label>
         <input matInput placeholder="Giá Bán" formControlName="GiaBan" type="number" [(ngModel)]="service.product.giaBan" required>
@@ -81,13 +77,13 @@
             </div>
         </div>
     </div>
-
-
     <br>
-    <mat-label>Mô tả</mat-label>
-    <ckeditor formControlName="MoTa" [editor]="Editor" [(ngModel)]="service.product.moTa" required></ckeditor>
-
-
+    <!-- <mat-label>Mô tả</mat-label>
+    <ckeditor formControlName="MoTa" [editor]="Editor" [(ngModel)]="service.product.moTa" required></ckeditor> -->
+    <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
+        <mat-label>Tag</mat-label>
+        <textarea  matInput placeholder="MoTa" formControlName="MoTa" type="text" [(ngModel)]="service.product.moTa" required></textarea>
+    </mat-form-field>
     <div *ngIf="MoTa.invalid && (MoTa.dirty || MoTa.touched)" class="alert alert-danger">
         <div div *ngIf="MoTa.errors.required">
             Mô tả không được bỏ trống
@@ -102,7 +98,6 @@
     <mat-form-field appearance="outline" floatLabel="always" class="w-100-p" [color]="accent" style="width: 100%;">
         <mat-label>Tag</mat-label>
         <input matInput placeholder="Tag" formControlName="Tag" type="text" [(ngModel)]="service.product.tag" required>
-
     </mat-form-field>
     <div *ngIf="Tag.invalid && (Tag.dirty || Tag.touched)" class="alert alert-danger">
         <div *ngIf="Tag.errors.required">
@@ -155,17 +150,17 @@
     <br>
     <div class="form-group">
         <span class="label label-default">Loại</span>
-        <select class="form-control" [(ngModel)]="service.product.tenLoai" formControlName="Id_Loai" required>
-            <option  *ngFor="let category of this.categories"
-                [value]="category.id">{{category.ten}}</option>
-        </select>
+        <select class="form-control" [(ngModel)]="service.product.id_Loai" formControlName="Id_Loai" required>
+      <option *ngFor="let category of this.categories" [value]="category.id">{{category.ten}}</option>
+    </select>
         <div *ngIf="Id_Loai.invalid && (Id_Loai.dirty || Id_Loai.touched)" class="alert alert-danger">
-
             <div *ngIf="Id_Loai.errors.required">
                 Loại sản phẩm không được bỏ trống
             </div>
         </div>
     </div>
+
+
     <div class="form-group">
         <span class="label label-default">Nhà cung cấp</span>
         <select class="form-control" [(ngModel)]="service.product.id_NhaCungCap" formControlName="Id_NhaCungCap" required>
@@ -177,19 +172,20 @@
             </div>
         </div>
     </div>
+
+
     <div class="form-group">
         <span class="label label-default">Nhãn hiệu</span>
-        <select class="form-control" [(ngModel)]="service.product.tenNhanHieu" formControlName="Id_NhanHieu" required>
-          <option  *ngFor="let brand of this.brands"
-              [value]="brand.id">{{brand.ten}}</option>
-      </select>
+        <select class="form-control" [(ngModel)]="service.product.id_NhanHieu" formControlName="Id_NhanHieu" required>
+      <option *ngFor="let brand of this.brands" [value]="brand.id">{{brand.ten}}</option>
+    </select>
         <div *ngIf="Id_NhanHieu.invalid && (Id_NhanHieu.dirty || Id_NhanHieu.touched)" class="alert alert-danger">
-
             <div *ngIf="Id_NhanHieu.errors.required">
                 Nhãn hiệu sản phẩm không được bỏ trống
             </div>
         </div>
     </div>
+
     <mat-label>Trạng thái sản phẩm</mat-label>
     <select class="form-control" [(ngModel)]="service.product.trangThaiSanPham" formControlName="TrangThaiSanPham" required>
         <option 
@@ -238,9 +234,9 @@
 
     <br>
     <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
-</form> -->
+</form>
 
-<style>
+<!-- <style>
     mat-form-field {
         margin-top: 2rem;
     }
@@ -501,4 +497,4 @@
 
     <br>
     <button mat-button color="accent" type="submit" style="width: 100%;" [disabled]="this.newForm.invalid">Submit</button>
-</form>
+</form> -->

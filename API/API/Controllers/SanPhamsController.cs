@@ -141,10 +141,10 @@ namespace API.Controllers
         }
         // GET: api/SanPhams
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SanPhamLoaiThuongHieu>>> GetSanPhams(int? pageNumber)
+        public async Task<ActionResult<IEnumerable<SanPhamLoaiThuongHieu>>> GetSanPhams()
         {
             var listIdSanPhamliked = await _context.UserLikes.Select(s => s.IdSanPham).ToListAsync();
-            var list = _context.SanPhams.Select(
+            var list = await _context.SanPhams.Select(
                    s => new SanPhamLoaiThuongHieu()
                    {
                        Id = s.Id,
@@ -167,9 +167,8 @@ namespace API.Controllers
                        TenLoai = _context.Loais.Where(d => d.Id == s.Id_Loai).Select(d => d.Ten).FirstOrDefault(),
                        TenNhanHieu = _context.NhanHieus.Where(d => d.Id == s.Id_NhanHieu).Select(d => d.Ten).FirstOrDefault(),
                        Image = _context.ImageSanPhams.Where(q => q.IdSanPham == s.Id).Select(q => q.ImageName).FirstOrDefault(),
-                   });
-            int pageSize = 3;
-            return await PaginatedList<SanPhamLoaiThuongHieu>.CreateAsync(list.AsNoTracking(), pageNumber ?? 1, pageSize);
+                   }).ToListAsync();
+            return list;
         }
         // GET: api/SanPhams/5
         [HttpGet("{id}")]

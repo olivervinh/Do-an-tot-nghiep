@@ -67,18 +67,6 @@ namespace API.Controllers
             var resuft = await _context.HoaDons.Where(d => d.Id_User == user.idUser).ToListAsync();
             return Json(resuft);
         }
-        public decimal SPjoinSPBTTraVeGiaBan(int IdThamSo)
-        {
-            SanPham kb = (SanPham)(from spbt in _context.SanPhamBienThes
-                                   join sp in _context.SanPhams
-                                   on spbt.Id_SanPham equals sp.Id
-                                   select new SanPham()
-                                   {
-                                       Id = (int)spbt.Id,
-                                       GiaBan = sp.GiaBan,
-                                   }).First(s => s.Id == IdThamSo);
-            return (decimal)kb.GiaBan;
-        }
         [HttpPut("suatrangthai/{id}")]
         public async Task<IActionResult> SuaTrangThai(int id, HoaDonUser hd)
         {
@@ -139,11 +127,9 @@ namespace API.Controllers
             };
             _context.HoaDons.Add(hoaDon);
             await _context.SaveChangesAsync();
-            HoaDon hoaDonTest;
-            hoaDonTest = await _context.HoaDons.FindAsync(hoaDon.Id);
             NotificationCheckout notification = new NotificationCheckout()
             {
-                ThongBaoMaDonHang = hoaDonTest.Id,
+                ThongBaoMaDonHang = hoaDon.Id,
             };
             _context.NotificationCheckouts.Add(notification);
             var cart = _context.Carts.Where(d => d.UserID == hd.Id_User).ToList();
@@ -154,7 +140,7 @@ namespace API.Controllers
                 ChiTietHoaDon cthd = new ChiTietHoaDon();
                 cthd.Id_SanPham = cart[i].SanPhamId;
                 cthd.Id_SanPhamBienThe = cart[i].Id_SanPhamBienThe;
-                cthd.Id_HoaDon = hoaDonTest.Id;
+                cthd.Id_HoaDon = hoaDon.Id;
                 cthd.GiaBan = cart[i].Gia;
                 cthd.Soluong = cart[i].SoLuong;
                 cthd.ThanhTien = cart[i].Gia * cart[i].SoLuong;

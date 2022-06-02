@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-contact',
   templateUrl: './bill_details.component.html',
@@ -17,12 +18,12 @@ export class BillDetailsComponent implements OnInit {
   constructor(public http:HttpClient,public route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.id_bill = params['id'];
-      this.http.post("https://localhost:44302/api/hoadons/hoadon/"+this.id_bill,{
+      this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
-    this.http.post("https://localhost:44302/api/chitiethoadons/chitiethoadon/"+this.id_bill,{
+    this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;
@@ -34,7 +35,7 @@ export class BillDetailsComponent implements OnInit {
   });
 }
 Huy(){
-  this.http.post("https://localhost:44302/api/chitiethoadons/huydon/"+this.id_bill,{
+  this.http.post(environment.URL_API+"chitiethoadons/huydon/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.loadChiTietPhieu()
@@ -42,12 +43,12 @@ Huy(){
 }
 loadChiTietPhieu()
 {
-  this.http.post("https://localhost:44302/api/hoadons/hoadon/"+this.id_bill,{
+  this.http.post(environment.URL_API+"hoadons/hoadon/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill=res;
     });
-    this.http.post("https://localhost:44302/api/chitiethoadons/chitiethoadon/"+this.id_bill,{
+    this.http.post(environment.URL_API+"chitiethoadons/chitiethoadon/"+this.id_bill,{
   }).subscribe(
     res=>{
       this.bill_details=res;

@@ -45,7 +45,7 @@ namespace API.Controllers
         {
             var resuft = await _context.HoaDons.Where(d => d.Id == id).SingleOrDefaultAsync();
             resuft.TrangThai = 2;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Json(resuft);
         }
         [HttpPost("thongtintaikhoan/{id}")]

@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { CartService } from 'src/app/service/product.service';
 import { UserService } from 'src/app/service/account/user.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -36,7 +38,7 @@ export class CheckoutComponent implements OnInit  {
     this.http.get("https://provinces.open-api.vn/api/?depth=3").subscribe(res=>{
       this.list_tinh_thanh=res;
     } );
-    this.http.post("https://localhost:44302/api/Carts/getCart/"+this.id_user,{}).subscribe(
+    this.http.post(environment.URL_API+"Carts/getCart/"+this.id_user,{}).subscribe(
       res=>{
         this.list_item = res;
         console.log(this.list_item)
@@ -46,13 +48,13 @@ export class CheckoutComponent implements OnInit  {
           this.tongThanhToan=this.tongtien+25000;
         }
       });
-    this.http.get("https://localhost:44302/api/hoadons/magiamgia/").subscribe(res=>{
+    this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(res=>{
       this.list_MGG=res;
     } );
     //this.checkdiachi=true;
     this.list_MGGSD=[];
     this.check=null;
-    this.http.post("https://localhost:44302/api/Auth/getDiaChi/",{
+    this.http.post(environment.URL_API+"Auth/getDiaChi/",{
       id_user :this.id_user
     }).subscribe(
       res=>{
@@ -79,11 +81,11 @@ export class CheckoutComponent implements OnInit  {
    delproduct.id_sanpham = item.idSanPhamBienThe
    delproduct.user_ID = clicks
  console.log(delproduct)
-  this.http.post("https://localhost:44302/api/Carts/delete",delproduct
+  this.http.post(environment.URL_API+"Carts/delete",delproduct
   ).subscribe(
     res=>{
       Swal.fire("Xoá sản phẩm thành công .", '', 'success')
-      this.http.post("https://localhost:44302/api/Carts/getCart/"+clicks,{}).subscribe(
+      this.http.post(environment.URL_API+"Carts/getCart/"+clicks,{}).subscribe(
       res=>{
         this.list_item = res;
         this.tongtien=0;
@@ -134,7 +136,7 @@ export class CheckoutComponent implements OnInit  {
     else
     {
       const clicks = localStorage.getItem('idUser');
-    this.http.post("https://localhost:44302/api/hoadons/",{
+    this.http.post(environment.URL_API+"hoadons/",{
       Tinh:this.Tinh,
       Huyen:this.Huyen,
       Xa:this.Xa,
@@ -153,7 +155,7 @@ export class CheckoutComponent implements OnInit  {
 }
 ChangeSoLuong(cartID,i){
   const clicks = localStorage.getItem('idUser');
-  this.http.post("https://localhost:44302/api/Carts/update/",{
+  this.http.post(environment.URL_API+"Carts/update/",{
     CartID:cartID,
     SoLuong:this.soLuong,
     UserID:clicks
@@ -171,7 +173,7 @@ ChangeSoLuong(cartID,i){
 }
   updateCongSanPham(cartID,soLuong){
     const clicks = localStorage.getItem('idUser');
-    this.http.post("https://localhost:44302/api/Carts/update/",{
+    this.http.post(environment.URL_API+"Carts/update/",{
     CartID:cartID,
     SoLuong:soLuong+1,
     UserID:clicks
@@ -197,7 +199,7 @@ ChangeSoLuong(cartID,i){
     {
       soLuong=soLuong-1;
     }
-    this.http.post("https://localhost:44302/api/Carts/update/",{
+    this.http.post(environment.URL_API+"Carts/update/",{
     CartID:cartID,
     SoLuong:soLuong,
     UserID:clicks

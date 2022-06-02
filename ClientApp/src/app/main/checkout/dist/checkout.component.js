@@ -22,7 +22,7 @@ var CheckoutComponent = /** @class */ (function () {
         this.http.get("https://provinces.open-api.vn/api/?depth=3").subscribe(function (res) {
             _this.list_tinh_thanh = res;
         });
-        this.http.post("https://localhost:44302/api/Carts/getCart/" + this.id_user, {}).subscribe(function (res) {
+        this.http.post(environment.URL_API+"Carts/getCart/" + this.id_user, {}).subscribe(function (res) {
             _this.list_item = res;
             console.log(_this.list_item);
             _this.tongtien = 0;
@@ -31,13 +31,13 @@ var CheckoutComponent = /** @class */ (function () {
                 _this.tongThanhToan = _this.tongtien + 25000;
             }
         });
-        this.http.get("https://localhost:44302/api/hoadons/magiamgia/").subscribe(function (res) {
+        this.http.get(environment.URL_API+"hoadons/magiamgia/").subscribe(function (res) {
             _this.list_MGG = res;
         });
         //this.checkdiachi=true;
         this.list_MGGSD = [];
         this.check = null;
-        this.http.post("https://localhost:44302/api/Auth/getDiaChi/", {
+        this.http.post(environment.URL_API+"Auth/getDiaChi/", {
             id_user: this.id_user
         }).subscribe(function (res) {
             _this.DiaChiDefaul = res;
@@ -61,9 +61,9 @@ var CheckoutComponent = /** @class */ (function () {
         delproduct.id_sanpham = item.idSanPhamBienThe;
         delproduct.user_ID = clicks;
         console.log(delproduct);
-        this.http.post("https://localhost:44302/api/Carts/delete", delproduct).subscribe(function (res) {
+        this.http.post(environment.URL_API+"Carts/delete", delproduct).subscribe(function (res) {
             sweetalert2_1["default"].fire("Xoá sản phẩm thành công .", '', 'success');
-            _this.http.post("https://localhost:44302/api/Carts/getCart/" + clicks, {}).subscribe(function (res) {
+            _this.http.post(environment.URL_API+"Carts/getCart/" + clicks, {}).subscribe(function (res) {
                 _this.list_item = res;
                 _this.tongtien = 0;
                 for (var i = 0; i < _this.list_item.length; i++) {
@@ -107,7 +107,7 @@ var CheckoutComponent = /** @class */ (function () {
         }
         else {
             var clicks = localStorage.getItem('idUser');
-            this.http.post("https://localhost:44302/api/hoadons/", {
+            this.http.post(environment.URL_API+"hoadons/", {
                 Tinh: this.Tinh,
                 Huyen: this.Huyen,
                 Xa: this.Xa,
@@ -125,7 +125,7 @@ var CheckoutComponent = /** @class */ (function () {
     CheckoutComponent.prototype.ChangeSoLuong = function (cartID, i) {
         var _this = this;
         var clicks = localStorage.getItem('idUser');
-        this.http.post("https://localhost:44302/api/Carts/update/", {
+        this.http.post(environment.URL_API+"Carts/update/", {
             CartID: cartID,
             SoLuong: this.soLuong,
             UserID: clicks
@@ -142,7 +142,7 @@ var CheckoutComponent = /** @class */ (function () {
     CheckoutComponent.prototype.updateCongSanPham = function (cartID, soLuong) {
         var _this = this;
         var clicks = localStorage.getItem('idUser');
-        this.http.post("https://localhost:44302/api/Carts/update/", {
+        this.http.post(environment.URL_API+"Carts/update/", {
             CartID: cartID,
             SoLuong: soLuong + 1,
             UserID: clicks
@@ -165,7 +165,7 @@ var CheckoutComponent = /** @class */ (function () {
         else {
             soLuong = soLuong - 1;
         }
-        this.http.post("https://localhost:44302/api/Carts/update/", {
+        this.http.post(environment.URL_API+"Carts/update/", {
             CartID: cartID,
             SoLuong: soLuong,
             UserID: clicks

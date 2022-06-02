@@ -48,7 +48,7 @@ var RegisterComponent = /** @class */ (function (_super) {
         }
     };
     RegisterComponent.prototype.registerAccount = function () {
-        this.http.post("https://localhost:44302/api/auth/registerCustomer", {
+        this.http.post(environment.URL_API+"auth/registerCustomer", {
             data: this.userFormGroup.value
         }).subscribe(function (resp) {
             sweetalert2_1["default"].fire("Đăng ký thành công", ' ', 'success').then(function () {

@@ -24,17 +24,17 @@ var ProductDetailsComponent = /** @class */ (function () {
             _this.id_product = params['id']; // get id to params
         });
         this.soLuong = 0;
-        this.http.get("https://localhost:44302/api/sanphams/chitietsanpham/" + this.id_product).subscribe(function (resp) {
+        this.http.get(environment.URL_API+"sanphams/chitietsanpham/" + this.id_product).subscribe(function (resp) {
             _this.product = resp;
             _this.list_san_pham_bien_the = _this.product.sanPhamBienThes;
             _this.testMarkup = _this.sanitized.bypassSecurityTrustHtml(_this.product.moTa);
-            _this.http.post("https://localhost:44302/api/mausacs/mau/", {
+            _this.http.post(environment.URL_API+"mausacs/mau/", {
                 id_san_pham: _this.id_product
             }).subscribe(function (res) {
                 _this.mau = res;
             });
             _this.size = {};
-            _this.http.post("https://localhost:44302/api/sanphams/listreview/", {
+            _this.http.post(environment.URL_API+"sanphams/listreview/", {
                 IdSanPham: _this.product.id
             }).subscribe(function (res) {
                 _this.list_review = res;
@@ -45,7 +45,7 @@ var ProductDetailsComponent = /** @class */ (function () {
     };
     ProductDetailsComponent.prototype.onChangeMau = function (mau) {
         var _this = this;
-        this.http.post("https://localhost:44302/api/sizes/sizetheomau/", {
+        this.http.post(environment.URL_API+"sizes/sizetheomau/", {
             id_san_pham: this.id_product,
             mamau: mau
         }).subscribe(function (res) {
@@ -55,7 +55,7 @@ var ProductDetailsComponent = /** @class */ (function () {
     ProductDetailsComponent.prototype.Review = function () {
         var _this = this;
         var clicks = localStorage.getItem('idUser');
-        this.http.post("https://localhost:44302/api/sanphams/review/", {
+        this.http.post(environment.URL_API+"sanphams/review/", {
             IdUser: clicks,
             IdSanPham: this.product.id,
             Content: this.Content
@@ -196,7 +196,7 @@ var ProductDetailsComponent = /** @class */ (function () {
             var SanPhamBienThe = this.list_san_pham_bien_the.filter(function (d) { return d.tenMau == _this.selectMau && d.tenSize == _this.selectSize; })[0];
             var clicks = localStorage.getItem('idUser');
             var SanPhamId = SanPhamBienThe.id;
-            this.http.post("https://localhost:44302/api/Carts", {
+            this.http.post(environment.URL_API+"Carts", {
                 Id_SanPhamBienThe: SanPhamId,
                 SanPhamId: this.product.id,
                 Mau: this.selectMau,

@@ -12,7 +12,7 @@ var BlogComponent = /** @class */ (function () {
     function BlogComponent(http) {
         var _this = this;
         this.http = http;
-        this.http.post("https://localhost:44302/api/blogs/getBlog/", {}).subscribe(function (res) {
+        this.http.post(environment.URL_API+"blogs/getBlog/", {}).subscribe(function (res) {
             _this.listblog = res;
         });
     }

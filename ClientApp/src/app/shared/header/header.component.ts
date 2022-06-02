@@ -99,13 +99,13 @@ $('.js-hide-cart').on('click',function(){
   });
   }
   logout() {
-    this.http.post("https://localhost:44302/api/Auth/logout",{}).subscribe(
+    this.http.post(environment.URL_API+"Auth/logout",{}).subscribe(
         res=>{
         },
         error=>{
         }
         );
-        this.http.get("https://localhost:44302/api/Auth/AuthHistory").subscribe(
+        this.http.get(environment.URL_API+"Auth/AuthHistory").subscribe(
     res=>{
       this.user = res;
     },

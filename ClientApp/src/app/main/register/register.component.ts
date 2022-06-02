@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseService } from 'src/app/service/base.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
@@ -35,7 +36,7 @@ export class RegisterComponent extends BaseService implements OnInit {
     }
    }
    registerAccount(){
-    this.http.post("https://localhost:44302/api/auth/registerCustomer",{
+    this.http.post(environment.URL_API+"auth/registerCustomer",{
       data:this.userFormGroup.value
       }).subscribe(resp => {
         Swal.fire("Đăng ký thành công", ' ', 'success').then(function () {

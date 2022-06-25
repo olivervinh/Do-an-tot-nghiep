@@ -274,6 +274,7 @@ namespace API.Data
                 }
             }
             cnn.Close();
+            return nam2021;
         }
         public async Task<MotHoaDon> HoaDonDetailAsync(int id)
         {

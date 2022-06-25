@@ -49,29 +49,23 @@ namespace API.Data
                         order by sum(ChiTietHoaDons.Soluong) desc
                        ";
             var solanxuathiens = new List<TenSPSoLanXuatHienTrongDonHang>();
-            try
+            SqlConnection conn = new SqlConnection(_context.Database.GetConnectionString());
+            await conn.OpenAsync();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataReader reader;
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                SqlConnection conn = new SqlConnection(_context.Database.GetConnectionString());
-                await conn.OpenAsync();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader reader;
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    solanxuathiens.Add(new TenSPSoLanXuatHienTrongDonHang()
                     {
-                        solanxuathiens.Add(new TenSPSoLanXuatHienTrongDonHang()
-                        {
-                            TenSP = (string)reader["Ten"],
-                            SoLanXuatHienTrongDonHang = (int)reader["Số lần tồn tại trong đơn hàng"]
-                        });
-                    }
+                        TenSP = (string)reader["Ten"],
+                        SoLanXuatHienTrongDonHang = (int)reader["Số lần tồn tại trong đơn hàng"]
+                    });
                 }
-                await conn.CloseAsync();
             }
-            catch (Exception)
-            {
-            }
+            await conn.CloseAsync();
             return solanxuathiens.ToList();
         }
         public async Task<List<TenSanPhamDoanhSo>> Top10SanPhamLoiNhats()
@@ -94,26 +88,20 @@ namespace API.Data
                     ";
             SqlConnection conn = new SqlConnection(_context.Database.GetConnectionString());
             List<TenSanPhamDoanhSo> tenspdss = new List<TenSanPhamDoanhSo>();
-            try
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            await conn.OpenAsync();
+            SqlDataReader reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                await conn.OpenAsync();
-                SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        tenspdss.Add(
-                            new TenSanPhamDoanhSo()
-                            {
-                                TenSP = (string)reader["Ten"],
-                                DoanhSoCaoNhat = (decimal)reader["ThanhTien"]
-                            });
-                    }
+                    tenspdss.Add(
+                        new TenSanPhamDoanhSo()
+                        {
+                            TenSP = (string)reader["Ten"],
+                            DoanhSoCaoNhat = (decimal)reader["ThanhTien"]
+                        });
                 }
-            }
-            catch (Exception)
-            {
             }
             return tenspdss;
         }
@@ -137,27 +125,21 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             List<NhanHieuBanChayNhatTrongNam2021> listNH = new List<NhanHieuBanChayNhatTrongNam2021>();
-            try
+            await cnn.OpenAsync();
+            cmd = new SqlCommand(sql, cnn);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                cmd = new SqlCommand(sql, cnn);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    listNH.Add(new NhanHieuBanChayNhatTrongNam2021()
                     {
-                        listNH.Add(new NhanHieuBanChayNhatTrongNam2021()
-                        {
-                            Ten = (string)reader["Ten"],
-                            SoLuong = (int)reader["soluong"]
-                        });
-                    }
+                        Ten = (string)reader["Ten"],
+                        SoLuong = (int)reader["soluong"]
+                    });
                 }
-                cnn.Close();
             }
-            catch (Exception)
-            {
-            };
+            cnn.Close();
             return listNH;
         }
         public async Task<List<DataSetBanRaTonKho>> DataDataSetBanRaTonKho()
@@ -184,28 +166,22 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var list = new List<DataSetBanRaTonKho>();
-            try
+            await cnn.OpenAsync();
+            cmd = new SqlCommand(sql, cnn);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                cmd = new SqlCommand(sql, cnn);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    list.Add(new DataSetBanRaTonKho()
                     {
-                        list.Add(new DataSetBanRaTonKho()
-                        {
-                            Ten = (string)reader["Ten"],
-                            GiaTriTonKho = (decimal)reader["GiaTriTonKho"],
-                            GiaTriBanRa = (decimal)reader["GiaTriBanRa"]
-                        });
-                    }
+                        Ten = (string)reader["Ten"],
+                        GiaTriTonKho = (decimal)reader["GiaTriTonKho"],
+                        GiaTriBanRa = (decimal)reader["GiaTriBanRa"]
+                    });
                 }
-                await cnn.CloseAsync();
             }
-            catch (Exception)
-            {
-            };
+            await cnn.CloseAsync();
             return list;
         }
         public async Task<List<NhaCungCapSoLuong>> GetNhaCungCapSoLuongs()
@@ -228,27 +204,21 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var list = new List<NhaCungCapSoLuong>();
-            try
+            await cnn.OpenAsync();
+            cmd = new SqlCommand(sql, cnn);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                cmd = new SqlCommand(sql, cnn);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    list.Add(new NhaCungCapSoLuong()
                     {
-                        list.Add(new NhaCungCapSoLuong()
-                        {
-                            Ten = (string)reader["Ten"],
-                            SoLuong = (int)reader["So luong da nhap"]
-                        });
-                    }
+                        Ten = (string)reader["Ten"],
+                        SoLuong = (int)reader["So luong da nhap"]
+                    });
                 }
-                await cnn.CloseAsync();
             }
-            catch (Exception)
-            {
-            };
+            await cnn.CloseAsync();
             return list;
         }
         public async Task<List<NhaCungCapTongTien>> GetDoanhSoBans()
@@ -263,27 +233,21 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var list = new List<NhaCungCapTongTien>();
-            try
+            await cnn.OpenAsync();
+            cmd = new SqlCommand(sql, cnn);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                cmd = new SqlCommand(sql, cnn);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    list.Add(new NhaCungCapTongTien()
                     {
-                        list.Add(new NhaCungCapTongTien()
-                        {
-                            Ten = (string)reader["Ten"],
-                            TongTien = (decimal)reader["TongTien"]
-                        });
-                    }
+                        Ten = (string)reader["Ten"],
+                        TongTien = (decimal)reader["TongTien"]
+                    });
                 }
-                await cnn.CloseAsync();
             }
-            catch (Exception)
-            {
-            };
+            await cnn.CloseAsync();
             return list;
         }
         public async Task<Nam2021SoTongTien> GetNam2021TongTien()
@@ -298,25 +262,18 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var nam2021 = new Nam2021SoTongTien();
-            try
+            await cnn.OpenAsync();
+            cmd = new SqlCommand(sql, cnn);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                cmd = new SqlCommand(sql, cnn);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        nam2021.Nam = (int)reader["Nam"];
-                        nam2021.TongTien = (decimal)reader["Tong tien trong nam"];
-                    }
+                    nam2021.Nam = (int)reader["Nam"];
+                    nam2021.TongTien = (decimal)reader["Tong tien trong nam"];
                 }
-                cnn.Close();
             }
-            catch (Exception)
-            {
-            };
-            return nam2021;
+            cnn.Close();
         }
         public async Task<MotHoaDon> HoaDonDetailAsync(int id)
         {
@@ -349,37 +306,31 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var list = new List<NhieuChiTietHoaDon>();
-            try
+            await cnn.OpenAsync();
+            SqlParameter param = new SqlParameter();
+            cmd = new SqlCommand(sql, cnn);
+            param.ParameterName = "@value";
+            param.Value = id;
+            cmd.Parameters.Add(param);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                SqlParameter param = new SqlParameter();
-                cmd = new SqlCommand(sql, cnn);
-                param.ParameterName = "@value";
-                param.Value = id;
-                cmd.Parameters.Add(param);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    list.Add(new NhieuChiTietHoaDon()
                     {
-                        list.Add(new NhieuChiTietHoaDon()
-                        {
-                            Id = (int)reader["Id"],
-                            Ten = (string)reader["Ten"],
-                            Hinh = (string)reader["ImageName"],
-                            GiaBan = (decimal)reader["GiaBan"],
-                            MauSac = (string)reader["MaMau"],
-                            Size = (string)reader["TenSize"],
-                            SoLuong = (int)reader["SoLuong"],
-                            ThanhTien = (decimal)reader["ThanhTien"]
-                        });
-                    }
+                        Id = (int)reader["Id"],
+                        Ten = (string)reader["Ten"],
+                        Hinh = (string)reader["ImageName"],
+                        GiaBan = (decimal)reader["GiaBan"],
+                        MauSac = (string)reader["MaMau"],
+                        Size = (string)reader["TenSize"],
+                        SoLuong = (int)reader["SoLuong"],
+                        ThanhTien = (decimal)reader["ThanhTien"]
+                    });
                 }
-                await cnn.CloseAsync();
             }
-            catch (Exception)
-            {
-            };
+            await cnn.CloseAsync();
             var hd = from h in _context.HoaDons
                      join us in _context.AppUsers
                      on h.Id_User equals us.Id
@@ -433,37 +384,31 @@ namespace API.Data
             SqlDataReader reader;
             SqlCommand cmd;
             var list = new List<NhieuChiTietHoaDon>();
-            try
+            await cnn.OpenAsync();
+            SqlParameter param = new SqlParameter();
+            cmd = new SqlCommand(sql, cnn);
+            param.ParameterName = "@value";
+            param.Value = id;
+            cmd.Parameters.Add(param);
+            reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
             {
-                await cnn.OpenAsync();
-                SqlParameter param = new SqlParameter();
-                cmd = new SqlCommand(sql, cnn);
-                param.ParameterName = "@value";
-                param.Value = id;
-                cmd.Parameters.Add(param);
-                reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    list.Add(new NhieuChiTietHoaDon()
                     {
-                        list.Add(new NhieuChiTietHoaDon()
-                        {
-                            Id = (int)reader["Id"],
-                            Ten = (string)reader["Ten"],
-                            Hinh = (string)reader["ImageName"],
-                            GiaBan = (decimal)reader["GiaBan"],
-                            MauSac = (string)reader["MaMau"],
-                            Size = (string)reader["TenSize"],
-                            SoLuong = (int)reader["SoLuong"],
-                            ThanhTien = (decimal)reader["ThanhTien"]
-                        });
-                    }
+                        Id = (int)reader["Id"],
+                        Ten = (string)reader["Ten"],
+                        Hinh = (string)reader["ImageName"],
+                        GiaBan = (decimal)reader["GiaBan"],
+                        MauSac = (string)reader["MaMau"],
+                        Size = (string)reader["TenSize"],
+                        SoLuong = (int)reader["SoLuong"],
+                        ThanhTien = (decimal)reader["ThanhTien"]
+                    });
                 }
-                await cnn.CloseAsync();
             }
-            catch (Exception)
-            {
-            };
+            await cnn.CloseAsync();
             var hd = from h in _context.HoaDons
                      join us in _context.AppUsers
                      on h.Id_User equals us.Id
